@@ -1,7 +1,6 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: faliszek
- * Date: 04.02.17
- * Time: 14:14
- */
+<?php get_header();?>
+
+<div class="container">
+    <i class="fa fa-bath"></i>
+</div>
+<?php get_footer();?>

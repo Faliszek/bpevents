@@ -86,7 +86,6 @@ Thumbs.db
 # "mu-plugins" directory
 # "plugins" directory
 # "themes" directory
-package.json
 
 wp-content/*
 !wp-content/mu-plugins/

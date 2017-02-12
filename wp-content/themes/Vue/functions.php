@@ -51,7 +51,7 @@ function vue_setup(){
     ) );
 }
 function vue_js() {
-    wp_enqueue_script( 'vue-js', get_template_directory_uri() . '/js/bundle.js', array('jquery'), NULL);
+    wp_enqueue_script( 'vue-js', get_template_directory_uri() . '/js/bundle.js', array('jquery'), NULL, true);
 }
 
 function vue_css() {

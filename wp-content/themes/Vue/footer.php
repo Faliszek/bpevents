@@ -34,11 +34,11 @@
                 </div>
             </div>
         </div>
+        <div class="footer-social">
 
+        </div>
     </div>
-    <div class="footer-social">
 
-    </div>
 
 </footer>
 </body>

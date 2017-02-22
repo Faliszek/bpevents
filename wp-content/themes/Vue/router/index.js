@@ -1,13 +1,17 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import VueAwesomeSwiper from 'vue-awesome-swiper'
 import Home from '../views/Home.vue';
 import References from '../views/References.vue';
 import Equipment from '../views/Equipment.vue';
 import Contact from '../views/Contact.vue';
+
 Vue.use(VueRouter);
 
 export default new VueRouter({
-  mode: 'history',
+  mode: 'hash',
+  root: '/',
+  // hashbang: true,
   routes: [
     {
       path: '/',
@@ -16,17 +20,19 @@ export default new VueRouter({
 
     {
       path: '/referencje',
-      component: References
+      component: References,
     },
 
     {
       path: '/sprzet',
-      component: Equipment
+      component: Equipment,
+
     },
 
     {
       path: '/kontakt',
-      component: Contact
+      component: Contact,
+
     },
 
     {
@@ -35,4 +41,5 @@ export default new VueRouter({
       redirect : '/'
     },
   ],
+
 });

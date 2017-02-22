@@ -1,12 +1,12 @@
 <template>
-	<header id="header">
+	<header>
     <nav class="main-nav">
       <div class="container">
         <div class="row">
           <div class="menu-main-container">
             <ul >
               <li v-for="link in links">
-                <router-link :to="{ path: link.object_slug } " replace>{{ link.title }}</router-link>
+                <router-link :to="{ path: link.object_slug } " >{{ link.title }}</router-link>
               </li>
             </ul>
           </div>
@@ -20,7 +20,7 @@ export default {
 	data() {
 		return {
 			message: 'footer Vue!',
-      links: this.getMenu(2)
+      links: this.getMenu(2),
 		}
 	},
 

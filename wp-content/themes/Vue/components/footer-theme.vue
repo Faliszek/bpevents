@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer id="footer">
     <div class="footer container">
       <div class="footer-content row">
         <div class="col-sm-5">
@@ -66,7 +66,6 @@
             a.href = path.replace(this.defines.siteUrl, '');
             a.addEventListener('click', (e) => {
               e.preventDefault();
-              console.log(e.srcElement.getAttribute('href'));
               this.$router.push({path: e.srcElement.getAttribute('href')});
             })
 

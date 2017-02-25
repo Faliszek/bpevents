@@ -5,6 +5,7 @@
 </template>
 <script>
   export default{
+    name: 'Contact',
     data(){
       return {
         msg: 'Kontakt'

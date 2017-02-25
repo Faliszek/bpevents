@@ -7,12 +7,9 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-<!--  --><?php //get_header();?>
-<header id="header"></header>
-<!--        <main id="app"></main>-->
+<?php //get_header();?>
   <div id="app"></div>
-<!--  --><?php //get_footer();?>
-<footer id="footer"></footer>
+<?php //get_footer();?>
 
 </body>
 <?php wp_footer();?>

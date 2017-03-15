@@ -1,12 +1,12 @@
 <!--suppress ALL -->
 <template>
     <div id="gallery" class="content" style="padding-top:100px;">
+        <h1>Galeria</h1>
         {{defines}}
         <section id="eq-slider">
             <swiper :options="swiperOption" ref="mySwiperB" v-if="slides">
                 <swiper-slide class="eq-slide" v-for="slide in slides">
-                    <div class="eq-content">
-                    </div>
+                        <img class="img-responsive" :src="slide.picture.url" :alt="slide.picture.alt" />
                 </swiper-slide>
                 <div class="swiper-pagination swiper-pagination-white" slot="pagination"></div>
                 <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
@@ -37,15 +37,26 @@
         }
       }
     },
+    mounted() {
+      if(this.defines){
+        this.getDataEq();
+      }
+    },
     methods: {
       getDataEq() {
+        console.log(this.defines.galleryPage)
         this.$http.get('/wp-json/acf/v2/post/' + this.defines.galleryPage)
             .then(response => {
-              this.data =  response.body;
+              this.data =  response.body.acf;
+              this.getSlides();
             }, response => {
               console.log('Data could not be loaded', +response)
             });
       },
+
+      getSlides() {
+        this.slides = this.data.eq;
+      }
     },
 
     watch: {

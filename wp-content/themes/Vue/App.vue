@@ -1,8 +1,13 @@
 <template>
+
   <div id="page">
     <header-theme></header-theme>
-    <router-view :defines="this.variables"></router-view>
+    <transition name="slide-fade" mode="out-in">
+      <router-view :defines="this.variables"></router-view>
+
+    </transition>
     <footer-theme :defines="this.variables"></footer-theme>
+
   </div>
 </template>
 <script>
@@ -10,7 +15,7 @@
   import router from './router';
   import HeaderTheme from './components/header-theme.vue';
   import FooterTheme from './components/footer-theme.vue';
-
+  import $ from 'jquery';
 
   export default{
     components: {
@@ -27,7 +32,6 @@
 
     created(){
       this.data = this.getDefines();
-
     },
     methods: {
       getDefines() {
@@ -35,6 +39,10 @@
           this.variables = JSON.parse(response.body);
           const routes = this.setRoutes(this.variables.routes);
           router.addRoutes(routes);
+          setTimeout(() => {
+            this.pageUnMove()
+          }, 0);
+
         }, response => {
           console.log('Data cannot be loaded', +response);
         });
@@ -42,7 +50,6 @@
       setRoutes(data){
         let array = [];
         data.forEach((route, index) => {
-          console.log(route.path)
           array.push({
             name: route.name,
             path: route.path,
@@ -58,6 +65,10 @@
           }
         });
         return array;
+      },
+
+      pageUnMove(){
+
       }
     }
   }

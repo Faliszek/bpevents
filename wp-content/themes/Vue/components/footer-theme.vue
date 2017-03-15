@@ -66,7 +66,8 @@
             a.href = path.replace(this.defines.siteUrl, '');
             a.addEventListener('click', (e) => {
               e.preventDefault();
-              this.$router.push({path: e.srcElement.getAttribute('href')});
+              let routeName = e.srcElement.getAttribute('href').replace(/\//g, '');
+              this.$router.push({name: routeName});
             })
 
           })

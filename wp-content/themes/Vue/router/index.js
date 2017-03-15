@@ -3,8 +3,8 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 export default new VueRouter({
-  mode: 'hash',
+  // mode: 'hashbang',
   root: '/',
-  // hashbang: true,
+  hashbang: true,
 
 });

@@ -1,7 +1,8 @@
 <template>
-    <div id="references" class="content">
-        {{ msg }}
-    </div>
+        <div id="references" class="content">
+            {{ msg }}
+        </div>
+
 </template>
 <script>
     export default{

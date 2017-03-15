@@ -1,7 +1,8 @@
 <template>
-    <div  class="content">
-        {{ msg }}
-    </div>
+        <div  class="content">
+            {{ msg }}
+        </div>
+
 </template>
 <script>
   export default{

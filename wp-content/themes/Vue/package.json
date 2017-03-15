@@ -22,6 +22,8 @@
   "dependencies": {
     "bootstrap-only-css": "^1.0.0",
     "font-awesome": "^4.7.0",
+    "jquery": "^3.1.1",
+    "slick-carousel": "^1.6.0",
     "vue": "^2.1.10",
     "vue-awesome-swiper": "^2.3.2",
     "vue-resource": "^1.2.0",

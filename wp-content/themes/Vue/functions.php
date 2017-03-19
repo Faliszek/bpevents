@@ -1,5 +1,31 @@
 <?php
 
+function vue_email( $phpmailer ) {
+
+        // Define that we are sending with SMTP
+        $phpmailer->isSMTP();
+
+        // The hostname of the mail server
+        $phpmailer->Host = "poczta.o2.pl";
+
+        // Use SMTP authentication (true|false)
+        $phpmailer->SMTPAuth = true;
+
+        // SMTP port number - likely to be 25, 465 or 587
+        $phpmailer->Port = "465";
+
+        // Username to use for SMTP authentication
+        $phpmailer->Username = "pawlic7@o2.pl";
+
+        // Password to use for SMTP authentication
+        $phpmailer->Password = "kk0sQq";
+
+        // Encryption system to use - ssl or tls
+        $phpmailer->SMTPSecure = "ssl";
+
+        $phpmailer->From = "pawlic7@tlen.pl";
+        $phpmailer->FromName = "Pawel";
+}
 function vue_setup(){
     add_theme_support( 'post-thumbnails' );
     add_theme_support( 'custom-logo' );
@@ -64,4 +90,5 @@ add_action( 'init' , 'vue_controllers_api');
 add_action( 'after_setup_theme', 'vue_setup' );
 add_action( 'wp_enqueue_scripts', 'vue_js' );
 add_action( 'wp_enqueue_scripts', 'vue_css' );
+add_action( 'phpmailer_init', 'vue_email' );
 

@@ -7123,15 +7123,27 @@ html.no-js {
 
 /***</DEV>***/
 /***<SLIDER>***/
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s ease; }
+.slide-fade-enter-active {
+  transition: all .3s ease; }
 
-.fade-enter, .fade-leave-active {
+.slide-fade-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1); }
+
+.slide-fade-enter {
+  transform: translateX(50px);
+  opacity: 0.3; }
+
+.slide-fade-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
   opacity: 0; }
 
-.swiper-wrapper .swiper-slide {
-  position: relative; }
-  .swiper-wrapper .swiper-slide .slide-content {
+.unvisible {
+  visibility: hidden; }
+
+#home-slider .slick-slide {
+  position: relative;
+  max-height: 600px; }
+  #home-slider .slick-slide .slide-content {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -7142,8 +7154,19 @@ html.no-js {
     transform: translate(-50%, -50%); }
 
 /***</SLIDER>***/
+html {
+  overflow-x: hidden; }
+
 body {
-  font-family: "Ubuntu", sans-serif; }
+  font-family: "Ubuntu", sans-serif;
+  transition: .3s all ease; }
+
+[v-cloak] {
+  display: none !important; }
+
+body:not(.loaded) #slider img {
+  -webkit-animation: fadein 2s;
+  visibility: hidden; }
 
 .main-nav {
   background: rgba(0, 0, 0, 0.8);

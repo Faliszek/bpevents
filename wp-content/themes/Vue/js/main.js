@@ -5,6 +5,7 @@ import VueResource from 'vue-resource';
 import App from '../App.vue';
 
 Vue.use(VueResource);
+Vue.http.options.root = 'http://bpevents.dev';
 Vue.config.devtools = true;
 Vue.http.options.emulateJSON = true;
 

@@ -14,16 +14,32 @@ html.no-js{
 }
 /***</DEV>***/
 /***<SLIDER>***/
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s ease;
+.slide-fade-enter-active {
+  transition: all .3s ease;
 }
-.fade-enter, .fade-leave-active /* .fade-leave-active in <2.1.8 */ {
-  opacity: 0
+.slide-fade-leave-active {
+
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter{
+  transform: translateX(50px);
+  opacity: 0.3;
+
 }
 
-.swiper-wrapper{
-  .swiper-slide{
+.slide-fade-leave-active{
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  opacity: 0;
+
+  }
+  .unvisible{
+  visibility:hidden;
+
+}
+#home-slider{
+  .slick-slide{
     position:relative;
+    max-height:600px;
     .slide-content{
       position:absolute;
       top:50%;
@@ -33,10 +49,20 @@ html.no-js{
   }
 }
 /***</SLIDER>***/
+html{
+  overflow-x:hidden;
+}
 body{
   font-family: $font-family;
+  transition: .3s all ease;
 }
-
+[v-cloak]{
+  display:none !important;
+}
+body:not(.loaded) #slider img {
+  -webkit-animation: fadein 2s; //I use chrome
+  visibility: hidden;
+}
 .main-nav{
   background:$nav-background;
   position:fixed;

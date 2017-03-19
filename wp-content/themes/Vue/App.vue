@@ -7,7 +7,7 @@
 
     </transition>
     <footer-theme :defines="this.variables"></footer-theme>
-
+    <div class="loader"></div>
   </div>
 </template>
 <script>
@@ -36,13 +36,14 @@
     methods: {
       getDefines() {
         this.$http.get('wp-json/defines/v2/info/').then(response => {
+          console.log(response);
           this.variables = JSON.parse(response.body);
           const routes = this.setRoutes(this.variables.routes);
           router.addRoutes(routes);
-          setTimeout(() => {
-            this.pageUnMove()
-          }, 0);
-
+          router.beforeEach((to, from, next) => {
+            $('.content').css('min-height', window.innerHeight+'px');
+            next();
+          })
         }, response => {
           console.log('Data cannot be loaded', +response);
         });
@@ -66,10 +67,6 @@
         });
         return array;
       },
-
-      pageUnMove(){
-
-      }
     }
   }
 </script>

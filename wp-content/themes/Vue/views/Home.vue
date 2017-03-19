@@ -1,6 +1,6 @@
 <!--suppress ALL -->
 <template>
-    <div id="home" class="content">
+    <div id="home" class="content" v-cloak>
       <section id="home-slider">
         <!--<swiper :options="swiperOption" ref="mySwiperA" v-if="slides">-->
         <!--<swiper-slide class="home-slide" v-for="slide in slides">-->
@@ -16,7 +16,7 @@
         <!--<div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>-->
         <!--<div class="swiper-button-next swiper-button-white" slot="button-next"></div>-->
         <!--</swiper>-->
-        <div id="slider">
+        <div id="slider" class="unvisible">
           <div class="home-slide" v-for="slide in slides">
             <div class="slide-content">
               <h1>{{ slide.slide_title }}</h1>
@@ -103,6 +103,10 @@
           if(!this.slides && this.data.home_slides){
             this.slides =  this.data.home_slides;
             setTimeout(function(){$('#slider').slick()},0);
+            $('#slider').on('init', (event) => {
+              console.log()
+              $(event.currentTarget).removeClass('unvisible');
+            })
           }
       },
 

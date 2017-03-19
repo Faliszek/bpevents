@@ -1,6 +1,6 @@
 <!--suppress ALL -->
 <template>
-    <div id="gallery" class="content" style="padding-top:100px;">
+    <div id="gallery" class="content" style="padding-top:100px;" v-cloak>
         <h1>Galeria</h1>
         {{defines}}
         <section id="eq-slider">

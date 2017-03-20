@@ -1,4 +1,6 @@
+const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 module.exports = {
   entry: "./js/main.js",
   output: {
@@ -51,11 +53,18 @@ module.exports = {
 
   resolve: {
     alias: {
-      vue: 'vue/dist/vue.js'
+      vue: 'vue/dist/vue.js',
+      // jquery: 'jquery/src/jquery'
     }
   },
 
   plugins: [
     new ExtractTextPlugin("../css/main.css"),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jquery: 'jquery',
+      'window.jQuery': 'jquery',
+      jQuery: 'jquery'
+    })
   ]
 };

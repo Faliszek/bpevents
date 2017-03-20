@@ -1,16 +1,8 @@
-<?php
-    $image = get_image_by_slug('logo');
-    $imageUrl = wp_get_attachment_url( $image->ID );
-    $imageMeta = get_post_meta( $image->ID, '_wp_attachment_image_alt', true);
-?>
 <footer>
     <div class="footer container">
         <div class="footer-content row">
             <div class="col-sm-5">
                 <div class="contact-block">
-                    <div class="logo">
-                        <img class="img-responsive" src="<?php echo $imageUrl;?>" alt="<?php echo $imageMeta;?>" />
-                    </div>
                     <div class="text">
                         <?php if ( is_active_sidebar( 'footer-contact' ) ) : ?>
                             <?php dynamic_sidebar( 'footer-contact' ); ?>

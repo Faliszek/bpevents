@@ -1,40 +1,26 @@
 <!--suppress ALL -->
 <template>
-    <div id="gallery" class="content" style="padding-top:100px;" v-cloak>
+    <section id="gallery" class="content" style="padding-top:100px;" v-cloak>
         <h1>Galeria</h1>
-        {{defines}}
-        <section id="eq-slider">
-            <swiper :options="swiperOption" ref="mySwiperB" v-if="slides">
-                <swiper-slide class="eq-slide" v-for="slide in slides">
+            <div id="eq-slider">
+                <div class="eq-slide" v-for="slide in slides">
                         <img class="img-responsive" :src="slide.picture.url" :alt="slide.picture.alt" />
-                </swiper-slide>
-                <div class="swiper-pagination swiper-pagination-white" slot="pagination"></div>
-                <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
-                <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
-            </swiper>
-        </section>
-    </div>
+                </div>
+            </div>
+    </section>
 </template>
 <script>
-  import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import $ from 'jquery';
+  import slick from 'slick-carousel';
 
   export default{
     name: 'Gallery',
-    components: { swiper, swiperSlide },
     props: ['defines'],
     data(){
       return {
         data: this.data ? this.getDataEq() : '',
         msg: 'Equipment',
         slides: '',
-        swiperOption: {
-          pagination: '.swiper-pagination',
-          paginationClickable: true,
-          nextButton: '.swiper-button-next',
-          prevButton: '.swiper-button-prev',
-          spaceBetween: 300,
-          effect: 'fade'
-        }
       }
     },
     mounted() {
@@ -49,6 +35,9 @@
             .then(response => {
               this.data =  response.body.acf;
               this.getSlides();
+              setTimeout(function(){
+                $('#eq-slider').slick();
+              },0);
             }, response => {
               console.log('Data could not be loaded', +response)
             });

@@ -2,31 +2,9 @@
 <template>
     <div id="home" class="content" v-cloak>
       <section id="home-slider">
-        <!--<swiper :options="swiperOption" ref="mySwiperA" v-if="slides">-->
-        <!--<swiper-slide class="home-slide" v-for="slide in slides">-->
-        <!--<div class="slide-content">-->
-        <!--<h1>{{ slide.slide_title }}</h1>-->
-        <!--<p v-html="slide.slide_text"></p>-->
-        <!--<router-link :to="{ name: slide.slide_link }">{{ slide.slide_btn_text }}</router-link>-->
-        <!--</div>-->
-        <!--<img class="img-responsive" :src="slide.slide_img.url" />-->
-
-        <!--</swiper-slide>-->
-        <!--<div class="swiper-pagination swiper-pagination-white" slot="pagination"></div>-->
-        <!--<div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>-->
-        <!--<div class="swiper-button-next swiper-button-white" slot="button-next"></div>-->
-        <!--</swiper>-->
-        <div id="slider" class="unvisible">
-          <div class="home-slide" v-for="slide in slides">
-            <div class="slide-content">
-              <h1>{{ slide.slide_title }}</h1>
-              <p v-html="slide.slide_text"></p>
-              <router-link :to="{ name: slide.slide_link }">{{ slide.slide_btn_text }}</router-link>
-            </div>
-            <img class="img-responsive" :src="slide.slide_img.url" />
-
-          </div>
-        </div>
+        <keep-alive>
+          <slider :slides="this.slides"></slider>
+        </keep-alive>
       </section>
 
       <section class="offer-block" v-if="offers">
@@ -56,28 +34,20 @@
 
 </template>
 <script type="text/babel">
-  import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import $ from 'jquery';
   import slick from 'slick-carousel';
+  import slider from '../components/slider.vue';
 
   export default{
     name: 'Home',
     props: ['defines'],
-    components: { swiper, swiperSlide },
+    components: {slider},
     data(){
       return {
         data: this.data ? this.getDataHome() : '',
-        slides: this.slides ? this.setSlider() : '',
+        slides: this.slides ? this.setDataSlider() : '',
         offers: this.offers ? this.setOffersBlock() : '',
         content: this.content ? this.setContentBlocks() : '',
-        swiperOption: {
-          pagination: '.swiper-pagination',
-          paginationClickable: true,
-          nextButton: '.swiper-button-next',
-          prevButton: '.swiper-button-prev',
-          spaceBetween: 300,
-          effect: 'fade'
-        }
       }
     },
     mounted() {
@@ -91,7 +61,7 @@
             .then(response => {
               this.data =  response.body.acf;
 
-                this.setSlider();
+                this.setDataSlider();
                 this.setOffersBlock();
                 this.setContentBlocks();
 
@@ -99,14 +69,9 @@
               console.log('Data could not be loaded', +response)
             });
       },
-      setSlider(){
+      setDataSlider(){
           if(!this.slides && this.data.home_slides){
             this.slides =  this.data.home_slides;
-            setTimeout(function(){$('#slider').slick()},0);
-            $('#slider').on('init', (event) => {
-              console.log()
-              $(event.currentTarget).removeClass('unvisible');
-            })
           }
       },
 
@@ -121,7 +86,6 @@
           this.content =  this.data.content_block;
         }
       },
-
       setIcon(string){
         string = "fa fa-"+string;
         return string;

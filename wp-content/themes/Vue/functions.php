@@ -1,31 +1,5 @@
 <?php
 
-function vue_email( $phpmailer ) {
-
-        // Define that we are sending with SMTP
-        $phpmailer->isSMTP();
-
-        // The hostname of the mail server
-        $phpmailer->Host = "poczta.o2.pl";
-
-        // Use SMTP authentication (true|false)
-        $phpmailer->SMTPAuth = true;
-
-        // SMTP port number - likely to be 25, 465 or 587
-        $phpmailer->Port = "465";
-
-        // Username to use for SMTP authentication
-        $phpmailer->Username = "pawlic7@o2.pl";
-
-        // Password to use for SMTP authentication
-        $phpmailer->Password = "kk0sQq";
-
-        // Encryption system to use - ssl or tls
-        $phpmailer->SMTPSecure = "ssl";
-
-        $phpmailer->From = "pawlic7@tlen.pl";
-        $phpmailer->FromName = "Pawel";
-}
 function vue_setup(){
     add_theme_support( 'post-thumbnails' );
     add_theme_support( 'custom-logo' );
@@ -75,20 +49,40 @@ function vue_setup(){
 function vue_js() {
     wp_enqueue_script( 'vue-js', get_template_directory_uri() . '/js/bundle.js', array('jquery'), NULL, true);
 }
-
 function vue_css() {
     wp_enqueue_style( 'style', get_template_directory_uri() . '/style.css', array(), '1.0.0' );
     wp_enqueue_style( 'main', get_template_directory_uri() . '/css/main.css', array(), '1.0.0' );
 
 }
-
 function vue_controllers_api(){
     require_once('controllers/controllers.php');
 }
+function vue_configure_email($phpmailer){
 
+        // Define that we are sending with SMTP
+        $phpmailer->isSMTP();
+        // The hostname of the mail server
+        $phpmailer->Host = "poczta.o2.pl";
+        // Use SMTP authentication (true|false)
+        $phpmailer->SMTPAuth = true;
+        // SMTP port number - likely to be 25, 465 or 587
+        $phpmailer->Port = "465";
+        // Username to use for SMTP authentication
+        $phpmailer->Username = "pawlic7@o2.pl";
+        // Password to use for SMTP authentication
+        $phpmailer->Password = "*****";
+        // Encryption system to use - ssl or tls
+        $phpmailer->SMTPSecure = "ssl";
+        $phpmailer->From = "pawlic7@o2.pl";
+        $phpmailer->FromName = "Paweł";
+
+}
+
+//add_filter( 'rest_endpoints', 'vue_remove_endpoints');
 add_action( 'init' , 'vue_controllers_api');
 add_action( 'after_setup_theme', 'vue_setup' );
 add_action( 'wp_enqueue_scripts', 'vue_js' );
 add_action( 'wp_enqueue_scripts', 'vue_css' );
-add_action( 'phpmailer_init', 'vue_email' );
+add_action( 'phpmailer_init', 'vue_configure_email' );
+add_action('wp_footer', 'send_mail');
 

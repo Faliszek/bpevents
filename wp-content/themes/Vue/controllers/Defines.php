@@ -45,6 +45,15 @@ function set_routes(){
     }
     return $routes;
 }
+
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'defines/v2', '/contact-form', array(
+        'methods' => 'GET',
+        'callback' => 'contact_form',
+    ) );
+} );
+
+
 add_action( 'rest_api_init', function () {
     register_rest_route( 'defines/v2', '/info', array(
         'methods' => 'GET',

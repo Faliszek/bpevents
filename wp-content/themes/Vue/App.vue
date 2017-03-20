@@ -6,7 +6,7 @@
       <router-view :defines="this.variables"></router-view>
 
     </transition>
-    <footer-theme :defines="this.variables"></footer-theme>
+    <!--<footer-theme :defines="this.variables"></footer-theme>-->
     <div class="loader"></div>
   </div>
 </template>
@@ -25,7 +25,6 @@
     },
     data(){
       return {
-        msg: 'hello vue',
         variables: '',
       }
     },
@@ -36,14 +35,14 @@
     methods: {
       getDefines() {
         this.$http.get('wp-json/defines/v2/info/').then(response => {
-          console.log(response);
           this.variables = JSON.parse(response.body);
           const routes = this.setRoutes(this.variables.routes);
           router.addRoutes(routes);
           router.beforeEach((to, from, next) => {
             $('.content').css('min-height', window.innerHeight+'px');
             next();
-          })
+          });
+          this.setRoutesForWidget();
         }, response => {
           console.log('Data cannot be loaded', +response);
         });
@@ -66,6 +65,22 @@
           }
         });
         return array;
+      },
+
+      setRoutesForWidget() {
+        let menuLinks = document.getElementById('menu-footer');
+        if(typeof menuLinks != 'undefined' && menuLinks != null) {
+          Array.from(menuLinks.children).forEach((el)=>{
+            let a = el.getElementsByTagName('a')[0];
+            let path = a.getAttribute('href');
+            a.href = path.replace(this.variables.siteUrl, '');
+            a.addEventListener('click', (e) => {
+              e.preventDefault();
+              let routeName = e.srcElement.getAttribute('href').replace(/\//g, '');
+              this.$router.push({name: routeName});
+            })
+          })
+        }
       },
     }
   }

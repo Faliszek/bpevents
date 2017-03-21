@@ -1,8 +1,8 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml">
         <div class="content" style="padding-top:150px;">
           <form>
-            <input type="text" placeholder="Imię" v-model="data.name"><br />
-            <input type="text" placeholder="Nazwisko" v-model="data.surname"><br />
+            <input type="text" placeholder="Imię i nazwisko" v-model="data.name"><br />
+            <input type="text" placeholder="Temat wiadomości" v-model="data.topic"><br />
             <input type="email" placeholder="E-mail" v-model="data.email"/><br />
             <textarea placeholder="Masz pytania? Pisz śmiało ;)" v-model="data.message"></textarea><br />
             <input type="submit" v-on:click="sendMessage" />
@@ -12,14 +12,16 @@
 
 </template>
 <script>
+  import $ from 'jquery';
   export default{
     name: 'Contact',
+    props: ['defines'],
     data(){
       return {
         msg: 'Kontakt',
         data: {
           name: this.name,
-          surname: this.surname,
+          topic: this.topic,
           email: this.email,
           message: this.message
         }
@@ -29,7 +31,14 @@
     },
     methods: {
       sendMessage: function(event){
-        this.$http.post('/someUrl', {foo: 'bar'}).then(response => {
+
+        event.preventDefault();
+        this.$http.post(''+this.defines.siteUrl+'/wp-admin/admin-ajax.php',
+            {
+              'action': 'send_mail',
+              'data': this.data,
+            },
+      ).then(response => {
 
           // get status
           response.status;
@@ -47,7 +56,6 @@
           // error callback
         });
         console.log(event);
-        event.preventDefault();
         console.log('wyslano wiadomość');
       }
     }

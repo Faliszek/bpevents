@@ -71,7 +71,7 @@
 	_vue2.default.use(_vueResource2.default);
 	// Vue.http.options.root = 'http://bpevents.dev';
 	_vue2.default.config.devtools = true;
-	// Vue.http.options.emulateJSON = true;
+	_vue2.default.http.options.emulateJSON = true;
 
 	new _vue2.default({
 	  el: '#app',
@@ -23588,35 +23588,29 @@
 
 /***/ },
 /* 30 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
+
+	var _jquery = __webpack_require__(27);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
 	  name: 'Contact',
+	  props: ['defines'],
 	  data: function data() {
 	    return {
 	      msg: 'Kontakt',
 	      data: {
 	        name: this.name,
-	        surname: this.surname,
+	        topic: this.topic,
 	        email: this.email,
 	        message: this.message
 	      }
@@ -23628,7 +23622,11 @@
 	    sendMessage: function sendMessage(event) {
 	      var _this = this;
 
-	      this.$http.post('/someUrl', { foo: 'bar' }).then(function (response) {
+	      event.preventDefault();
+	      this.$http.post('' + this.defines.siteUrl + '/wp-admin/admin-ajax.php', {
+	        'action': 'send_mail',
+	        'data': this.data
+	      }).then(function (response) {
 
 	        // get status
 	        response.status;
@@ -23645,11 +23643,22 @@
 	        // error callback
 	      });
 	      console.log(event);
-	      event.preventDefault();
 	      console.log('wyslano wiadomość');
 	    }
 	  }
-	};
+	}; //
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
 
 /***/ },
 /* 31 */
@@ -23670,7 +23679,7 @@
 	    }],
 	    attrs: {
 	      "type": "text",
-	      "placeholder": "Imię"
+	      "placeholder": "Imię i nazwisko"
 	    },
 	    domProps: {
 	      "value": _vm._s(_vm.data.name)
@@ -23685,20 +23694,20 @@
 	    directives: [{
 	      name: "model",
 	      rawName: "v-model",
-	      value: (_vm.data.surname),
-	      expression: "data.surname"
+	      value: (_vm.data.topic),
+	      expression: "data.topic"
 	    }],
 	    attrs: {
 	      "type": "text",
-	      "placeholder": "Nazwisko"
+	      "placeholder": "Temat wiadomości"
 	    },
 	    domProps: {
-	      "value": _vm._s(_vm.data.surname)
+	      "value": _vm._s(_vm.data.topic)
 	    },
 	    on: {
 	      "input": function($event) {
 	        if ($event.target.composing) { return; }
-	        _vm.data.surname = $event.target.value
+	        _vm.data.topic = $event.target.value
 	      }
 	    }
 	  }), _c('br'), _vm._v(" "), _c('input', {

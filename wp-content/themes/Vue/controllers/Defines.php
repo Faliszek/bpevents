@@ -1,5 +1,5 @@
 <?php
-define(SITE_URL, get_site_url());
+define('SITE_URL', get_site_url());
 
 function site_info() {
     $data = new stdClass();

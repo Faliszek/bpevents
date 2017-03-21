@@ -3,7 +3,6 @@
 function vue_setup(){
     add_theme_support( 'post-thumbnails' );
     add_theme_support( 'custom-logo' );
-
     //KONTAKT FOOTER
     register_sidebar( array(
         'name'          => __( 'Kontakt', 'Vue' ),
@@ -15,13 +14,6 @@ function vue_setup(){
 //        'after_title'   => '</h2>',
     ) );
     //FORMULARZ KONTAKTPWY
-    register_sidebar( array(
-        'name'          => __( 'Formularz kontaktowy', 'Vue' ),
-        'id'            => 'footer-contact-form',
-        'description'   => __( 'Formularz kontaktowy w stopce', 'Vue' ),
-        'before_widget' => '',
-        'after_widget'  => '',
-    ) );
 
     //MAPA STRONY
     register_sidebar( array(
@@ -59,30 +51,33 @@ function vue_controllers_api(){
 }
 function vue_configure_email($phpmailer){
 
+    $options = get_option('smtp_configuration_name');
         // Define that we are sending with SMTP
         $phpmailer->isSMTP();
         // The hostname of the mail server
-        $phpmailer->Host = "poczta.o2.pl";
+        $phpmailer->Host = $options['host'];
         // Use SMTP authentication (true|false)
         $phpmailer->SMTPAuth = true;
         // SMTP port number - likely to be 25, 465 or 587
-        $phpmailer->Port = "465";
+        $phpmailer->Port = (string)$options['port'];
         // Username to use for SMTP authentication
-        $phpmailer->Username = "pawlic7@o2.pl";
+        $phpmailer->Username = $options['login'];
         // Password to use for SMTP authentication
-        $phpmailer->Password = "*****";
+        $phpmailer->Password = $options['password'];
         // Encryption system to use - ssl or tls
-        $phpmailer->SMTPSecure = "ssl";
-        $phpmailer->From = "pawlic7@o2.pl";
-        $phpmailer->FromName = "Paweł";
+        $phpmailer->SMTPSecure = $options['hash'];
+        $phpmailer->From = $options['login'];
+        $phpmailer->FromName = $options['name'];
 
 }
-
 //add_filter( 'rest_endpoints', 'vue_remove_endpoints');
 add_action( 'init' , 'vue_controllers_api');
 add_action( 'after_setup_theme', 'vue_setup' );
 add_action( 'wp_enqueue_scripts', 'vue_js' );
 add_action( 'wp_enqueue_scripts', 'vue_css' );
 add_action( 'phpmailer_init', 'vue_configure_email' );
-add_action('wp_footer', 'send_mail');
+add_action( 'wp_ajax_send_mail', 'send_mail' );
+add_action( 'wp_ajax_nopriv_send_mail', 'send_mail' );
+//add_action( 'wp_ajax_siteWideMessage', 'send_mail' );
+
 

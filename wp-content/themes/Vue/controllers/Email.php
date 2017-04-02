@@ -1,24 +1,32 @@
 <?php
 
-
 function send_mail(){
     if(isset($_POST['data'])){
+        $to = Mailer::getAdminMail();
         $data = $_POST['data'];
-        $email = $data['email'];
         $topic = $data['topic'];
         $message = $data['message'];
+        $name = $data['name'];
+        $from = $data['email'];
+        $headers[] = 'From: '.$name.' <'.$from.'>';
+        $headers[] = 'Reply-To: '.$name.' <'.$from.'>,';
+
+        $headers[] = 'Cc: '.$name.''; // note you can just use a simple email address
         $errors = array();
-        $result = false;
+        $result = array();
+
         foreach($data as $key => $value){
-            if($value == 'undefined'){
+            if($value == 'undefined' || $value == ''){
                 $errors[$key] = $value;
             }
         }
+
         if(sizeof($errors) == 0){
             try {
-                $success = wp_mail($email, $topic, $message);
-                $result = $success;
-                echo json_encode($result);
+                $success = wp_mail($to, $topic, $message, $headers);
+                $result['result'] = $success;
+                $result['msg'] = 'Wiadomość wysłano pomyślnie, niedługo się odezwę';
+                echo json_encode($result, true);
             } catch (Exception $e){
                 echo json_encode($e->getMessage(), true);
             }

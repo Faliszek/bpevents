@@ -51,7 +51,7 @@ function vue_controllers_api(){
 }
 function vue_configure_email($phpmailer){
 
-    $options = get_option('smtp_configuration_name');
+    $options = get_option('smtp_configuration');
         // Define that we are sending with SMTP
         $phpmailer->isSMTP();
         // The hostname of the mail server

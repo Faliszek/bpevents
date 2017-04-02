@@ -41,6 +41,8 @@ function set_routes(){
         $route->link = get_page_link($page->ID);
         $route->path = str_replace(constant('SITE_URL'), '', $route->link);
         $route->component = get_field('layout', $page->ID);
+        $route->meta_title = get_field('seo_title', $page->ID);
+        $route->meta_desc = get_field('seo_desc', $page->ID);
         array_push($routes, $route);
     }
     return $routes;

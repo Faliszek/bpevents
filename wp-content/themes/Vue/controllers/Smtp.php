@@ -1,5 +1,5 @@
 <?php
-class MySettingsPage
+class Mailer
 {
     /**
      * Holds the values to be used in the fields callbacks
@@ -36,7 +36,7 @@ class MySettingsPage
     public function create_admin_page()
     {
         // Set class property
-        $this->options = get_option( 'smtp_configuration_name' );
+        $this->options = get_option( 'smtp_configuration' );
         ?>
         <div class="wrap">
             <h1>SMTP</h1>
@@ -59,7 +59,7 @@ class MySettingsPage
     {
         register_setting(
             'smtp_configuration_group', // Option group
-            'smtp_configuration_name', // Option name
+            'smtp_configuration', // Option name
             array( $this, 'sanitize' ) // Sanitize
         );
 
@@ -162,7 +162,7 @@ class MySettingsPage
     public function host_callback()
     {
         printf(
-            '<input type="text" id="host" name="smtp_configuration_name[host]" value="%s" />',
+            '<input type="text" id="host" name="smtp_configuration[host]" value="%s" />',
             isset( $this->options['host'] ) ? esc_attr( $this->options['host']) : ''
         );
     }
@@ -173,7 +173,7 @@ class MySettingsPage
     public function port_callback()
     {
         printf(
-            '<input type="text" id="port" name="smtp_configuration_name[port]" value="%s" />',
+            '<input type="text" id="port" name="smtp_configuration[port]" value="%s" />',
             isset( $this->options['port'] ) ? esc_attr( $this->options['port']) : ''
         );
     }
@@ -181,7 +181,7 @@ class MySettingsPage
     public function login_callback()
     {
         printf(
-            '<input type="text" id="login" name="smtp_configuration_name[login]" value="%s" />',
+            '<input type="text" id="login" name="smtp_configuration[login]" value="%s" />',
             isset( $this->options['login'] ) ? esc_attr( $this->options['login']) : ''
         );
     }
@@ -190,7 +190,7 @@ class MySettingsPage
     public function pass_callback()
     {
         printf(
-            '<input type="password" id="password" name="smtp_configuration_name[password]" />',
+            '<input type="password" id="password" name="smtp_configuration[password]" />',
             isset( $this->options['password'] ) ? esc_attr( $this->options['password']) : ''
         );
     }
@@ -198,7 +198,7 @@ class MySettingsPage
     public function hash_callback()
     {
         printf(
-            '<input type="hash" id="hash" name="smtp_configuration_name[hash]" value="%s"/>',
+            '<input type="hash" id="hash" name="smtp_configuration[hash]" value="%s"/>',
             isset( $this->options['hash'] ) ? esc_attr( $this->options['hash']) : ''
         );
     }
@@ -206,11 +206,16 @@ class MySettingsPage
     public function name_callback()
     {
         printf(
-            '<input type="text" id="name" name="smtp_configuration_name[name]" value="%s"/>',
+            '<input type="text" id="name" name="smtp_configuration[name]" value="%s"/>',
             isset( $this->options['name'] ) ? esc_attr( $this->options['name']) : ''
         );
     }
+
+    public static function getAdminMail(){
+      return get_option('smtp_configuration')['login'];
+    }
+
 }
 
 if( is_admin() )
-    $my_settings_page = new MySettingsPage();
+    $my_settings_page = new Mailer();

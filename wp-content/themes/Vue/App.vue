@@ -6,7 +6,7 @@
       <router-view :defines="this.variables"></router-view>
 
     </transition>
-    <!--<footer-theme :defines="this.variables"></footer-theme>-->
+    <footer-theme :defines="this.variables"></footer-theme>
     <div class="loader"></div>
   </div>
 </template>
@@ -54,6 +54,10 @@
             name: route.name,
             path: route.path,
             component: require('./views/' + route.component + '.vue'),
+            meta: {
+              title: route.meta_title,
+              desc: route.meta_desc
+            }
           });
 
           if (index + 1 === data.length) {

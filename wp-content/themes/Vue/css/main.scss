@@ -1,5 +1,6 @@
 @import '~bootstrap-only-css';
 @import '~slick-carousel/slick/slick.scss';
+@import '~jquery-toast-plugin/dist/jquery.toast.min.css';
 @import '_font-awesome.css';
 @import '_theme-variables.scss';
 @import '_mixins.scss';
@@ -12,7 +13,16 @@ html.no-js{
     display:none !important;
   }
 }
-/***</DEV>***/
+.form-error{
+  border:1px solid #8d1012;
+}
+.jq-toast-wrap {
+  width:unset;
+}
+.jq-toast-single {
+  padding:10px 25px;
+}
+  /***</DEV>***/
 /***<SLIDER>***/
 .slide-fade-enter-active {
   transition: all .3s ease;

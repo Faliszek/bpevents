@@ -1,18 +1,21 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml">
         <div class="content" style="padding-top:150px;">
           <form>
-            <input type="text" placeholder="Imię i nazwisko" v-model="data.name"><br />
-            <input type="text" placeholder="Temat wiadomości" v-model="data.topic"><br />
-            <input type="email" placeholder="E-mail" v-model="data.email"/><br />
-            <textarea placeholder="Masz pytania? Pisz śmiało ;)" v-model="data.message"></textarea><br />
+            <input :class="{ 'form-error': !validate.nameIsValid }" type="text" placeholder="Imię i nazwisko" v-model="data.name"><br />
+            <input :class="{ 'form-error': !validate.topicIsValid }" type="text" placeholder="Temat wiadomości" v-model="data.topic"><br />
+            <input :class="{ 'form-error': !validate.emailIsValid }" type="email" placeholder="E-mail" v-model="data.email"/><br />
+            <textarea :class="{ 'form-error': !validate.messageIsValid }" placeholder="Masz pytania? Pisz śmiało ;)" v-model="data.message"></textarea><br />
             <input type="submit" v-on:click="sendMessage" />
           </form>
-          {{data}}
+          {{data}}<br />
+          {{validate}}
         </div>
 
 </template>
 <script>
   import $ from 'jquery';
+  import { isMail, isName, isSafe } from '../js/helper';
+  import toast from 'jquery-toast-plugin';
   export default{
     name: 'Contact',
     props: ['defines'],
@@ -20,43 +23,132 @@
       return {
         msg: 'Kontakt',
         data: {
-          name: this.name,
-          topic: this.topic,
-          email: this.email,
-          message: this.message
-        }
+          name: this.name ? this.name : '',
+          topic: this.topic ? this.topic : '',
+          email: this.email ? this.email : '',
+          message: this.message ? this.message : ''
+        },
+        validate: {
+          emailIsValid: true,
+          nameIsValid: true,
+          topicIsValid: true,
+          messageIsValid: true,
+        },
+
+        success: ''
       }
     },
     created(){
     },
     methods: {
       sendMessage: function(event){
-
         event.preventDefault();
-        this.$http.post(''+this.defines.siteUrl+'/wp-admin/admin-ajax.php',
-            {
-              'action': 'send_mail',
-              'data': this.data,
-            },
-      ).then(response => {
 
-          // get status
-          response.status;
+        this.validateData();
 
-          // get status text
-          response.statusText;
+        if(this.checkData() && this.validateData()) {
+          $.toast({
+            text:'Trwa wysyłanie wiadomości proszę czekać',
+            showHideTransition: 'slide',
+            loader:false,
+            bgColor: 'rgba(0,0,0,0.8)',
+            position: 'bottom-right',
+            textAlign: 'center',
+            hideAfter: 10000,
+          });
 
-          // get 'Expires' header
-          response.headers.get('Expires');
+          this.$http.post(''+this.defines.siteUrl+'/wp-admin/admin-ajax.php',
+              {
+                'action': 'send_mail',
+                'data': this.data,
+              },
+          ).then(response => {
+            $.toast().reset('all');
+            $.toast({
+              text:''+response.body.msg+'',
+              showHideTransition: 'slide',
+              loader:false,
+              bgColor:'rgba(25, 180, 25, 0.8)',
+              position: 'bottom-right',
+              textAlign: 'center'
+            });
+            console.log(response);
+            this.resetData();
 
-          // get body data
-          this.someData = response.body;
+          }, response => {
+            $.toast().reset('all');
+            $.toast({
+              text:'Upsss.. coś poszło nie tak',
+              showHideTransition: 'slide',
+              loader:false,
+              bgColor:'rgba(180, 25, 25, 0.8)',
+              position: 'bottom-right',
+              textAlign: 'center'
+            });
+          });
 
-        }, response => {
-          // error callback
-        });
-        console.log(event);
-        console.log('wyslano wiadomość');
+        }
+      },
+
+      resetData() {
+        this.data.name = '';
+        this.data.topic = '';
+        this.data.email = '';
+        this.data.message = '';
+      },
+      validateData() {
+        let result = true;
+        let name = this.data.name;
+        let email = this.data.email;
+        let topic = this.data.topic;
+        let message = this.data.message;
+
+        isMail(email) ? this.validate.emailIsValid = true : this.validate.emailIsValid = false;
+        isName(name) ? this.validate.nameIsValid = true : this.validate.nameIsValid = false;
+        isSafe(topic) ? this.validate.topicIsValid = true : this.validate.topicIsValid = false;
+        isSafe(message) ? this.validate.messageIsValid = true : this.validate.messageIsValid = false;
+
+        for (let key in this.validate) {
+          let value = this.validate[key];
+          if(!value){
+            result = false;
+            $.toast().reset('all');
+            $.toast({
+              text:'Pole zawiera niedozwolone znaki np. ^<>{}',
+              showHideTransition: 'slide',
+              loader:false,
+              position:'bottom-right',
+              bgColor: 'rgba(100,100,100,0.8)',
+              textAlign: 'center',
+
+            });
+          } else {
+            result = true;
+          }
+        }
+        return result;
+      },
+      checkData() {
+        let result = true;
+
+        for (let key in this.data) {
+          let value = this.data[key];
+         if(value === ''){
+           result = false;
+           $.toast().reset('all');
+           $.toast({
+             text:'Wypełnij brakujące pola',
+             showHideTransition: 'slide',
+             loader:false,
+             position:'bottom-right',
+             bgColor: 'rgba(100,100,100,0.8)',
+             textAlign: 'center',
+
+           });
+           return;
+         }
+        }
+        return result;
       }
     }
   }

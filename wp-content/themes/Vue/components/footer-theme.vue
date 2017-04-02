@@ -21,10 +21,10 @@
           </div>
         </div>
         <div class="col-sm-4">
-          <div class="form-contact" v-if="footerContactForm">
-            <aside class="widget" v-html="footerContactForm.rendered">
-            </aside>
-          </div>
+          <!--<div class="form-contact" v-if="footerContactForm">-->
+            <!--<aside class="widget" v-html="footerContactForm.rendered">-->
+            <!--</aside>-->
+          <!--</div>-->
         </div>
       </div>
       <div class="footer-social">
@@ -39,7 +39,7 @@
     data() {
       return {
         footerContact: this.footerContact = this.getWidget('footer-contact', 'footerContact'),
-        footerContactForm: this.getWidget('footer-contact-form', 'footerContactForm'),
+//        footerContactForm: this.getWidget('footer-contact-form', 'footerContactForm'),
         footerLinks: this.getWidget('footer-links', 'footerLinks'),
       }
     },

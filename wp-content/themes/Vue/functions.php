@@ -10,8 +10,8 @@ function vue_setup(){
         'description'   => __( 'Dane kontaktowe w footerze', 'Vue' ),
         'before_widget' => '',
         'after_widget'  => '',
-//        'before_title'  => '<h2 class="widget-title">',
-//        'after_title'   => '</h2>',
+        'before_title'  => '<h4 class="widget-title">',
+        'after_title'   => '</h4>',
     ) );
     //FORMULARZ KONTAKTPWY
 
@@ -22,6 +22,8 @@ function vue_setup(){
         'description'   => __( 'Linki w w stopce strony', 'Vue' ),
         'before_widget' => '',
         'after_widget'  => '',
+        'before_title'  => '<h4 class="widget-title">',
+        'after_title'   => '</h4>',
     ) );
 
     //FORMULARZ KONTAKTPWY
@@ -39,11 +41,11 @@ function vue_setup(){
     ) );
 }
 function vue_js() {
-    wp_enqueue_script( 'vue-js', get_template_directory_uri() . '/js/bundle.js', array('jquery'), NULL, true);
+    wp_enqueue_script( 'vue-js', get_template_directory_uri() . '/assets/bundle.js', array('jquery'), NULL, true);
 }
 function vue_css() {
     wp_enqueue_style( 'style', get_template_directory_uri() . '/style.css', array(), '1.0.0' );
-    wp_enqueue_style( 'main', get_template_directory_uri() . '/css/main.css', array(), '1.0.0' );
+    wp_enqueue_style( 'main', get_template_directory_uri() . '/assets/main.css', array(), '1.0.0' );
 
 }
 function vue_controllers_api(){

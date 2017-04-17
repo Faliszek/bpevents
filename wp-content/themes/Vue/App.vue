@@ -31,6 +31,8 @@
 
     created(){
       this.data = this.getDefines();
+      console.log(this.$route.name);
+      this.className = this.$route.name;
     },
     methods: {
       getDefines() {
@@ -55,6 +57,7 @@
             path: route.path,
             component: require('./views/' + route.component + '.vue'),
             meta: {
+              site_title: route.site_title,
               title: route.meta_title,
               desc: route.meta_desc
             }

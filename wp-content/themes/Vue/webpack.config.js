@@ -4,7 +4,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
   entry: "./js/main.js",
   output: {
-    path: __dirname + '/js/',
+    path: __dirname + '/assets/',
     filename: "bundle.js"
   },
   module: {
@@ -39,6 +39,10 @@ module.exports = {
       {
         test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
         loader: 'url'
+      },
+      {
+        test: /\.png/,
+        loader: 'file'
       }
 
 
@@ -59,7 +63,7 @@ module.exports = {
   },
 
   plugins: [
-    new ExtractTextPlugin("../css/main.css"),
+    new ExtractTextPlugin("../assets/main.css"),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jquery: 'jquery',

@@ -18,7 +18,7 @@
           </div>
         </div>
       </section>
-      <section class="content-block" v-for="(block, index) in content" :class="index%2 == 1 ? 'left' : 'right'">
+      <section class="content-block" v-for="(block, index) in content" :class="index%2 == 1 ? 'left-side' : 'right-side'">
         <article >
           <h1>{{ block.title }}</h1>
           <p v-html="block.content"></p>
@@ -42,6 +42,21 @@
     name: 'Home',
     props: ['defines'],
     components: {slider},
+    head: {
+      // To use "this" in the component, it is necessary to return the object through a function
+      title: function () {
+        return {
+          inner: this.$route.meta.site_title,
+          separator: ' ',
+        }
+      },
+      meta: function(){
+        return [
+          { name: 'description', content: this.$route.meta.desc },
+          { name: 'title', content: this.$route.meta.title }
+        ]
+      }
+    },
     data(){
       return {
         data: this.data ? this.getDataHome() : '',

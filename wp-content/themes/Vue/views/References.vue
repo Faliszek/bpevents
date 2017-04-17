@@ -2,8 +2,6 @@
         <div id="references" class="content" style="padding-top:150px;">
           <h1>Opinie</h1>
           <div id="refs">
-            {{defines}}
-            {{ meta_title }}
             <div class="ref" v-for="ref in refs">
               <img class="img-responsive" :src="ref.ref_autor_img.url" :alt="ref.ref_autor_img.alt" />
               <h2>{{ ref.ref_autor }}</h2>
@@ -23,13 +21,14 @@
         // To use "this" in the component, it is necessary to return the object through a function
         title: function () {
           return {
-            inner: this.$route.meta.title,
-            separator: '',
+            inner: this.$route.meta.site_title,
+            separator: ' ',
           }
         },
         meta: function(){
           return [
-            { name: 'description', content: this.$route.meta.desc }
+            { name: 'description', content: this.$route.meta.desc },
+            { name: 'title', content: this.$route.meta.title }
           ]
         }
       },

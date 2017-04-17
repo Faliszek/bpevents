@@ -1,70 +1,39 @@
+/*** DEV ***/
+@import 'dev';
+
+/*** LIBS **/
 @import '~bootstrap-only-css';
 @import '~slick-carousel/slick/slick.scss';
 @import '~jquery-toast-plugin/dist/jquery.toast.min.css';
-@import '_font-awesome.css';
-@import '_theme-variables.scss';
-@import '_mixins.scss';
-@import '_classes.scss';
+@import '~node-waves/dist/waves.css';
+@import '~materialize-css/sass/components/_mixins.scss';
+@import '~materialize-css/sass/components/_color.scss';
+@import '~materialize-css/sass/components/_variables.scss';
+@import '~materialize-css/sass/components/_normalize.scss';
+@import '~materialize-css/sass/components/_typography.scss';
+//@import '~materialize-css/sass/components/_global.scss';
+//@import '~materialize-css/sass/components/_buttons.scss';
+/*** THEME ***/
+@import 'theme/_font-awesome.css';
+@import 'theme/_theme-variables.scss';
+@import 'theme/_mixins.scss';
+@import 'theme/_classes.scss';
+/*** COMPONENTS ***/
+@import 'components/header';
+@import 'components/footer';
+@import 'components/button';
+@import 'components/input';
+@import 'components/toast';
+/*** SITES ***/
+@import 'sites/home';
+@import 'sites/contact';
 
-/***<DEV>***/
-html.no-js{
-  margin-top:0px !important;
-  #wpadminbar{
-    display:none !important;
-  }
-}
-.form-error{
-  border:1px solid #8d1012;
-}
-.jq-toast-wrap {
-  width:unset;
-}
-.jq-toast-single {
-  padding:10px 25px;
-}
-  /***</DEV>***/
-/***<SLIDER>***/
-.slide-fade-enter-active {
-  transition: all .3s ease;
-}
-.slide-fade-leave-active {
-
-  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
-.slide-fade-enter{
-  transform: translateX(50px);
-  opacity: 0.3;
-
-}
-
-.slide-fade-leave-active{
-  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-  opacity: 0;
-
-  }
-  .unvisible{
-  visibility:hidden;
-
-}
-#home-slider{
-  .slick-slide{
-    position:relative;
-    max-height:600px;
-    .slide-content{
-      position:absolute;
-      top:50%;
-      left:50%;
-      @include translateXY(-50%, -50%);
-    }
-  }
-}
-/***</SLIDER>***/
 html{
   overflow-x:hidden;
 }
 body{
   font-family: $font-family;
-  transition: .3s all ease;
+  transition: $transition;
 }
 [v-cloak]{
   display:none !important;
@@ -72,52 +41,6 @@ body{
 body:not(.loaded) #slider img {
   -webkit-animation: fadein 2s; //I use chrome
   visibility: hidden;
-}
-.main-nav{
-  background:$nav-background;
-  position:fixed;
-  top:0;
-  width:100%;
-  z-index:999;
-  .header-logo{
-    .b{
-      color:$accent;
-    }
-    .p{
-      color:$accent-hover
-    }
-    h2{
-      color: #fff;
-      letter-spacing: -3px;
-      padding: 9px 0;
-      margin:0;
-    }
-  }
-  .menu-main-container{
-    float:right;
-    ul{
-      margin-bottom:0;
-      li{
-        list-style-type: none;
-        display:block;
-        float:left;
-
-        a{
-          color: #fff;
-          padding:16px;
-          display:block;
-          transition: $transition;
-          &:hover{
-            text-decoration: none;
-            background:rgba(0,0,0,0.9);
-          }
-        }
-      }
-      .router-link-active {
-         @include box-shadow(inset 0 -3px 0 0 $accent)
-      }
-    }
-  }
 }
 
 .banner{
@@ -151,68 +74,4 @@ body:not(.loaded) #slider img {
 }
 .content{
   min-height:300px;
-}
-footer{
-  background:#212121;
-  color:#fefefe;
-  width:100%;
-  .footer{
-    h2{
-      padding-bottom:16px;
-    }
-    .footer-content{
-      padding-top:25px;
-      padding-bottom:25px;
-    }
-    .contact-block{
-      @include display-flex;
-      //@include align-items(center);
-      img{
-        max-width:100%;
-        width:auto;
-        height:auto;
-      }
-    }
-    .logo{
-      display:block;
-      float:left;
-      width:35%;
-    }
-    .text{
-      display:block;
-      float:left;
-      width:65%;
-      padding:0 16px;
-    }
-    .site-map{
-      a{
-        color:#fff;
-      }
-    }
-
-    .form-contact{
-      input[type=email]{
-        width:80%;
-        display:block;
-        float:left;
-        height:35px;
-        box-sizing: border-box;
-
-      }
-
-      input[type=submit]{
-        display:block;
-        float:left;
-        width:20%;
-        height:35px;
-        box-sizing: border-box;
-
-      }
-    }
-  }
-  .footer-social{
-    width:100%;
-    height:50px;
-    border-top:1px solid #fefefe;
-  }
 }

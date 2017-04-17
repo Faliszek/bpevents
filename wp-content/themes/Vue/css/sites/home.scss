@@ -1,0 +1,12 @@
+#home-slider{
+  .slick-slide{
+    position:relative;
+    max-height:600px;
+    .slide-content{
+      position:absolute;
+      top:50%;
+      left:50%;
+      @include translateXY(-50%, -50%);
+    }
+  }
+}

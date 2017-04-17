@@ -16,10 +16,24 @@
   export default{
     name: 'Gallery',
     props: ['defines'],
+    head: {
+      // To use "this" in the component, it is necessary to return the object through a function
+      title: function () {
+        return {
+          inner: this.$route.meta.site_title,
+          separator: ' ',
+        }
+      },
+      meta: function(){
+        return [
+          { name: 'description', content: this.$route.meta.desc },
+          { name: 'title', content: this.$route.meta.title }
+        ]
+      }
+    },
     data(){
       return {
         data: this.data ? this.getDataEq() : '',
-        msg: 'Equipment',
         slides: '',
       }
     },

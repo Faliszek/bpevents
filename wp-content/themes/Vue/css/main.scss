@@ -13,6 +13,7 @@
 @import '~materialize-css/sass/components/_typography.scss';
 //@import '~materialize-css/sass/components/_global.scss';
 //@import '~materialize-css/sass/components/_buttons.scss';
+@import '~imagelightbox/src/imagelightbox.css';
 /*** THEME ***/
 @import 'theme/_font-awesome.css';
 @import 'theme/_theme-variables.scss';
@@ -27,6 +28,8 @@
 /*** SITES ***/
 @import 'sites/home';
 @import 'sites/contact';
+@import 'sites/gallery';
+@import 'sites/references';
 
 html{
   overflow-x:hidden;

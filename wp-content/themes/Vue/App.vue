@@ -4,7 +4,6 @@
     <header-theme></header-theme>
     <transition name="slide-fade" mode="out-in">
       <router-view :defines="this.variables"></router-view>
-
     </transition>
     <footer-theme :defines="this.variables"></footer-theme>
     <div class="loader"></div>
@@ -31,7 +30,6 @@
 
     created(){
       this.data = this.getDefines();
-      console.log(this.$route.name);
       this.className = this.$route.name;
     },
     methods: {

@@ -4,9 +4,6 @@
       <div class="footer-content row">
         <div class="col-sm-5">
           <div class="contact-block">
-            <div class="logo">
-              <img class="img-responsive" src="" alt="" />
-            </div>
             <div class="text" v-if="footerContact">
               <aside class="widget" v-html="footerContact.rendered">
               </aside>

@@ -1,18 +1,26 @@
 <!--suppress ALL -->
 <template>
-    <section id="gallery" class="content" style="padding-top:100px;" v-cloak>
-        <h1>Galeria</h1>
-            <div id="eq-slider">
-                <div class="eq-slide" v-for="slide in slides">
-                        <img class="img-responsive" :src="slide.picture.url" :alt="slide.picture.alt" />
-                </div>
+    <section id="gallery" class="gallery content" v-cloak>
+        <h1 class="text-center">Galeria</h1>
+        <div class="container">
+            <div class="row">
+                    <transition-group name="flip-list" tag="ul">
+                    <li class="eq-photo" v-for="(slide, index) in slides"  v-bind:key="slide">
+                        <a :href="slide.picture.url" class="image-light-box" :data-ilb2-caption="slide.picture.description">
+                            <img class="img-responsive" :src="slide.picture.url" :alt="slide.picture.alt" />
+                        </a>
+                    </li>
+                    </transition-group>
+                <!--</ul>-->
             </div>
+        </div>
     </section>
 </template>
 <script>
   import $ from 'jquery';
   import slick from 'slick-carousel';
-
+  import imageLightbox from 'imagelightbox/src/imagelightbox.js';
+  import _ from 'lodash';
   export default{
     name: 'Gallery',
     props: ['defines'],
@@ -40,18 +48,16 @@
     mounted() {
       if(this.defines){
         this.getDataEq();
+        this.shuffle();
       }
     },
     methods: {
       getDataEq() {
-        console.log(this.defines.galleryPage)
         this.$http.get('/wp-json/acf/v2/post/' + this.defines.galleryPage)
             .then(response => {
               this.data =  response.body.acf;
               this.getSlides();
-              setTimeout(function(){
-                $('#eq-slider').slick();
-              },0);
+              this.setImgPreview();
             }, response => {
               console.log('Data could not be loaded', +response)
             });
@@ -59,7 +65,23 @@
 
       getSlides() {
         this.slides = this.data.eq;
+      },
+
+      setImgPreview(){
+        setTimeout(function(){
+            $('.image-light-box')
+                .imageLightbox({
+                    arrows:true,
+                    overlay:true,
+                    button: true,
+                    caption: true
+                });
+        },0);
+      },
+      shuffle() {
+        this.slides = _.shuffle(this.slides)
       }
+
     },
 
     watch: {

@@ -15,7 +15,9 @@
 
 </template>
 <style>
-
+    .slick-initialized .slick-slide {
+        outline:none;
+    }
 </style>
 <script type="text/babel">
     import $ from 'jquery';

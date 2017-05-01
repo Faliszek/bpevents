@@ -1,12 +1,14 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml">
         <div class="contact content">
+
           <div class="container">
             <div class="row">
-              <h1>Skontaktuj się ze mną!</h1>
+              <h1 class="text-center">Skontaktuj się ze mną!</h1>
               <div class="contact-wrap">
                 <div class="col-xs-6">
-                  <div class="logo"></div>
-                  <div class="contact-info" v-html="content.rendered"></div>
+                  <keep-alive>
+                    <contact-desc :desc="content.rendered" :logo="logoID"></contact-desc>
+                  </keep-alive>
                 </div>
                 <div class="contact-form-wrapper col-xs-6">
                   <form id="contact-form" class="z-depth-3">
@@ -58,11 +60,13 @@
   import { isMail, isName, isSafe } from '../js/helper';
   import Waves from 'node-waves/dist/waves';
   import toast from 'jquery-toast-plugin';
+  import contactDesc from '../components/contact-desc.vue';
 
   export default{
     name: 'Contact',
     props: ['defines'],
     className: 'contact',
+    components: {contactDesc},
     head: {
       // To use "this" in the component, it is necessary to return the object through a function
       title: function () {
@@ -94,7 +98,7 @@
           topicIsValid: true,
           messageIsValid: true,
         },
-
+        logoID: {},
         success: ''
       }
     },
@@ -109,11 +113,11 @@
     },
   methods: {
     getDataContact() {
-      console.log(this.defines.contactPage);
       this.$http.get('/wp-json/wp/v2/pages/' + this.defines.contactPage)
           .then(response => {
-            console.log(response)
             this.content =  response.body.content;
+            this.logoID = response.body.featured_media;
+            console.log(this.logoID);
           }, response => {
             console.log('Data could not be loaded', +response)
           });

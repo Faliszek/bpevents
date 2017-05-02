@@ -10,23 +10,34 @@
       <section class="offer-block" v-if="offers">
         <div class="container">
           <div class="row">
-            <div class="col-sm-4" v-for="offer in offers">
-              <i :class="setIcon(offer.offer_icon)"></i>
-              <h2>{{ offer.offer_title }}</h2>
-              <p v-html="offer.offer_content"></p>
+            <h1 class="offer-block__title">Oferta</h1>
+            <div class="col-sm-4 offer" v-for="offer in offers">
+              <i :class="setIcon(offer.offer_icon)" class="z-depth-1"></i>
+              <h3 class="offer__title">{{ offer.offer_title }}</h3>
+              <p class="offer__content" v-html="offer.offer_content"></p>
             </div>
           </div>
         </div>
       </section>
       <section class="content-block" v-for="(block, index) in content" :class="index%2 == 1 ? 'left-side' : 'right-side'">
-        <article >
-          <h1>{{ block.title }}</h1>
-          <p v-html="block.content"></p>
-          <figure>
-            <img :src="block.background.url" :alt="block.background.alt" />
-          </figure>
-        </article>
+        <div class="container">
+        <div class="row">
+        <article class="content-block__article">
+          <h1 class="content-block__title">{{ block.title }}</h1>
+          <div class="content-block__wrapper">
+          <p class="content-block__text" v-html="block.content"></p>
+            <figure class="content-block__img">
+              <a :href="block.background.url" class="image-light-box" :data-ilb2-caption="block.background.description">
+              <img :src="block.background.url" :alt="block.background.alt" class="img-responsive z-depth-3" />
 
+              </a>
+              <figcaption v-if="block.background.description">{{ block.background.description }}</figcaption>
+            </figure>
+          </div>
+
+        </article>
+        </div>
+        </div>
       </section>
 
 
@@ -75,8 +86,7 @@
         this.$http.get('/wp-json/acf/v2/post/' + this.defines.homePage)
             .then(response => {
               this.data =  response.body.acf;
-
-                this.setDataSlider();
+                this.setSlider();
                 this.setOffersBlock();
                 this.setContentBlocks();
 
@@ -84,7 +94,7 @@
               console.log('Data could not be loaded', +response)
             });
       },
-      setDataSlider(){
+      setSlider(){
           if(!this.slides && this.data.home_slides){
             this.slides =  this.data.home_slides;
           }
@@ -93,6 +103,7 @@
       setOffersBlock(){
         if(!this.offers && this.data.offers){
           this.offers =  this.data.offers;
+          this.setImgPreview();
         }
       },
 
@@ -104,7 +115,17 @@
       setIcon(string){
         string = "fa fa-"+string;
         return string;
-      }
+      },
+      setImgPreview(){
+        setTimeout(function(){
+          $('.image-light-box')
+              .imageLightbox({
+                overlay:true,
+                button: true,
+                caption: true
+              });
+        },0);
+      },
     },
 
     watch: {

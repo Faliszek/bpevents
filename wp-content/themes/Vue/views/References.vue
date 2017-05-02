@@ -84,13 +84,13 @@
               infinite: true,
               speed: 700,
               lazyLoad:'ondemand',
-              cssEase: 'ease-out',
+              cssEase: 'cubic-bezier(1,0.5,0.8,1)',
               arrows:true,
+              fade:true,
               prevArrow: `<i class="arrow-prev fa fa-angle-left"></i>`,
               nextArrow: `<i class="arrow-next fa fa-angle-right"></i>`,
             });
           }, 0);
-
           el.on('init', function(){
             el.removeClass('unvisible');
           });

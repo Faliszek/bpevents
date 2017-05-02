@@ -2,9 +2,9 @@
 
   <div id="page">
     <header-theme></header-theme>
-    <transition name="slide-fade" mode="out-in">
-      <router-view :defines="this.variables"></router-view>
-    </transition>
+      <transition name="slide-fade" mode="out-in">
+        <router-view :defines="this.variables"></router-view>
+      </transition>
     <footer-theme :defines="this.variables"></footer-theme>
     <div class="loader"></div>
   </div>
@@ -25,6 +25,7 @@
     data(){
       return {
         variables: '',
+        className: 'home'
       }
     },
 

@@ -3,12 +3,25 @@ footer{
   color:#fefefe;
   width:100%;
   .footer{
+    &__block{
+      flex:1;
+      display:flex;
+      justify-content:center;
+    }
+    .logo{
+      background:url(../img/logo-header.png) center center no-repeat;
+      background-size:contain;
+      width: 100%;
+      height: 100px;
+    }
     h2{
       padding-bottom:16px;
     }
     .footer-content{
       padding-top:25px;
       padding-bottom:25px;
+      display: flex;
+      align-items: center;
     }
     .contact-block{
       @include display-flex;
@@ -19,15 +32,9 @@ footer{
         height:auto;
       }
     }
-    .logo{
-      display:block;
-      float:left;
-      width:35%;
-    }
     .text{
       display:block;
       float:left;
-      width:65%;
       padding:0 16px;
     }
     .site-map{

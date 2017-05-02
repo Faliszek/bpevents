@@ -2,7 +2,14 @@
   <footer id="footer">
     <div class="footer container">
       <div class="footer-content row">
-        <div class="col-sm-5">
+        <div class="col-sm-4 footer__block">
+          <div class="logo"></div>
+          <!--<div class="form-contact" v-if="footerContactForm">-->
+          <!--<aside class="widget" v-html="footerContactForm.rendered">-->
+          <!--</aside>-->
+          <!--</div>-->
+        </div>
+        <div class="col-sm-4 footer__block">
           <div class="contact-block">
             <div class="text" v-if="footerContact">
               <aside class="widget" v-html="footerContact.rendered">
@@ -11,17 +18,11 @@
           </div>
 
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-4 footer__block">
           <div class="site-map" v-if="footerLinks">
             <aside class="widget" v-html="footerLinks.rendered">
             </aside>
           </div>
-        </div>
-        <div class="col-sm-4">
-          <!--<div class="form-contact" v-if="footerContactForm">-->
-            <!--<aside class="widget" v-html="footerContactForm.rendered">-->
-            <!--</aside>-->
-          <!--</div>-->
         </div>
       </div>
       <div class="footer-social">

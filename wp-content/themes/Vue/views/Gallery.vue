@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                     <transition-group name="flip-list" tag="ul">
-                    <li class="eq-photo" v-for="(slide, index) in slides"  v-bind:key="slide">
+                    <li class="eq-photo z-depth-1" v-for="(slide, index) in slides"  v-bind:key="slide">
                         <a :href="slide.picture.url" class="image-light-box" :data-ilb2-caption="slide.picture.description">
                             <img class="img-responsive" :src="slide.picture.url" :alt="slide.picture.alt" />
                         </a>

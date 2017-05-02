@@ -8,11 +8,11 @@ module.exports = {
     filename: "bundle.js"
   },
   module: {
-    loaders: [
+    rules: [
 
       {
         test: /\.vue$/,
-        loader: 'vue'
+        loader: 'vue-loader'
       },
 
       {
@@ -26,29 +26,38 @@ module.exports = {
 
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract(
-            "style-loader",
-            "css-loader!sass-loader!postcss")
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: function () {
+                  return [
+                    require('autoprefixer')
+                  ];
+                }
+              }
+            },
+            {
+              loader: 'sass-loader'
+            }
+          ]
+        })
       },
 
       {
         test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
-        loader: 'url'
+        loader: 'url-loader'
       },
       {
         test: /\.png/,
-        loader: 'file'
+        loader: 'file-loader'
       }
-
-
     ]
   },
 
-  vue: {
-    loaders: {
-      js: 'babel?presets[]=es2015'
-    }
-  },
 
   resolve: {
     alias: {

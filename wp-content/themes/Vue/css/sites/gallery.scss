@@ -6,8 +6,18 @@
   }
   .eq-photo {
     //float:left;
-    width:33%;
     //display:inline-block;
+    width: 31%;
+    display: inline-block;
+    margin: 1%;
+    img {
+      transition: $transition;
+    }
+    &:hover {
+      img {
+        transform: scale(1.03);
+      }
+    }
   }
 }
 .flip-list-move {

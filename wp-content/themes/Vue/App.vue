@@ -1,26 +1,26 @@
 <template>
-
   <div id="page">
+    <!--<pre-loader :defines="this.variables"></pre-loader>-->
     <header-theme></header-theme>
       <transition name="slide-fade" mode="out-in">
         <router-view :defines="this.variables"></router-view>
       </transition>
     <footer-theme :defines="this.variables"></footer-theme>
-    <div class="loader"></div>
   </div>
 </template>
 <script>
+  import $ from 'jquery';
   import Vue from 'vue';
-  import router from './router';
+  import router from './js/main';
+  import PreLoader from './components/preloader.vue';
   import HeaderTheme from './components/header-theme.vue';
   import FooterTheme from './components/footer-theme.vue';
-  import $ from 'jquery';
 
-  export default{
+  export default {
     components: {
+      PreLoader,
       HeaderTheme,
       FooterTheme,
-
     },
     data(){
       return {
@@ -28,21 +28,21 @@
         className: 'home'
       }
     },
-
     created(){
-      this.data = this.getDefines();
+      this.data = this.initData();
       this.className = this.$route.name;
+      this.setViewport();
     },
     methods: {
-      getDefines() {
+      initData() {
         this.$http.get('wp-json/defines/v2/info/').then(response => {
           this.variables = JSON.parse(response.body);
           const routes = this.setRoutes(this.variables.routes);
-          router.addRoutes(routes);
-          router.beforeEach((to, from, next) => {
-            $('.content').css('min-height', window.innerHeight+'px');
-            next();
-          });
+            router.addRoutes(routes);
+            router.beforeEach((to, from, next) => {
+              $('.content').css('min-height', window.innerHeight+'px');
+              next();
+            });
           this.setRoutesForWidget();
         }, response => {
           console.log('Data cannot be loaded', +response);
@@ -72,7 +72,6 @@
         });
         return array;
       },
-
       setRoutesForWidget() {
         let menuLinks = document.getElementById('menu-footer');
         if(typeof menuLinks != 'undefined' && menuLinks != null) {
@@ -88,6 +87,11 @@
           })
         }
       },
+      setViewport(){
+        document.write(`<style>.content { min-height: ${window.innerHeight}px }</style>`);
+        //Nie jestem z tego dumny ;(
+      }
+
     }
   }
 </script>

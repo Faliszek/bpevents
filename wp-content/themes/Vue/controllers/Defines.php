@@ -5,7 +5,7 @@ function site_info() {
     $data = new stdClass();
     $data->siteUrl = constant('SITE_URL');
 
-    $data->homePage = get_option( 'page_on_front' );
+    $data->homePage = (int)get_option( 'page_on_front' );
     $data->referencesPage = get_page_by_title( 'referencje' )->ID;
     $data->contactPage = get_page_by_title( 'kontakt' )->ID;
     $data->galleryPage = get_page_by_title( 'galeria' )->ID;

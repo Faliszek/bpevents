@@ -18,7 +18,6 @@
 </template>
 <script type="text/babel">
   import Waves from 'node-waves/dist/waves';
-
   export default {
 	data() {
 		return {

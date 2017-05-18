@@ -4,14 +4,13 @@
         <h1 class="text-center">Galeria</h1>
         <div class="container">
             <div class="row">
-                    <transition-group name="flip-list" tag="ul">
+                <ul>
                     <li class="eq-photo z-depth-1" v-for="(slide, index) in slides"  v-bind:key="slide">
                         <a :href="slide.picture.url" class="image-light-box" :data-ilb2-caption="slide.picture.description">
                             <img class="img-responsive" :src="slide.picture.url" :alt="slide.picture.alt" />
                         </a>
                     </li>
-                    </transition-group>
-                <!--</ul>-->
+                </ul>
             </div>
         </div>
     </section>

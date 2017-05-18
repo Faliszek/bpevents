@@ -4,10 +4,6 @@
       <div class="footer-content row">
         <div class="col-sm-4 footer__block">
           <div class="logo"></div>
-          <!--<div class="form-contact" v-if="footerContactForm">-->
-          <!--<aside class="widget" v-html="footerContactForm.rendered">-->
-          <!--</aside>-->
-          <!--</div>-->
         </div>
         <div class="col-sm-4 footer__block">
           <div class="contact-block">
@@ -16,7 +12,6 @@
               </aside>
             </div>
           </div>
-
         </div>
         <div class="col-sm-4 footer__block">
           <div class="site-map" v-if="footerLinks">
@@ -24,8 +19,6 @@
             </aside>
           </div>
         </div>
-      </div>
-      <div class="footer-social">
       </div>
     </div>
   </footer>
@@ -37,7 +30,6 @@
     data() {
       return {
         footerContact: this.footerContact = this.getWidget('footer-contact', 'footerContact'),
-//        footerContactForm: this.getWidget('footer-contact-form', 'footerContactForm'),
         footerLinks: this.getWidget('footer-links', 'footerLinks'),
       }
     },

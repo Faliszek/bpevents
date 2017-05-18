@@ -1,6 +1,7 @@
 <?php
 
 function send_mail(){
+
     if(isset($_POST['data'])){
         $to = Mailer::getAdminMail();
         $data = $_POST['data'];

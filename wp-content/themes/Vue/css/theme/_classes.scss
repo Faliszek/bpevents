@@ -48,11 +48,11 @@
 }
 
 .slide-fade-enter-active {
-  transition: all .3s ease;
+  transition: all $transition-time ease;
 }
 .slide-fade-leave-active {
 
-  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all $transition-time cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
 .slide-fade-enter{
   transform: translateX(50px);
@@ -61,7 +61,7 @@
 }
 
 .slide-fade-leave-active{
-  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all $transition-time cubic-bezier(1.0, 0.5, 0.8, 1.0);
   opacity: 0;
 
 }

@@ -49,7 +49,7 @@ function vue_css() {
 
 }
 function vue_controllers_api(){
-    require_once('controllers/controllers.php');
+    require_once('controllers.php');
 }
 function vue_configure_email($phpmailer){
 

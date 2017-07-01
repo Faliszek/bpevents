@@ -12,8 +12,14 @@
   font-size: 18px;
   width: 70%;
   transition:$transition;
+  cursor:pointer;
   &:hover{
     background-color:$accent-hover;
     @extend .z-depth-3;
+    text-decoration:none;
+  }
+  &:visited, &:focus, &:active{
+    color:#fff;
+    text-decoration:none;
   }
 }

@@ -14,6 +14,20 @@ function site_info() {
     return json_encode($data, false);
 }
 
+
+function set_data() {
+	$data = new stdClass();
+	$data->siteUrl = constant('SITE_URL');
+
+	$data->homePage = (int)get_option( 'page_on_front' );
+	$data->referencesPage = get_page_by_title( 'referencje' )->ID;
+	$data->contactPage = get_page_by_title( 'kontakt' )->ID;
+	$data->galleryPage = get_page_by_title( 'galeria' )->ID;
+
+	$data->routes = set_routes();
+	return json_encode($data, false);
+}
+
 function set_routes(){
     $routes = array();
     $args = array(

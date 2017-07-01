@@ -12,12 +12,15 @@
                     <div class="ref__content">
                       <h4>{{ ref.ref_autor }}</h4>
                       <p class="text" v-html="ref.ref_opinion "></p>
-                      <span class="date" v-html="modifyDate(ref.ref_data)"></span>
+                      <!--<span class="date" v-html="modifyDate(ref.ref_data)"></span>-->
                       <a class="link" :href="ref.ref_link">Zobacz opinie</a>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+            <div class="row btn-row">
+              <a class="main-button facebook-button" :href="facebook_link" target="_blank">Zobacz więcej opini</a>
             </div>
           </div>
           <!--{{ refs }}-->
@@ -51,6 +54,7 @@
             msg: 'References',
             meta_title: this.meta_title ? this.meta_title : '',
             refs: this.refs ? this.getRefs() : '',
+            facebook_link: this.facebook_link ? this.facebook_link : ''
           }
         },
       mounted() {
@@ -61,12 +65,13 @@
       },
       methods: {
         setMeta() {
-          console.log(this.$route);
+//          console.log(this.$route);
         },
         getData() {
           this.$http.get('/wp-json/acf/v2/post/' + this.defines.referencesPage)
               .then(response => {
                 this.refs = response.body.acf.opinion;
+                this.facebook_link = response.body.acf.facebook_link
                 this.setSlider();
 
               }, response => {
@@ -95,12 +100,12 @@
             el.removeClass('unvisible');
           });
         },
-        modifyDate(s){
-          let slash = '/';
-          let r = new RegExp(slash, 'g');
-          s += 'r.';
-          return s.replace(r, '.');
-        }
+//        modifyDate(s){
+//          let slash = '/';
+//          let r = new RegExp(slash, 'g');
+//          s += 'r.';
+//          return s.replace(r, '.');
+//        }
       },
     }
 </script>

@@ -30,9 +30,11 @@ function send_mail(){
                 echo json_encode($result, true);
             } catch (Exception $e){
                 echo json_encode($e->getMessage(), true);
+                $result['msg'] = 'Coś poszło nie tak, spróboj później';
             }
         } else{
             echo json_encode($errors, true);
+	          $result['msg'] = 'Coś poszło nie tak, spróboj później';
         }
 
     }

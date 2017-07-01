@@ -10,8 +10,8 @@
 </template>
 <script>
   import $ from 'jquery';
+  import { DATA_PAGE } from './js/data';
   import Vue from 'vue';
-  import router from './js/main';
   import PreLoader from './components/preloader.vue';
   import HeaderTheme from './components/header-theme.vue';
   import FooterTheme from './components/footer-theme.vue';
@@ -24,54 +24,14 @@
     },
     data(){
       return {
-        variables: '',
-        className: 'home'
+        variables: DATA_PAGE ? DATA_PAGE : {},
       }
     },
-    created(){
-      this.data = this.initData();
-      this.className = this.$route.name;
+    mounted(){
+      this.setRoutesForWidget();
       this.setViewport();
     },
     methods: {
-      initData() {
-        this.$http.get('wp-json/defines/v2/info/').then(response => {
-          this.variables = JSON.parse(response.body);
-          const routes = this.setRoutes(this.variables.routes);
-            router.addRoutes(routes);
-            router.beforeEach((to, from, next) => {
-              $('.content').css('min-height', window.innerHeight+'px');
-              next();
-            });
-          this.setRoutesForWidget();
-        }, response => {
-          console.log('Data cannot be loaded', +response);
-        });
-      },
-      setRoutes(data){
-        let array = [];
-        data.forEach((route, index) => {
-          array.push({
-            name: route.name,
-            path: route.path,
-            component: require('./views/' + route.component + '.vue'),
-            meta: {
-              site_title: route.site_title,
-              title: route.meta_title,
-              desc: route.meta_desc
-            }
-          });
-
-          if (index + 1 === data.length) {
-            array.push({
-              path: '*',
-              component: require('./views/Home.vue'),
-              redirect: '/'
-            });
-          }
-        });
-        return array;
-      },
       setRoutesForWidget() {
         let menuLinks = document.getElementById('menu-footer');
         if(typeof menuLinks != 'undefined' && menuLinks != null) {

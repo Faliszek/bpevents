@@ -6,9 +6,12 @@
   <link href="https://fonts.googleapis.com/css?family=Droid+Sans|Lato|Raleway|Roboto|Slabo+27px" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300i" rel="stylesheet">
   <?php wp_head(); ?>
+
+  <script> var SERVER_DATA = <?php echo set_data();?></script>
 </head>
   <body>
     <div id="app"></div>
+    <div id="error-occurred"></div>
   </body>
   <?php wp_footer();?>
 </html>

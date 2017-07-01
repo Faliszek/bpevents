@@ -21,7 +21,6 @@
   export default {
 	data() {
 		return {
-			message: 'footer Vue!',
       links: this.getMenu(2),
 		}
 	},

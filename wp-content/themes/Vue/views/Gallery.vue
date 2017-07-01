@@ -4,11 +4,34 @@
         <h1 class="text-center">Galeria</h1>
         <div class="container">
             <div class="row">
-                <ul>
+                <div class="gallery-menu">
+                </div>
+                <ul class="photos photos-container">
                     <li class="eq-photo z-depth-1" v-for="(slide, index) in slides"  v-bind:key="slide">
                         <a :href="slide.picture.url" class="image-light-box" :data-ilb2-caption="slide.picture.description">
                             <img class="img-responsive" :src="slide.picture.url" :alt="slide.picture.alt" />
                         </a>
+                    </li>
+                </ul>
+
+                <ul class="videos photos-container">
+                    <li>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/xO83H3wAGP0" frameborder="0" allowfullscreen></iframe>
+                    </li>
+                    <li>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/xlnwXOea3gQ" frameborder="0" allowfullscreen></iframe>
+                    </li>
+                    <li>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/uKvR9zT6B2k" frameborder="0" allowfullscreen></iframe>
+                    </li>
+                    <li>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/aaC51E1zd-A" frameborder="0" allowfullscreen></iframe>
+                    </li>
+                    <li>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/uKvR9zT6B2k" frameborder="0" allowfullscreen></iframe>
+                    </li>
+                    <li>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/aaC51E1zd-A" frameborder="0" allowfullscreen></iframe>
                     </li>
                 </ul>
             </div>
@@ -20,7 +43,7 @@
   import slick from 'slick-carousel';
   import imageLightbox from 'imagelightbox/src/imagelightbox.js';
   import _ from 'lodash';
-  export default{
+  export default {
     name: 'Gallery',
     props: ['defines'],
     head: {

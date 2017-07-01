@@ -13,5 +13,10 @@
     <div id="app"></div>
     <div id="error-occurred"></div>
   </body>
+<script>
+  (function(){
+    document.write(`<style>.content \{ min-height: ${window.innerHeight}px }</style>`);
+  })();
+</script>
   <?php wp_footer();?>
 </html>

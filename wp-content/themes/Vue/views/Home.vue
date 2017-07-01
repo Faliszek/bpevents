@@ -77,14 +77,15 @@
       }
     },
     mounted() {
-      if(this.defines){
+//      if(this.defines){
         this.getDataHome();
-      }
+//      }
     },
     methods: {
       getDataHome() {
-        this.$http.get('/wp-json/acf/v2/post/' + this.defines.homePage)
+        this.$http.get('/wp-json/acf/v2/post/'+this.defines.homePage)
             .then(response => {
+              console.log(response);
               this.data =  response.body.acf;
                 this.setSlider();
                 this.setOffersBlock();

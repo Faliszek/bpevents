@@ -20,7 +20,7 @@
               </div>
             </div>
             <div class="row btn-row">
-              <a class="main-button facebook-button" :href="facebook_link" target="_blank">Zobacz więcej opini</a>
+              <a class="main-button facebook-button" :href="facebook_link" target="_blank">Zobacz więcej opinii</a>
             </div>
           </div>
           <!--{{ refs }}-->
@@ -60,18 +60,14 @@
       mounted() {
         if(this.defines){
           this.getData();
-          this.meta_title = this.setMeta();
         }
       },
       methods: {
-        setMeta() {
-//          console.log(this.$route);
-        },
         getData() {
           this.$http.get('/wp-json/acf/v2/post/' + this.defines.referencesPage)
               .then(response => {
                 this.refs = response.body.acf.opinion;
-                this.facebook_link = response.body.acf.facebook_link
+                this.facebook_link = response.body.acf.facebook_link;
                 this.setSlider();
 
               }, response => {

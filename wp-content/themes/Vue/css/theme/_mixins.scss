@@ -29,6 +29,11 @@
   display: flex;
 }
 
+@mixin flex-wrap(){
+  display: -webkit-flex; /* Safari */
+  -webkit-flex-wrap: wrap; /* Safari 6.1+ */
+}
+
 @mixin flex-direction($direction) {
   -webkit-flex-direction: $direction;
   -ms-flex-direction: $direction;

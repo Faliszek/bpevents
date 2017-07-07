@@ -1,7 +1,7 @@
 <!--suppress ALL -->
 <template>
-    <section id="gallery" class="gallery content" v-cloak>
-        <h1 class="text-center">Galeria</h1>
+    <section id="gallery" class="gallery content page__content" v-cloak>
+        <h1 class="text-center page__title">Galeria</h1>
         <div class="container">
             <div class="row">
                 <div class="gallery-menu">
@@ -11,27 +11,6 @@
                         <a :href="slide.picture.url" class="image-light-box" :data-ilb2-caption="slide.picture.description">
                             <img class="img-responsive" :src="slide.picture.url" :alt="slide.picture.alt" />
                         </a>
-                    </li>
-                </ul>
-
-                <ul class="videos photos-container">
-                    <li>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/xO83H3wAGP0" frameborder="0" allowfullscreen></iframe>
-                    </li>
-                    <li>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/xlnwXOea3gQ" frameborder="0" allowfullscreen></iframe>
-                    </li>
-                    <li>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/uKvR9zT6B2k" frameborder="0" allowfullscreen></iframe>
-                    </li>
-                    <li>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/aaC51E1zd-A" frameborder="0" allowfullscreen></iframe>
-                    </li>
-                    <li>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/uKvR9zT6B2k" frameborder="0" allowfullscreen></iframe>
-                    </li>
-                    <li>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/aaC51E1zd-A" frameborder="0" allowfullscreen></iframe>
                     </li>
                 </ul>
             </div>
@@ -104,12 +83,6 @@
         this.slides = _.shuffle(this.slides)
       }
 
-    },
-
-    watch: {
-      defines: function() {
-        this.getDataEq();
-      }
     }
   }
 </script>

@@ -13,6 +13,7 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader'
+
       },
 
       {
@@ -74,5 +75,6 @@ module.exports = {
       'window.jQuery': 'jquery',
       jQuery: 'jquery'
     })
-  ]
+  ],
+  devtool: 'source-map'
 };

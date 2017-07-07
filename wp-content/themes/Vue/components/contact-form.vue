@@ -1,8 +1,6 @@
 <template>
   <form id="contact-form" class="z-depth-3">
-
     <div class="form-group firstname">
-      <!--<label for="firstname">Imię i nazwisko</label>-->
       <input id="firstname" :class="{ 'form-error': !validate.nameIsValid }"
              class="input" type="text"
              @blur="removeError"
@@ -10,14 +8,12 @@
 
     </div>
     <div class="form-group email">
-      <!--<label for="email">E-mail</label>-->
       <input id="email" :class="{ 'form-error': !validate.emailIsValid }"
              class="input" type="email"
              @blur="removeError"
              placeholder="E-mail" v-model="dataForm.email"/>
     </div>
     <div class="form-group topic">
-      <!--<label for="topic">Temat wiadomości</label>-->
       <input id="topic" :class="{ 'form-error': !validate.topicIsValid }"
              class="input" type="text"
              @blur="removeError"
@@ -25,7 +21,6 @@
 
     </div>
     <div class="form-group message">
-      <!--<label for="message">Treść wiadomość</label>-->
       <textarea id="message" :class="{ 'form-error': !validate.messageIsValid }"
                 class="input"
                 @blur="removeError"

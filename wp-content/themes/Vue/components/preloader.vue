@@ -8,6 +8,9 @@
     </div>
 </template>
 <style>
+    h1{
+        text-align:center;
+    }
     .loader{
         background:#fff;
         width:100%;
@@ -35,13 +38,16 @@
 </style>
 <script>
     import $ from 'jquery';
-  export default{
+    export default{
       name: 'pre-loader',
       props: ['defines'],
         data(){
             return{
                 msg:'hello vue'
             }
+        },
+        beforeMount(){
+          this.loadAllData(this.defines)
         },
         methods: {
           loadAllData(data){
@@ -50,11 +56,6 @@
             });
             $(this.$el).fadeOut('slow');
               console.log(this.$route);
-          }
-        },
-        watch: {
-          defines: function(){
-            this.loadAllData(this.defines)
           }
         }
     }

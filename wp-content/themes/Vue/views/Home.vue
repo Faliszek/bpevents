@@ -1,13 +1,25 @@
 <!--suppress ALL -->
 <template>
-    <div id="home" class="content" v-cloak>
-      <section id="home-slider">
-        <keep-alive>
-          <slider :slides="this.slides"></slider>
-        </keep-alive>
-      </section>
+    <section id="home"  class="content page__content" v-cloak>
+      <div id="home-slider">
+          <slider
+            v-if="slides"
+            :slides="slides"
+          ></slider>
+        <div class="arrow-wrap">
+          <i class="fa fa-angle-down"></i>
+        </div>
+        <div v-show="!sliderLoaded" class="loader">
+          <div class="loader-wrap">
+            <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+              <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+            </svg>
+          </div>
+        </div>
 
-      <section class="offer-block" v-if="offers">
+      </div>
+
+      <div class="offer-block" v-if="offers">
         <div class="container">
           <div class="row">
             <h1 class="offer-block__title">Oferta</h1>
@@ -18,8 +30,8 @@
             </div>
           </div>
         </div>
-      </section>
-      <section class="content-block" v-for="(block, index) in content" :class="index%2 == 1 ? 'left-side' : 'right-side'">
+      </div>
+      <div class="content-block" v-if="content" v-for="(block, index) in content" :class="index%2 == 1 ? 'left-side' : 'right-side'">
         <div class="container">
         <div class="row">
         <article class="content-block__article">
@@ -38,10 +50,10 @@
         </article>
         </div>
         </div>
-      </section>
+      </div>
 
 
-    </div>
+    </section>
 
 </template>
 <script type="text/babel">
@@ -70,48 +82,48 @@
     },
     data(){
       return {
-        data: this.data ? this.getDataHome() : '',
-        slides: this.slides ? this.setDataSlider() : '',
-        offers: this.offers ? this.setOffersBlock() : '',
-        content: this.content ? this.setContentBlocks() : '',
+          slides: [],
+          offers: [],
+          content: [],
+
+          sliderLoaded: false,
       }
     },
     mounted() {
-//      if(this.defines){
-        this.getDataHome();
-//      }
+      this.getDataHome();
+      this.attachArrowEvent();
     },
     methods: {
       getDataHome() {
+
         this.$http.get('/wp-json/acf/v2/post/'+this.defines.homePage)
             .then(response => {
-              console.log(response);
-              this.data =  response.body.acf;
-                this.setSlider();
-                this.setOffersBlock();
-                this.setContentBlocks();
-
+              let store = this.store;
+              this.slides = response.body.acf.home_slides;
+              this.offers = response.body.acf.offers;
+              this.content = response.body.acf.content_block;
+              setTimeout(()=> {
+                $(this.$el.querySelector('.loader')).fadeOut(()=>{
+                  this.setSliderLoaded();
+                });
+              }, 1500)
             }, response => {
               console.log('Data could not be loaded', +response)
             });
-      },
-      setSlider(){
-          if(!this.slides && this.data.home_slides){
-            this.slides =  this.data.home_slides;
-          }
-      },
 
-      setOffersBlock(){
-        if(!this.offers && this.data.offers){
-          this.offers =  this.data.offers;
-          this.setImgPreview();
-        }
       },
+      attachArrowEvent(){
+        this.$el
+            .querySelector('.fa-angle-down')
+            .addEventListener('click', () => {
+              $('html, body').animate({
+                scrollTop: $('.offer-block').offset().top
+              });
+            });
 
-      setContentBlocks() {
-        if(!this.content && this.data.content_block){
-          this.content =  this.data.content_block;
-        }
+      },
+      setSliderLoaded(){
+        this.sliderLoaded = true;
       },
       setIcon(string){
         string = "fa fa-"+string;
@@ -127,12 +139,6 @@
               });
         },0);
       },
-    },
-
-    watch: {
-      defines: function() {
-        this.getDataHome();
-      }
     }
   }
 </script>

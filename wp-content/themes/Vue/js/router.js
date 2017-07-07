@@ -36,4 +36,9 @@ const router = new VueRouter({
   routes: routesCreator()
 });
 
+router.beforeEach((to, from, next)=>{
+  // console.log('CLICKED: '+new Date().getTime());
+  next()
+});
+
 export default router;

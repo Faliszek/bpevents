@@ -1,23 +1,24 @@
 <template>
-    <div id="slider" class="unvisible">
-        <div class="home-slide" v-for="slide in slides">
-            <div class="slide-img img-responsive" :style="{ backgroundImage: 'url(' + slide.slide_img.url + ')' }" ></div>
-            <div class="mask"></div>
-            <div class="slide-content">
-                <h1 class="slide-content__title">{{ slide.slide_title }}</h1>
-                <p class="slide-content__text" v-html="slide.slide_text"></p>
-                <router-link :to="{ name: slide.slide_link }" class="slide-content__link main-button">
-                    {{ slide.slide_btn_text }}
-                </router-link>
+        <div id="slider">
+            <div class="home-slide" v-for="slide in slides">
+                <div class="slide-img img-responsive" :style="{ backgroundImage: 'url(' + slide.slide_img.url + ')' }" ></div>
+                <div class="mask"></div>
+                <div class="slide-content">
+                    <h1 class="slide-content__title">{{ slide.slide_title }}</h1>
+                    <p class="slide-content__text" v-html="slide.slide_text"></p>
+                    <router-link :to="{ name: slide.slide_link }" class="slide-content__link main-button">
+                        {{ slide.slide_btn_text }}
+                    </router-link>
+                </div>
             </div>
-
         </div>
-    </div>
-
 </template>
 <style>
     .slick-initialized .slick-slide {
         outline:none;
+    }
+    .home-slide{
+        height:100%;
     }
 </style>
 <script type="text/babel">
@@ -27,50 +28,46 @@
 
     export default{
       name: 'slider',
-      props: ['slides', 'options', 'url'],
+      props: ['slides', 'sliderLoaded'],
       data(){
         return{
-          windowH:'',
+          windowH: Math.max(document.documentElement.clientHeight, window.innerHeight || 0)+'px',
+          loaded: this.sliderLoaded,
         }
       },
       created(){
-        this.windowH = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)+'px';
+        this.attachResizeEvent();
       },
-      mounted(){
-        let el = this.$el;
-        $(window).on('resize', ()=>{
-          this.windowH = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)+'px';
-          $(el).css('height', this.windowH)
-        })
+      updated(){
+        this.$el.style.height = this.windowH;
+        this.getSlides();
+        console.log('updated slider')
       },
 
       methods: {
         getSlides(){
-          let el = this.$el;
-          setTimeout(()=>{
-            $(el).not('.slick-initialized').slick({
-              infinite: true,
-              speed: 500,
-              cssEase: 'ease-out',
-              arrows:true,
-              prevArrow: `<i class="arrow-prev fa fa-angle-left"></i>`,
-              nextArrow: `<i class="arrow-next fa fa-angle-right"></i>`,
-            });
-          }, 0);
+            $(this.$el).not('.slick-initialized')
+                .on('init', (e)=>{
+                  e.currentTarget.classList.remove('unvisible');
+                  e.currentTarget.style.height = this.windowH;
+                  Waves.init();
+                  Waves.attach('.main-button');
+                })
+                .slick({
+                  infinite: true,
+                  speed: 500,
+                  cssEase: 'ease-out',
+                  arrows:true,
+                  prevArrow: `<i class="arrow-prev fa fa-angle-left"></i>`,
+                  nextArrow: `<i class="arrow-next fa fa-angle-right"></i>`,
+                });
 
-          $(el).on('init', ()=>{
-            $(el).removeClass('unvisible');
-            $(el).css('height', this.windowH);
-            Waves.init();
-            Waves.attach('.main-button');
-          });
         },
-      },
-      watch : {
-        slides: function(){
-          this.getSlides();
+        attachResizeEvent() {
+          window.onresize = () => {
+            $(this.$el).slick('setPosition')
+          }
         }
       }
-
     }
 </script>

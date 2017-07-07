@@ -1,21 +1,16 @@
-.refs.content{
-    padding-top: 64px;
-    padding-bottom: 64px;
+.facebook-button {
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  color:#fff;
+  max-width:320px;
+  width:90%;
+}
 
-  .facebook-button {
-    margin: 0 auto;
-    display: block;
-    text-align: center;
-    font-weight: bold;
-    color:#fff;
-    max-width:320px;
-    width:90%;
-  }
-
-  .btn-row{
-    padding-top:40px;
-    padding-bottom:25px;
-  }
+.btn-row{
+  padding-top:40px;
+  padding-bottom:25px;
 }
 #refs {
   //@include display-flex();

@@ -11,5 +11,4 @@ export function isName(s){
 export function isSafe(s){
   var reg = /^[^<>{}]+$/g;
   return reg.test(s);
-
 }

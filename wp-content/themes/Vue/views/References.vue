@@ -1,6 +1,6 @@
 <template>
-        <div id="references" class="refs content">
-          <h1 class="text-center">Opinie</h1>
+        <section id="references" class="refs page__content">
+          <h1 class="text-center page__title">Opinie</h1>
           <div class="container">
             <div class="row">
               <div id="refs" class="unvisible clearfix">
@@ -24,7 +24,7 @@
             </div>
           </div>
           <!--{{ refs }}-->
-        </div>
+        </section>
 
 </template>
 <script>
@@ -51,16 +51,12 @@
       },
         data(){
           return {
-            msg: 'References',
-            meta_title: this.meta_title ? this.meta_title : '',
-            refs: this.refs ? this.getRefs() : '',
+            refs: this.refs ? this.getData() : [],
             facebook_link: this.facebook_link ? this.facebook_link : ''
           }
         },
       mounted() {
-        if(this.defines){
           this.getData();
-        }
       },
       methods: {
         getData() {
@@ -69,14 +65,9 @@
                 this.refs = response.body.acf.opinion;
                 this.facebook_link = response.body.acf.facebook_link;
                 this.setSlider();
-
               }, response => {
                 console.log('Data could not be loaded', +response)
               });
-        },
-
-        getRefs(){
-            this.data = this.data.eq;
         },
         setSlider(){
           let el = $('#refs');
@@ -84,7 +75,6 @@
             el.not('.slick-initialized').slick({
               infinite: true,
               speed: 700,
-              lazyLoad:'ondemand',
               cssEase: 'cubic-bezier(1,0.5,0.8,1)',
               arrows:true,
               fade:true,
@@ -96,12 +86,6 @@
             el.removeClass('unvisible');
           });
         },
-//        modifyDate(s){
-//          let slash = '/';
-//          let r = new RegExp(slash, 'g');
-//          s += 'r.';
-//          return s.replace(r, '.');
-//        }
       },
     }
 </script>

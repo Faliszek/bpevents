@@ -1,20 +1,6 @@
 <?php
 define('SITE_URL', get_site_url());
 
-function site_info() {
-    $data = new stdClass();
-    $data->siteUrl = constant('SITE_URL');
-
-    $data->homePage = (int)get_option( 'page_on_front' );
-    $data->referencesPage = get_page_by_title( 'referencje' )->ID;
-    $data->contactPage = get_page_by_title( 'kontakt' )->ID;
-    $data->galleryPage = get_page_by_title( 'galeria' )->ID;
-
-    $data->routes = set_routes();
-    return json_encode($data, false);
-}
-
-
 function set_data() {
 	$data = new stdClass();
 	$data->siteUrl = constant('SITE_URL');
@@ -23,6 +9,7 @@ function set_data() {
 	$data->referencesPage = get_page_by_title( 'referencje' )->ID;
 	$data->contactPage = get_page_by_title( 'kontakt' )->ID;
 	$data->galleryPage = get_page_by_title( 'galeria' )->ID;
+	$data->recommendPage = get_page_by_title( 'polecamy' )->ID;
 
 	$data->routes = set_routes();
 	return json_encode($data, false);
@@ -62,18 +49,3 @@ function set_routes(){
     }
     return $routes;
 }
-
-add_action( 'rest_api_init', function () {
-    register_rest_route( 'defines/v2', '/contact-form', array(
-        'methods' => 'GET',
-        'callback' => 'contact_form',
-    ) );
-} );
-
-
-add_action( 'rest_api_init', function () {
-    register_rest_route( 'defines/v2', '/info', array(
-        'methods' => 'GET',
-        'callback' => 'site_info',
-    ) );
-} );

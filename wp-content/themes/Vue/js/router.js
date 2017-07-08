@@ -7,7 +7,8 @@ const assignRoutesToComponents = (dataRoutes) => {
     mappedRoutes.push({
       name: route.name,
       path: route.path,
-      component: require('../views/'+route.component+'.vue'),
+      component:
+          require(`../components/views/${route.component}/${route.component}.vue`),
       meta: {
         site_title: route.site_title,
         title: route.meta_title,
@@ -18,7 +19,7 @@ const assignRoutesToComponents = (dataRoutes) => {
     if (index + 1 === dataRoutes.length) {
       mappedRoutes.push({
         path: '*',
-        component: require('../views/Home.vue'),
+        component: require('../components/views/Home/Home.vue'),
         redirect: '/'
       });
     }

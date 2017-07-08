@@ -59,7 +59,7 @@
 <script type="text/babel">
   import $ from 'jquery';
   import slick from 'slick-carousel';
-  import slider from '../components/slider.vue';
+  import slider from './HomeSlider.vue';
 
   export default{
     name: 'Home',

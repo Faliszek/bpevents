@@ -1,31 +1,32 @@
-export const state = {
-  header: {
-    links: []
-  },
-  contact: {
-    desc: '',
-    img: {},
-  },
+export const stateCreator = () => {
+  return {
+    header: {
+      links: []
+    },
+    contact: {
+      desc: '',
+          img: {},
+    },
 
-  gallery: {
-    equipment: [],
-    photos: [],
-    videos: []
-  },
+    gallery: {
+      equipment: [],
+          photos: [],
+          videos: []
+    },
 
-  home: {
-    slides: [],
-    offers: [],
-    content: [],
-  },
+    home: {
+      slides: [],
+          offers: [],
+          content: [],
+    },
 
-  recommend: {
-    recommendations: [],
-  },
+    recommend: {
+      recommendations: [],
+    },
 
-  references: {
-    refs: [],
-    facebook_link: ''
-  },
+    references: {
+      refs: [],
+          facebook_link: ''
+    },
+  }
 };
-

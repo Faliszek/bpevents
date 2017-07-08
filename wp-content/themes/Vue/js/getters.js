@@ -1,43 +1,44 @@
+export const gettersCreator = () => {
+  return {
+    getMenuLinks: state =>
+        state.header.links,
 
-export const getMenuLinks = (state) => state.header.links;
-// export const getContactDesc = (state) => {
-//     return state.contact.desc;
-//   }
+    getContactDesc: state =>
+        state.contact.desc,
+
+    getContactImg: state =>
+        state.contact.img,
+  }
+
+};
+
+
 //
-// export const getContactImg = (state) => {
-//     return state.contact.img;
-//   }
+
 //
-// export const getGalleryEquipment = (state) => {
-//     return state.gallery.equipment;
-//   }
+//     getGalleryEquipment: state =>
+//     state.gallery.equipment,
 //
-// export const getGalleryPhotos = (state) => {
-//     return state.gallery.photos;
-//   }
+//     getGalleryPhotos: state =>
+//     state.gallery.photos,
 //
-// export const getGalleryVideos = (state) => {
-//     return state.gallery.videos
-//   }
+//     getGalleryVideos: state =>
+//     state.gallery.videos,
 //
-// export const getHomeSlides = (state) => {
-//     return state.home.slides;
-//   }
-// export const getHomeOffers = (state) => {
-//     return state.home.offers;
-//   }
-// export const getHomeConten = (state) => {
-//     return state.home.content;
-//   }
+//     getHomeSlides: state =>
+//     state.home.slides,
 //
-// export const getRecommendation = (state) => {
-//     return state.recommend.recommendations;
-//   }
+//     getHomeOffers: state =>
+//     state.home.offers,
 //
-// export const getReference = (state) => {
-//     return state.references.refs;
-//   }
+//     getHomeContent: state =>
+//     state.home.content,
 //
-// export const getReferencesFacebookLin = (state) => {
-//     return state.references.facebook_link;
-//   }
+//     getRecommendation: state =>
+//     state.recommend.recommendations,
+//
+//     getReference: state =>
+//     state.references.refs,
+//
+//     getReferencesFacebookLink: state =>
+//     state.references.facebook_link,

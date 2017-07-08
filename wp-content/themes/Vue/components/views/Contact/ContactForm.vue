@@ -1,5 +1,6 @@
 <template>
-  <form id="contact-form" class="z-depth-3">
+  <div class="contact-form-wrapper col-xs-6">
+   <form id="contact-form" class="z-depth-3">
     <div class="form-group firstname">
       <input id="firstname" :class="{ 'form-error': !validate.nameIsValid }"
              class="input" type="text"
@@ -31,10 +32,11 @@
       Wyślij
     </button>
   </form>
+  </div>
 </template>
 <script>
   import $ from 'jquery';
-  import { isMail, isName, isSafe } from '../js/helper';
+  import { isMail, isName, isSafe } from '../../../js/helper';
   import Waves from 'node-waves/dist/waves';
   import toast from 'jquery-toast-plugin';
 

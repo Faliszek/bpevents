@@ -2,20 +2,14 @@
     <section id="recommend" class="content page__content">
         <div class="container">
             <div class="row">
-                <h1 class="text-center page__title">Polecamy</h1>
+                <page-title :title="title"></page-title>
                 <div class="recommendation__wrap">
-                    <div v-for="r in recommendations" class="single-rec">
-                        <div class="img-wrap">
-                            <a :href="r.img.url" class="image-light-box" :data-ilb2-caption="r.img.alt">
-                                <img class="img-wrap__img img-responsive" :src="r.img.url" :alt="r.img.alt" />
-                            </a>
-                        </div>
-                        <div class="text-wrap">
-                            <h3 class="text-wrap__title">{{r.title}}</h3>
-                            <p class="text-wrap__content" v-html="r.content"></p>
-                            <a v-if="r.link" :href="r.link" target="_blank" class="text-wrap__link secondary-button">Dowiedz się więcej</a>
-                        </div>
-                    </div>
+                    <single-recommend
+                      v-for="(rec, index) in recommendations"
+                      :key="index"
+                      :recommendation="rec">
+                    </single-recommend>
+                </div>
                 </div>
             </div>
         </div>
@@ -23,10 +17,17 @@
 </template>
 <script>
     import $ from 'jquery';
+    import PageTitle from '../page-title.vue';
+    import SingleRecommend from './RecommendSingle.vue';
+    import { mapGetters } from 'vuex';
 
     export default{
       name: 'Recommend',
-        props: ['defines'],
+      props: ['defines'],
+      components: {
+        PageTitle,
+        SingleRecommend
+      },
       head: {
         // To use "this" in the component, it is necessary to return the object through a function
         title: function () {
@@ -42,41 +43,42 @@
           ]
         }
       },
+      computed: {
+        ...mapGetters({
+          recommendations: 'getRecommendations',
+        })
+      },
         data(){
             return{
-                recommendations: []
+                title: 'Polecamy',
             }
         },
-        created(){
-          this.getData()
-        },
-        mounted(){
-          setTimeout(()=> {
-            this.setImgPreview();
-          }, 0);
-        },
-
         methods: {
-          getData() {
-            console.log(this.defines);
-            this.$http.get('/wp-json/acf/v2/post/' + this.defines.recommendPage)
-                .then(response => {
-                  console.log(response.body.acf);
-                  this.recommendations = response.body.acf.recommendations;
-                }, response => {
-                  console.log('Data could not be loaded', +response)
-                });
-          },
-
           setImgPreview(){
-              $('.image-light-box')
-                  .imageLightbox({
-                    arrows:true,
-                    overlay:true,
-                    button: true,
-                    caption: true
-                  });
+            $('.image-light-box')
+                .imageLightbox({
+                  arrows:true,
+                  overlay:true,
+                  button: true,
+                  caption: true
+                });
           }
+        },
+        created(){
+          this.$store.dispatch(
+              'fetchDataPage',
+              {
+                ID: this.defines.recommendPage,
+                chunks: [
+                  {
+                    method: 'setRecommendations',
+                    chunkType: 'recommendations'
+                  }
+                ]
+              });
+        },
+        updated(){
+          this.setImgPreview();
         }
     }
 </script>

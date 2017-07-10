@@ -4,7 +4,6 @@
 /*** LIBS **/
 @import '~bootstrap-only-css';
 @import '~slick-carousel/slick/slick.scss';
-@import '~jquery-toast-plugin/dist/jquery.toast.min.css';
 @import '~node-waves/dist/waves.css';
 @import '~materialize-css/sass/components/_mixins.scss';
 @import '~materialize-css/sass/components/_color.scss';
@@ -12,6 +11,7 @@
 @import '~materialize-css/sass/components/_normalize.scss';
 @import '~materialize-css/sass/components/_typography.scss';
 @import '~imagelightbox/src/imagelightbox.css';
+
 /*** THEME ***/
 @import 'theme/_font-awesome.css';
 @import 'theme/_theme-variables.scss';
@@ -24,6 +24,7 @@
 @import 'components/input';
 @import 'components/toast';
 @import 'components/scrollbar';
+
 /*** SITES ***/
 @import 'sites/home';
 @import 'sites/contact';

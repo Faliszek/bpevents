@@ -130,11 +130,12 @@
   padding-bottom:64px;
   padding-top: 64px;
   @include display-flex;
-  @include align-items(center);
+  @include flex-wrap();
   &__title{
     text-align:center;
     font-weight:bold;
     padding-bottom:32px;
+    width:100%;
   }
   i.fa{
     font-size: 65px;
@@ -217,6 +218,8 @@
   position: absolute;
   top: 0;
   left: 0;
+  opacity:1;
+  transition:all 0.5s ease-out;
 }
 
 $offset: 187;
@@ -228,7 +231,14 @@ $duration: 1.4s;
   @include justify-content(center);
   height:100%;
   transition:0.3s all;
+  position:absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255,255,255,1);
 }
+
+
 .spinner {
   animation: rotator $duration linear infinite;
 }

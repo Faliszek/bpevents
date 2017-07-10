@@ -15,9 +15,6 @@
         desc: 'getContactDesc',
         picture: 'getContactImg'
       })
-    },
-    created(){
-      console.log(this.picture)
     }
   }
 </script>

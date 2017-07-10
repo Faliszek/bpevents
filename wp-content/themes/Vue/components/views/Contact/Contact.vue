@@ -1,11 +1,11 @@
 <template>
   <section id="contact" class="contact page__content">
+    <page-title :title="title"></page-title>
     <div class="container">
       <div class="row">
-        <h1 class="text-center">Skontaktuj się ze mną!</h1>
         <div class="contact-wrap">
-            <contact-desc></contact-desc>
-            <contact-form :defines="defines"></contact-form>
+          <contact-desc></contact-desc>
+          <contact-form :defines="defines"></contact-form>
         </div>
       </div>
     </div>
@@ -14,16 +14,18 @@
 </template>
 <script>
   import $ from 'jquery';
-  import contactDesc from './ContactDesc.vue';
-  import contactForm from './ContactForm.vue';
+  import PageTitle from '../page-title.vue';
+  import ContactDesc from './ContactDesc.vue';
+  import ContactForm from './ContactForm.vue';
 
   export default{
     name: 'Contact',
     props: ['defines'],
     className: 'contact',
     components: {
-      contactDesc,
-      contactForm
+      PageTitle,
+      ContactDesc,
+      ContactForm
     },
     head: {
       // To use "this" in the component, it is necessary to return the object through a function
@@ -38,6 +40,11 @@
           {name: 'description', content: this.$route.meta.desc},
           {name: 'title', content: this.$route.meta.title}
         ]
+      }
+    },
+    data(){
+      return {
+        title: 'Skontaktuj się ze mną!'
       }
     },
     created(){

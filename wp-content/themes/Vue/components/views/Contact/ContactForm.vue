@@ -28,90 +28,109 @@
                 placeholder="Masz pytania? Pisz śmiało ;)" v-model="dataForm.message"></textarea>
 
     </div>
-    <button class="main-button center-block" type="submit" v-on:click="sendMessage">
+    <button class="main-button center-block" type="submit" @click="sendMessage">
       Wyślij
     </button>
   </form>
+    <transition name="quick-fade">
+      <div class="loader" v-show="loading">
+        <loader></loader>
+      </div>
+    </transition>
+    <vue-toast ref="toast"></vue-toast>
   </div>
 </template>
+<style>
+
+</style>
 <script>
   import $ from 'jquery';
   import { isMail, isName, isSafe } from '../../../js/helper';
   import Waves from 'node-waves/dist/waves';
-  import toast from 'jquery-toast-plugin';
-
+  import VueToast from 'vue-toast';
+  import Loader from '../loader.vue';
   export default {
     name: 'contact-form',
     props: ['defines'],
+    components: {
+      VueToast, Loader
+    },
     data() {
       return {
         dataForm: {
-          name: this.name ? this.name : '',
-          topic: this.topic ? this.topic : '',
-          email: this.email ? this.email : '',
-          message: this.message ? this.message : ''
+//          name: this.name ? this.name : '',
+//          topic: this.topic ? this.topic : '',
+//          email: this.email ? this.email : '',
+//          message: this.message ? this.message : ''
+                    name: 'Janusz Nowak',
+          topic: 'Axios Test',
+          email: 'asd@o2.pl',
+          message: 'Testowa wiadomość'
         },
         validate: {
           emailIsValid: true,
           nameIsValid: true,
           topicIsValid: true,
           messageIsValid: true,
-        }
+        },
+        toastConfig: {
+          position: 'bottom right',
+        },
+        loading: false,
       }
     },
     created(){
-      setTimeout(function(){
         Waves.init();
         Waves.attach('.main-button');
-      },0)
+        document.addEventListener('beforeSend', () => {
+          this.showToast('Wysyłanie wiadomości, proszę czekać', 'default');
+          this.loading = true;
+        });
+        document.addEventListener('contactFormSend', () => {
+          this.showToast('Wiadomość wysłano pomyślnie, niedługo się odezwę', 'success');
+          this.loading = false;
+          this.resetData();
+        });
+
+        document.addEventListener('failSendForm', () => {
+          this.showToast('Upsss.. coś poszło nie tak, spróboj ponownie', 'error');
+          this.loading = false;
+        });
+//        document.addEventListener('', () => {})
     },
     methods: {
-      sendMessage: function (event) {
+      sendMessage(event) {
         event.preventDefault();
         let validated = this.validateData();
 
         if (validated) {
-          $.toast({
-            text: 'Trwa wysyłanie wiadomości proszę czekać',
-            showHideTransition: 'slide',
-            loader: false,
-            bgColor: 'rgba(0,0,0,0.8)',
-            position: 'bottom-right',
-            textAlign: 'center',
-            hideAfter: 10000,
-          });
+          this.$store.dispatch('sendContactForm', this.dataForm)
 
-          this.$http.post('' + this.defines.siteUrl + '/wp-admin/admin-ajax.php',
-              {
-                'action': 'send_mail',
-                'data': this.dataForm,
-              },
-          ).then(response => {
-            console.log(this.response);
-            $.toast().reset('all');
-            $.toast({
-              text: '' + response.body.msg + '',
-              showHideTransition: 'slide',
-              loader: false,
-              bgColor: 'rgba(25, 180, 25, 0.8)',
-              position: 'bottom-right',
-              textAlign: 'center'
-            });
-            this.resetData();
+//            $.toast().reset('all');
+//            $.toast({
+//              text: '' + response.body.msg + '',
+//              showHideTransition: 'slide',
+//              loader: false,
+//              bgColor: 'rgba(25, 180, 25, 0.8)',
+//              position: 'bottom-right',
+//              textAlign: 'center'
+//            });
+//            this.resetData();
 
-          }, response => {
-            $.toast().reset('all');
-            $.toast({
-              text: 'Upsss.. coś poszło nie tak, spróboj ponownie',
-              showHideTransition: 'slide',
-              loader: false,
-              bgColor: 'rgba(180, 25, 25, 0.8)',
-              position: 'bottom-right',
-              textAlign: 'center'
-            });
-          });
+//          }, response => {
+//            $.toast().reset('all');
+//            $.toast({
+//              text: 'Upsss.. coś poszło nie tak, spróboj ponownie',
+//              showHideTransition: 'slide',
+//              loader: false,
+//              bgColor: 'rgba(180, 25, 25, 0.8)',
+//              position: 'bottom-right',
+//              textAlign: 'center'
+//            });
+//          });
         }
       },
+
       validateData() {
         let result = true;
         let name = this.dataForm.name;
@@ -174,14 +193,26 @@
         }
         return result;
       },
+      showToast(txt, theme = 'success', lifetime = 30000, position = 'bottom right',  maxToasts = 2 ){
+        let toast = this.$refs.toast;
+        toast.setOptions({lifetime, position,  maxToasts});
+        toast.showToast(txt, {theme});
+
+      },
       removeError(e){
         e.target.classList.remove('form-error');
       },
       resetData() {
-        this.dataForm.name = '';
-        this.dataForm.topic = '';
-        this.dataForm.email = '';
-        this.dataForm.message = '';
+        let contactForm = document.querySelector('#contact-form');
+        contactForm.classList.add('was-send');
+        setTimeout(() => {
+          this.dataForm.name = '';
+          this.dataForm.topic = '';
+          this.dataForm.email = '';
+          this.dataForm.message = '';
+          contactForm.classList.remove('was-send');
+        }, 300);
+
       }
     }
   }

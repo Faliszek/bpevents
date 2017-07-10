@@ -30,7 +30,6 @@
     "webpack": "^2.4.1"
   },
   "dependencies": {
-    "axios": "^0.16.2",
     "bootstrap-only-css": "^1.0.0",
     "font-awesome": "^4.7.0",
     "imagelightbox": "^0.7.5",
@@ -45,6 +44,7 @@
     "vue-preload": "^0.1.11",
     "vue-resource": "^1.2.0",
     "vue-router": "^2.2.0",
+    "vue-toast": "^3.1.0",
     "vuex": "^2.3.1",
     "vuex-router-sync": "^4.2.0"
   }

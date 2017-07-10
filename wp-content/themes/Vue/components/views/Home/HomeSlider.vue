@@ -25,15 +25,20 @@
     import $ from 'jquery';
     import slick from 'slick-carousel';
     import Waves from 'node-waves/dist/waves';
-
+    import { mapGetters } from 'vuex';
     export default{
       name: 'slider',
-      props: ['slides', 'sliderLoaded'],
+      props: ['sliderLoaded'],
       data(){
         return{
           windowH: Math.max(document.documentElement.clientHeight, window.innerHeight || 0)+'px',
           loaded: this.sliderLoaded,
         }
+      },
+      computed: {
+          ...mapGetters({
+            slides: 'getHomeSlides',
+          })
       },
       created(){
         this.attachResizeEvent();

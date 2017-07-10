@@ -5,6 +5,7 @@ module.exports = {
   entry: "./js/main.js",
   output: {
     path: __dirname + '/assets/',
+    publicPath: '/wp-content/themes/Vue/assets/',
     filename: "bundle.js"
   },
   module: {
@@ -54,7 +55,7 @@ module.exports = {
       },
       {
         test: /\.png/,
-        loader: 'file-loader'
+        loader: 'file-loader?name=[hash].[ext]'
       }
     ]
   },

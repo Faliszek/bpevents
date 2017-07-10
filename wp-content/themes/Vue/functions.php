@@ -41,7 +41,9 @@ function vue_setup(){
     ) );
 }
 function vue_js() {
-    wp_enqueue_script( 'vue-js', get_template_directory_uri() . '/assets/bundle.js', array('jquery'), NULL, true);
+	if ( !is_admin() ) {
+		wp_deregister_script( 'jquery' );
+	}
 }
 function vue_css() {
     wp_enqueue_style( 'style', get_template_directory_uri() . '/style.css', array(), '1.0.0' );

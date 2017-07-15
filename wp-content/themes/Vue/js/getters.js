@@ -25,6 +25,15 @@ export const gettersCreator = () => {
 
     getReferencesFacebookLink: state =>
         state.references.facebook_link,
+
+    getFooterWidget: state =>
+        state.footer.widget,
+
+    getFooterMenuLinks: state =>
+        state.footer.menu.links,
+
+    getFooterMenuTitle: state =>
+        state.footer.menu.title
   }
 
 
@@ -33,15 +42,5 @@ export const gettersCreator = () => {
 
 //
 
-//
-//     getGalleryEquipment: state =>
-//     state.gallery.equipment,
-//
-//     getGalleryPhotos: state =>
-//     state.gallery.photos,
-//
-//     getGalleryVideos: state =>
-//     state.gallery.videos,
-//
 
 //

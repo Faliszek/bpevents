@@ -8,7 +8,10 @@ export const mutationsCreator = () => {
     setContactImg: (state, data) => state.contact.img = data,
     setRecommendations: (state, data) => state.recommend.recommendations = data,
     setReference: (state, data) => state.references.refs = data,
-    setReferencesFacebookLink: (state, data) => state.references.facebook_link = data
+    setReferencesFacebookLink: (state, data) => state.references.facebook_link = data,
+    setFooterWidget: (state, data) => state.footer.widget = data,
+    setFooterMenuLinks: (state, data) => state.footer.menu.links = data,
+    setFooterMenuTitle: (state, data) => state.footer.menu.title = data
   }
 };
 

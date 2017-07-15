@@ -44,7 +44,6 @@
 
 </style>
 <script>
-  import $ from 'jquery';
   import { isMail, isName, isSafe } from '../../../js/helper';
   import Waves from 'node-waves/dist/waves';
   import VueToast from 'vue-toast';
@@ -165,26 +164,26 @@
           result = false;
           if (!value && value !== '') {
             if(key === 'emailIsValid') {
-              $.toast().reset('all');
-              $.toast({
-                text: 'Wprowadzony e-mail jest niepoprawny',
-                showHideTransition: 'slide',
-                loader: false,
-                position: 'bottom-right',
-                bgColor: 'rgba(100,100,100,0.8)',
-                textAlign: 'center',
-              });
+//              $.toast().reset('all');
+//              $.toast({
+//                text: 'Wprowadzony e-mail jest niepoprawny',
+//                showHideTransition: 'slide',
+//                loader: false,
+//                position: 'bottom-right',
+//                bgColor: 'rgba(100,100,100,0.8)',
+//                textAlign: 'center',
+//              });
               return result;
             }
-            $.toast().reset('all');
-            $.toast({
-              text: 'Pole zawiera niedozwolone znaki np. ^<>{}',
-              showHideTransition: 'slide',
-              loader: false,
-              position: 'bottom-right',
-              bgColor: 'rgba(100,100,100,0.8)',
-              textAlign: 'center',
-            });
+//            $.toast().reset('all');
+//            $.toast({
+//              text: 'Pole zawiera niedozwolone znaki np. ^<>{}',
+//              showHideTransition: 'slide',
+//              loader: false,
+//              position: 'bottom-right',
+//              bgColor: 'rgba(100,100,100,0.8)',
+//              textAlign: 'center',
+//            });
             return result;
           }
           else {

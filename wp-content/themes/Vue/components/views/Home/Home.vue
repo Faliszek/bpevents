@@ -13,7 +13,6 @@
         <loader v-if="!sliderLoaded"></loader>
       </transition>
     </div>
-
     <div class="container">
       <div class="row">
         <home-offers></home-offers>
@@ -29,7 +28,7 @@
 
 </template>
 <script type="text/babel">
-  import $ from 'jquery';
+//  import $ from 'jquery';
   import {mapGetters} from 'vuex';
   import slick from 'slick-carousel';
   import Slider from './HomeSlider.vue';
@@ -70,15 +69,13 @@
     },
     created(){
       this.$store.dispatch(
-          'fetchDataPage',
-          {
-            ID: this.defines.homePage,
-            chunks: [
+          'fetchDataPage',{
+          ID:this.defines.homePage,
+          chunks: [
               {method: 'setHomeSlides', chunkType: 'home_slides'},
               {method: 'setHomeOffers', chunkType: 'offers'},
               {method: 'setHomeContent', chunkType: 'content_block'},
-            ]
-          })
+          ]})
       document.addEventListener('dataArrived', () => {
         setTimeout(() => {
           this.sliderLoaded = true

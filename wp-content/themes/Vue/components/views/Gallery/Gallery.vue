@@ -18,7 +18,7 @@
     </section>
 </template>
 <script>
-  import $ from 'jquery';
+//  import $ from 'jquery';
   import slick from 'slick-carousel';
   import imageLightbox from 'imagelightbox/src/imagelightbox.js';
   import _ from 'lodash';

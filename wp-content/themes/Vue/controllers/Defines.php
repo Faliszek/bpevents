@@ -1,10 +1,13 @@
 <?php
 define('SITE_URL', get_site_url());
+define('MAIN_MENU_ID', 2);
+define('FOOTER_MENU_ID', 3);
 
 function set_data() {
 	$data = new stdClass();
 	$data->siteUrl = constant('SITE_URL');
-
+	$data->main_menu_id = constant('MAIN_MENU_ID');
+	$data->footer_menu_id = constant('FOOTER_MENU_ID');
 	$data->homePage = (int)get_option( 'page_on_front' );
 	$data->referencesPage = get_page_by_title( 'referencje' )->ID;
 	$data->contactPage = get_page_by_title( 'kontakt' )->ID;

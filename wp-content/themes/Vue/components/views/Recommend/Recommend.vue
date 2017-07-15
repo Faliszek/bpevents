@@ -16,7 +16,6 @@
     </section>
 </template>
 <script>
-    import $ from 'jquery';
     import PageTitle from '../page-title.vue';
     import SingleRecommend from './RecommendSingle.vue';
     import { mapGetters } from 'vuex';
@@ -66,16 +65,14 @@
         },
         created(){
           this.$store.dispatch(
-              'fetchDataPage',
-              {
-                ID: this.defines.recommendPage,
-                chunks: [
+              'fetchDataPage',{
+              ID: this.defines.recommendPage,
+              chunks: [
                   {
                     method: 'setRecommendations',
                     chunkType: 'recommendations'
                   }
-                ]
-              });
+              ]});
         },
         updated(){
           this.setImgPreview();

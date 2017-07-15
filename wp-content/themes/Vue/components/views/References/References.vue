@@ -60,15 +60,12 @@
     },
     created() {
       this.$store.dispatch(
-          'fetchDataPage',
-          {
-            ID: this.defines.referencesPage,
-            chunks: [
+          'fetchDataPage',{
+           ID:this.defines.referencesPage,
+           chunks: [
               {method: 'setReference', chunkType: 'opinion'},
               {method: 'setReferencesFacebookLink', chunkType: 'facebook_link'}
-            ]
-          }
-      );
+           ]});
     },
     updated(){
       this.setSlider();

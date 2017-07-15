@@ -1,4 +1,6 @@
 import Vue from 'vue';
+import { DATA_PAGE, MAIN_MENU_ID, FOOTER_MENU_ID } from './data';
+import { stateCreator } from './state';
 
 export const actionsCreators = () => {
   return {
@@ -6,8 +8,14 @@ export const actionsCreators = () => {
       Vue.http
           .get('/wp-json/wp-api-menus/v2/menus/' + menuID)
           .then((resp) => {
-            let links = resp.body.items;
-            context.commit('setMenuLinks', links)
+            let data = resp.body;
+            if(menuID === MAIN_MENU_ID) {
+              context.commit('setMenuLinks', data.items)
+            }
+            if(menuID === FOOTER_MENU_ID) {
+              context.commit('setFooterMenuLinks', data.items);
+              context.commit('setFooterMenuTitle', data.name)
+            }
           });
     },
 
@@ -17,14 +25,21 @@ export const actionsCreators = () => {
           .then((resp) => {
             let data = resp.body.acf;
             let event = new Event('dataArrived');
-            console.log(data);
-            params.chunks.forEach((item) => {
-              console.log(item.method);
-              context.commit(item.method, data[item.chunkType]);
-            });
-
+              params.chunks.forEach((item) => {
+                context.commit(item.method, data[item.chunkType]);
+              });
             document.dispatchEvent(event);
 
+          });
+      },
+
+    getWidget(context, name){
+      Vue.http
+          .get('/wp-json/wp-rest-api-sidebars/v1/sidebars/'+name)
+          .then(response => {
+            context.commit('setFooterWidget', response.body)
+          }, response => {
+              console.log('Sidebar could not be loaded', +response)
           });
       },
 

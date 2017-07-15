@@ -13,7 +13,6 @@
 
 </template>
 <script>
-  import $ from 'jquery';
   import PageTitle from '../page-title.vue';
   import ContactDesc from './ContactDesc.vue';
   import ContactForm from './ContactForm.vue';
@@ -51,12 +50,14 @@
       this.$store.dispatch(
           'fetchDataPage',
           {
-            ID: this.defines.contactPage,
+            ID:this.defines.contactPage,
             chunks: [
               {method: 'setContactDesc', chunkType: 'desc'},
               {method: 'setContactImg', chunkType: 'img'}
             ]
-          });
+          },
+          this.defines.contactPage
+          );
     }
   }
 </script>

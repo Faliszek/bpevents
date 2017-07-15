@@ -14,12 +14,10 @@
   import { DATA_PAGE } from './js/data';
   import HeaderTheme from './components/header-theme.vue';
   import FooterTheme from './components/footer-theme.vue';
-  import Container from './components/views/container.vue';
   export default {
     name: 'App',
     components: {
       HeaderTheme,
-      Container,
       FooterTheme,
     },
     data(){

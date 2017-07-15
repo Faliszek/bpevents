@@ -12,6 +12,7 @@ function vue_setup(){
         'after_widget'  => '',
         'before_title'  => '<h4 class="widget-title">',
         'after_title'   => '</h4>',
+	      'class'         => 'text',
     ) );
     //FORMULARZ KONTAKTPWY
 
@@ -24,17 +25,8 @@ function vue_setup(){
         'after_widget'  => '',
         'before_title'  => '<h4 class="widget-title">',
         'after_title'   => '</h4>',
-    ) );
+        'class'         => 'site-map',
 
-    //FORMULARZ KONTAKTPWY
-    register_sidebar( array(
-        'name'          => __( 'Social media', 'Vue' ),
-        'id'            => 'social-icons',
-        'description'   => __( 'Linki społecznościowe w w stopce strony', 'Vue' ),
-        'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</aside>',
-//        'before_title'  => '<h2 class="widget-title">',
-//        'after_title'   => '</h2>',
     ) );
     register_nav_menus( array(
         'primary' => __( 'Primary Menu', 'Vue' ),
@@ -73,6 +65,7 @@ function vue_configure_email($phpmailer){
         $phpmailer->From = $options['login'];
         $phpmailer->FromName = $options['name'];
 
+
 }
 //add_filter( 'rest_endpoints', 'vue_remove_endpoints');
 add_action( 'init' , 'vue_controllers_api');
@@ -82,6 +75,6 @@ add_action( 'wp_enqueue_scripts', 'vue_css' );
 add_action( 'phpmailer_init', 'vue_configure_email' );
 add_action( 'wp_ajax_send_mail', 'send_mail' );
 add_action( 'wp_ajax_nopriv_send_mail', 'send_mail' );
-//add_action( 'wp_ajax_siteWideMessage', 'send_mail' );
+add_action( 'wp_ajax_siteWideMessage', 'send_mail' );
 
 

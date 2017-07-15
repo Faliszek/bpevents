@@ -26,7 +26,14 @@ export const stateCreator = () => {
 
     references: {
       refs: [],
-          facebook_link: ''
+      facebook_link: ''
     },
+    footer: {
+      widget: {},
+      menu: {
+        title: '',
+        links: []
+      }
+    }
   }
 };

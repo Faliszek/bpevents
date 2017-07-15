@@ -6,7 +6,7 @@
           <a class="logo" href="/"></a>
           <div class="menu-main-container">
             <ul>
-              <li v-for="link in links">
+              <li @mouseover="fetchData(link.object_id)" v-for="link in links">
                 <router-link
                   :to="{ path: link.object_slug }"
                   class="menu-item">
@@ -23,6 +23,7 @@
 <script type="text/babel">
   import Waves from 'node-waves/dist/waves';
   import { mapGetters } from 'vuex';
+  import { MAIN_MENU_ID } from '../js/data';
 
   export default {
     props: ['defines'],
@@ -32,7 +33,12 @@
       })
     },
     created(){
-      this.$store.dispatch('getMenu', 2);
+      this.$store.dispatch('getMenu', MAIN_MENU_ID);
     },
+    methods: {
+      fetchData(id){
+//        this.$store.dispatch('fetchDataPage',id)
+      }
+    }
   }
 </script>

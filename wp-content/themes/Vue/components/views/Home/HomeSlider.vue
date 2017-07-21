@@ -1,78 +1,72 @@
 <template>
-        <div id="slider">
-            <div class="home-slide" v-for="slide in slides">
-                <div class="slide-img img-responsive" :style="{ backgroundImage: 'url(' + slide.slide_img.url + ')' }" ></div>
-                <div class="mask"></div>
-                <div class="slide-content">
-                    <h1 class="slide-content__title">{{ slide.slide_title }}</h1>
-                    <p class="slide-content__text" v-html="slide.slide_text"></p>
-                    <router-link :to="{ name: slide.slide_link }" class="slide-content__link main-button">
-                        {{ slide.slide_btn_text }}
-                    </router-link>
-                </div>
-            </div>
+  <div id="slider" :class="{ 'unvisible' : !sliderLoaded }">
+    <div id="progress-bar" class="progress-bar"></div>
+    <swiper :options="swiperOption" ref="mySwiper" >
+      <swiper-slide v-for="(slide, index) in slides"  key="index" class="home-slide">
+        <!--<div class="slide-img img-responsive" :style="{ backgroundImage: 'url(' + slide.slide_img.url + ')' }" ></div>-->
+        <img class="slide-img img-responsive" :src="slide.slide_img.url"/>
+        <div class="mask"></div>
+        <div class="slide-content">
+          <h1 class="slide-content__title">{{ slide.slide_title }}</h1>
+          <p class="slide-content__text" v-html="slide.slide_text"></p>
+          <home-slider-btn key="index" :slide="slide"></home-slider-btn>
         </div>
+      </swiper-slide>
+    </swiper>
+      <i class="arrow-prev fa fa-angle-left"></i>
+      <i class="arrow-next fa fa-angle-right"></i>
+  </div>
 </template>
-<style>
-    .slick-initialized .slick-slide {
-        outline:none;
-    }
-    .home-slide{
-        height:100%;
-    }
-</style>
 <script type="text/babel">
-    import $ from 'jquery';
-    import slick from 'slick-carousel';
-    import Waves from 'node-waves/dist/waves';
-    import { mapGetters } from 'vuex';
-    export default{
-      name: 'slider',
-      props: ['sliderLoaded'],
-      data(){
-        return{
-          windowH: Math.max(document.documentElement.clientHeight, window.innerHeight || 0)+'px',
-          loaded: this.sliderLoaded,
-        }
-      },
-      computed: {
-          ...mapGetters({
-            slides: 'getHomeSlides',
-          })
-      },
-      created(){
-        this.attachResizeEvent();
-      },
-      updated(){
-        this.$el.style.height = this.windowH;
-        this.getSlides();
-        console.log('updated slider')
-      },
+  import {mapGetters} from 'vuex';
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import HomeSliderBtn  from './HomeSliderBtn.vue';
 
-      methods: {
-        getSlides(){
-            $(this.$el).not('.slick-initialized')
-                .on('init', (e)=>{
-                  e.currentTarget.classList.remove('unvisible');
-                  e.currentTarget.style.height = this.windowH;
-                  Waves.init();
-                  Waves.attach('.main-button');
-                })
-                .slick({
-                  infinite: true,
-                  speed: 500,
-                  cssEase: 'ease-out',
-                  arrows:true,
-                  prevArrow: `<i class="arrow-prev fa fa-angle-left"></i>`,
-                  nextArrow: `<i class="arrow-next fa fa-angle-right"></i>`,
-                });
-
+  export default{
+    name: 'slider',
+    props: ['slides','slidesArrived'],
+    components: {
+      swiper,
+      swiperSlide,
+      HomeSliderBtn
+    },
+    data() {
+      return {
+        swiperOption: {
+          mousewheelControl: true,
+          observeParents: true,
+          nextButton: '.arrow-next',
+          prevButton: '.arrow-prev',
+          speed: 500,
+          loop:false,
+          autoplay: 4000,
+          direction: 'horizontal',
+          watchSlidesProgress: true,
         },
-        attachResizeEvent() {
-          window.onresize = () => {
-            $(this.$el).slick('setPosition')
-          }
-        }
+        swiperSlides: [],
+        windowH: Math.max(document.documentElement.clientHeight, window.innerHeight || 0) + 'px',
+        sliderLoaded: false,
+      }
+    },
+    beforeCreate(){
+    },
+
+    created(){
+      this.setSlider();
+    },
+    updated(){
+      this.$el.style.height = this.windowH;
+      this.setSlider();
+    },
+    mounted(){
+    },
+    methods: {
+      setSlider(){
+        this.swiperSlides = this.slides;
+          setTimeout(() => {
+            this.sliderLoaded = true;
+            }, 1000);
       }
     }
+  }
 </script>

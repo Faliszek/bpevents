@@ -4,8 +4,7 @@
       <div class="ref__img">
         <a :href="reference.ref_autor_img.url"
            class="image-light-box"
-           :data-ilb2-caption="reference.ref_autor_img.description">
-          <img class="img-responsive z-depth-1"
+          <img v-img class="img-responsive z-depth-1"
                :src="reference.ref_autor_img.url"
                :alt="reference.ref_autor_img.alt"/>
         </a>

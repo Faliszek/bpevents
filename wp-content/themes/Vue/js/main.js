@@ -4,12 +4,17 @@ import Vue from 'vue';
 import VueResource from 'vue-resource';
 import VueHead from 'vue-head';
 import VueRouter from 'vue-router'
-import router from './router'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import VueImg from 'v-img';
 import store from './store';
+import router from './router'
 import { sync } from 'vuex-router-sync';
+
 Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(VueHead);
+Vue.use(VueAwesomeSwiper);
+Vue.use(VueImg);
 
 Vue.config.devtools = true;
 Vue.http.options.emulateJSON = true;

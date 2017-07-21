@@ -48,7 +48,10 @@ module.exports = {
           ]
         })
       },
-
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
+      },
       {
         test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
         loader: 'url-loader'
@@ -64,18 +67,13 @@ module.exports = {
   resolve: {
     alias: {
       vue: 'vue/dist/vue.js',
-      // jquery: 'jquery/src/jquery'
     }
   },
 
   plugins: [
     new ExtractTextPlugin("../assets/main.css"),
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jquery: 'jquery',
-      'window.jQuery': 'jquery',
-      jQuery: 'jquery'
-    })
+    // new webpack.ProvidePlugin({
+    // })
   ],
   devtool: 'source-map'
 };

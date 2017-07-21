@@ -44,7 +44,7 @@
       },
       computed: {
         ...mapGetters({
-          recommendations: 'getRecommendations',
+          recommendations: 'getRecommendRecommendations',
         })
       },
         data(){
@@ -69,7 +69,7 @@
               ID: this.defines.recommendPage,
               chunks: [
                   {
-                    method: 'setRecommendations',
+                    method: 'setRecommendRecommendations',
                     chunkType: 'recommendations'
                   }
               ]});

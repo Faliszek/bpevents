@@ -3,15 +3,23 @@
     <page-title :title="title"></page-title>
     <div class="container">
       <div class="row">
-        <div id="refs" class="clearfix">
-          <reference-single
-            :reference="reference"
-            v-for="(reference, index) in refs"
-            key="index"></reference-single>
+        <div id="refs" class="clearfix refs__slider">
+          <swiper :options="swiperOption" ref="refsSwiper" >
+            <swiper-slide v-for="(reference, index) in refs"  key="index" class="refs__slide">
+              <!--<div class="slide-img img-responsive" :style="{ backgroundImage: 'url(' + slide.slide_img.url + ')' }" ></div>-->
+              <reference-single
+                :reference="reference"
+                key="index"></reference-single>
+            </swiper-slide>
+          </swiper>
+
         </div>
+        <i class="arrow-prev fa fa-angle-left"></i>
+        <i class="arrow-next fa fa-angle-right"></i>
       </div>
+
       <div class="row btn-row">
-        <a class="main-button facebook-button" :href="facebook_link" target="_blank">Zobacz więcej opinii</a>
+        <a class="main-button facebook-button" :href="facebookLink" target="_blank">Zobacz więcej opinii</a>
       </div>
     </div>
     <!--{{ refs }}-->
@@ -19,11 +27,13 @@
 
 </template>
 <script>
-  import $ from 'jquery';
-  import slick from 'slick-carousel';
   import PageTitle from '../page-title.vue';
   import ReferenceSingle from './ReferenceSingle.vue';
   import {mapGetters} from 'vuex';
+  import { boundedChunksWithMutations } from '../../../js/helper';
+  import { swiper, swiperSlide } from 'vue-awesome-swiper';
+
+
 
   export default{
     name: 'References',
@@ -49,51 +59,33 @@
     },
     computed: {
       ...mapGetters({
-        refs: 'getReference',
-        facebook_link: 'getReferencesFacebookLink'
+        refs: 'getReferencesRefs',
+        facebookLink: 'getReferencesFacebookLink'
       })
     },
     data(){
       return {
-        title: 'Opinie'
+        title: 'Opinie',
+        swiperOption: {
+          mousewheelControl: true,
+          observeParents: true,
+          nextButton: '.arrow-next',
+          prevButton: '.arrow-prev',
+          speed: 500,
+          loop:false,
+          autoplay: 4000,
+          direction: 'horizontal',
+          watchSlidesProgress: true,
+        },
+        swiperSlides: [],
       }
     },
     created() {
+      let ID = this.defines.referencesPage;
       this.$store.dispatch(
-          'fetchDataPage',{
-           ID:this.defines.referencesPage,
-           chunks: [
-              {method: 'setReference', chunkType: 'opinion'},
-              {method: 'setReferencesFacebookLink', chunkType: 'facebook_link'}
-           ]});
-    },
-    updated(){
-      this.setSlider();
-      this.setImgPreview();
-
-    },
-    methods: {
-      setSlider(){
-        let el = $('#refs');
-        el.not('.slick-initialized').slick({
-          infinite: true,
-          speed: 700,
-          cssEase: 'ease-out',
-          arrows: true,
-          fade: true,
-          prevArrow: `<i class="arrow-prev fa fa-angle-left"></i>`,
-          nextArrow: `<i class="arrow-next fa fa-angle-right"></i>`,
-        })
-      },
-      setImgPreview(){
-        $('.image-light-box')
-            .imageLightbox({
-                  arrows: true,
-                  overlay: true,
-                  button: true,
-                  caption: true
-             });
-      }
-    },
+          'fetchDataPage',
+          {ID, chunks: boundedChunksWithMutations(ID)}
+      );
+    }
   }
 </script>

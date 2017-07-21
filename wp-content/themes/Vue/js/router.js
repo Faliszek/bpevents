@@ -1,5 +1,7 @@
 import { DATA_PAGE } from './data';
+import store from './store';
 import VueRouter from 'vue-router';
+import { getRouteComponentID, boundedChunksWithMutations } from './helper.js'
 
 const assignRoutesToComponents = (dataRoutes) => {
   let mappedRoutes = [];
@@ -34,7 +36,14 @@ const routesCreator = () => {
 const router = new VueRouter({
   mode: 'history',
   root: '/',
-  routes: routesCreator()
+  routes: routesCreator(),
+
 });
+
+// router.beforeEach((to, from, next) => {
+  // let ID = getRouteComponentID(to.name).ID;
+  // store.dispatch('fetchDataPage', {ID, chunks: boundedChunksWithMutations(ID) })
+  // next();
+// })
 
 export default router;

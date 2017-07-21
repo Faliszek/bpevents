@@ -8,19 +8,21 @@
                 </div>
                 <ul class="photos photos-container">
                     <li class="eq-photo z-depth-1" v-for="(slide, index) in slides"  v-bind:key="slide">
-                        <a :href="slide.picture.url" class="image-light-box" :data-ilb2-caption="slide.picture.description">
+                        <a :href="slide.picture.url" class="image-light-box">
                             <img class="img-responsive" :src="slide.picture.url" :alt="slide.picture.alt" />
                         </a>
                     </li>
-                </ul>
+                 </ul>
             </div>
         </div>
     </section>
 </template>
+<style>
+    li[data-id='10'] {
+        display: none !important;
+    }
+</style>
 <script>
-//  import $ from 'jquery';
-  import slick from 'slick-carousel';
-  import imageLightbox from 'imagelightbox/src/imagelightbox.js';
   import _ from 'lodash';
   export default {
     name: 'Gallery',
@@ -58,7 +60,6 @@
             .then(response => {
               this.data =  response.body.acf;
               this.getSlides();
-              this.setImgPreview();
             }, response => {
               console.log('Data could not be loaded', +response)
             });
@@ -66,18 +67,6 @@
 
       getSlides() {
         this.slides = this.data.eq;
-      },
-
-      setImgPreview(){
-        setTimeout(function(){
-            $('.image-light-box')
-                .imageLightbox({
-                    arrows:true,
-                    overlay:true,
-                    button: true,
-                    caption: true
-                });
-        },0);
       },
       shuffle() {
         this.slides = _.shuffle(this.slides)

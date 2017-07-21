@@ -6,16 +6,16 @@
         v-if="slides"
         :slides="slides">
       </slider>
-      <div class="arrow-wrap">
+      <div id="main-arrow-down" class="arrow-wrap" >
         <i class="fa fa-angle-down"></i>
       </div>
       <transition name="fade">
-        <loader v-if="!sliderLoaded"></loader>
+        <loader v-if="!slidesArrived"></loader>
       </transition>
     </div>
     <div class="container">
       <div class="row">
-        <home-offers></home-offers>
+        <home-offers ref="OffersComponent"></home-offers>
         <home-content
           v-for="(block, index) in content" :block="block"
           :class="index%2 == 1 ? 'left-side' : 'right-side'" key="index">
@@ -28,15 +28,15 @@
 
 </template>
 <script type="text/babel">
-//  import $ from 'jquery';
   import {mapGetters} from 'vuex';
-  import slick from 'slick-carousel';
   import Slider from './HomeSlider.vue';
   import loader from '../loader.vue';
   import HomeOffers from './HomeOffers.vue';
   import HomeContent from './HomeContent.vue';
+  import { scrollToElement, boundedChunksWithMutations } from '../../../js/helper';
 
-  export default{
+
+export default{
     name: 'Home',
     props: ['defines'],
     components: {Slider, HomeOffers, HomeContent, loader},
@@ -64,51 +64,27 @@
     },
     data(){
       return {
-        sliderLoaded: false,
+        slidesArrived: false,
       }
     },
     created(){
+      let ID = this.defines.homePage;
       this.$store.dispatch(
-          'fetchDataPage',{
-          ID:this.defines.homePage,
-          chunks: [
-              {method: 'setHomeSlides', chunkType: 'home_slides'},
-              {method: 'setHomeOffers', chunkType: 'offers'},
-              {method: 'setHomeContent', chunkType: 'content_block'},
-          ]})
-      document.addEventListener('dataArrived', () => {
-        setTimeout(() => {
-          this.sliderLoaded = true
-        }, 500);
-      })
+            'fetchDataPage',
+            {ID, chunks: boundedChunksWithMutations(ID)}
+      )
     },
     mounted() {
       this.attachArrowEvent();
     },
-    updated(){
-      this.setImgPreview();
-    },
+
     methods: {
       attachArrowEvent(){
-        this.$el
-            .querySelector('.fa-angle-down')
-            .addEventListener('click', () => {
-              $('html, body').animate({
-                scrollTop: $('.offer-block').offset().top
-              });
-            });
+        document.getElementById('main-arrow-down').addEventListener('click', (e)=>{
+          let el = this.$refs.OffersComponent.$el;
+          scrollToElement(el, 500)
+        })
       },
-      setImgPreview(){
-        setTimeout(function () {
-          $('.image-light-box')
-              .imageLightbox({
-                overlay: true,
-                button: true,
-                caption: true
-              });
-        }, 0);
-
-      }
     }
   }
 </script>

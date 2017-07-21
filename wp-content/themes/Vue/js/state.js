@@ -5,19 +5,19 @@ export const stateCreator = () => {
     },
     contact: {
       desc: '',
-          img: {},
+      img: {},
     },
 
     gallery: {
       equipment: [],
-          photos: [],
-          videos: []
+      photos: [],
+      videos: []
     },
 
     home: {
       slides: [],
-          offers: [],
-          content: [],
+      offers: [],
+      content: [],
     },
 
     recommend: {
@@ -26,7 +26,7 @@ export const stateCreator = () => {
 
     references: {
       refs: [],
-      facebook_link: ''
+      facebookLink: ''
     },
     footer: {
       widget: {},

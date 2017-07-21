@@ -6,12 +6,13 @@
           <a class="logo" href="/"></a>
           <div class="menu-main-container">
             <ul>
-              <li @mouseover="fetchData(link.object_id)" v-for="link in links">
+              <li @mouseover="fetchData(link.object_id)" :data-id="link.object_id" v-for="link in links">
                 <router-link
                   :to="{ path: link.object_slug }"
                   class="menu-item">
                   {{ link.title }}
                 </router-link>
+
               </li>
             </ul>
           </div>
@@ -24,7 +25,7 @@
   import Waves from 'node-waves/dist/waves';
   import { mapGetters } from 'vuex';
   import { MAIN_MENU_ID } from '../js/data';
-
+  import { boundedChunksWithMutations } from '../js/helper'
   export default {
     props: ['defines'],
     computed: {
@@ -36,8 +37,8 @@
       this.$store.dispatch('getMenu', MAIN_MENU_ID);
     },
     methods: {
-      fetchData(id){
-//        this.$store.dispatch('fetchDataPage',id)
+      fetchData(ID){
+        this.$store.dispatch('fetchDataPage', {ID, chunks: boundedChunksWithMutations(ID) })
       }
     }
   }

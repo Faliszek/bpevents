@@ -183,9 +183,7 @@
 .fa-glass:before {
   content: "\f000";
 }
-.fa-music:before {
-  content: "\f001";
-}
+
 .fa-search:before {
   content: "\f002";
 }
@@ -286,18 +284,14 @@
 .fa-flag:before {
   content: "\f024";
 }
-.fa-headphones:before {
-  content: "\f025";
-}
+
 .fa-volume-off:before {
   content: "\f026";
 }
 .fa-volume-down:before {
   content: "\f027";
 }
-.fa-volume-up:before {
-  content: "\f028";
-}
+
 .fa-qrcode:before {
   content: "\f029";
 }
@@ -905,18 +899,7 @@
 .fa-angle-double-down:before {
   content: "\f103";
 }
-.fa-angle-left:before {
-  content: "\f104";
-}
-.fa-angle-right:before {
-  content: "\f105";
-}
-.fa-angle-up:before {
-  content: "\f106";
-}
-.fa-angle-down:before {
-  content: "\f107";
-}
+
 .fa-desktop:before {
   content: "\f108";
 }
@@ -2316,22 +2299,30 @@
 .fa-meetup:before {
   content: "\f2e0";
 }
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
+
+
+
+.fa-headphones:before {
+  content: "\f025";
 }
-.sr-only-focusable:active,
-.sr-only-focusable:focus {
-  position: static;
-  width: auto;
-  height: auto;
-  margin: 0;
-  overflow: visible;
-  clip: auto;
+
+.fa-volume-up:before {
+  content: "\f028";
+}
+
+.fa-music:before {
+  content: "\f001";
+}
+
+.fa-angle-left:before {
+  content: "\f104";
+}
+.fa-angle-right:before {
+  content: "\f105";
+}
+.fa-angle-up:before {
+  content: "\f106";
+}
+.fa-angle-down:before {
+  content: "\f107";
 }

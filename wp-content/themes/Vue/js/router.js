@@ -1,7 +1,6 @@
 import { DATA_PAGE } from './data';
-import store from './store';
 import VueRouter from 'vue-router';
-import { getRouteComponentID, boundedChunksWithMutations } from './helper.js'
+import { scrollToTop } from './helper.js'
 
 const assignRoutesToComponents = (dataRoutes) => {
   let mappedRoutes = [];
@@ -37,7 +36,9 @@ const router = new VueRouter({
   mode: 'history',
   root: '/',
   routes: routesCreator(),
-
+  scrollBehavior (to, from, savedPosition) {
+    scrollToTop(300);
+  }
 });
 
 // router.beforeEach((to, from, next) => {

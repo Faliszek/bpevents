@@ -1,29 +1,26 @@
 <!--suppress ALL -->
 <template>
   <section id="home" class="content page__content" v-cloak>
-    <div id="home-slider">
-      <slider
-        v-if="slides"
-        :slides="slides">
-      </slider>
-      <div id="main-arrow-down" class="arrow-wrap" >
-        <i class="fa fa-angle-down"></i>
-      </div>
-      <transition name="fade">
-        <loader v-if="!slidesArrived"></loader>
+    <div id="home-slider" class="home__slider">
+      <transition name="flash" mode="out-in">
+        <component
+          :is="slidesArrived"
+          :slides-arrived="slidesArrived = 'slider'"
+          :slides="slides">
+        </component>
       </transition>
     </div>
-    <div class="container">
-      <div class="row">
-        <home-offers ref="OffersComponent"></home-offers>
-        <home-content
-          v-for="(block, index) in content" :block="block"
-          :class="index%2 == 1 ? 'left-side' : 'right-side'" key="index">
-        </home-content>
+    <transition name="flash" appear>
+      <div class="container" v-show="showRestContent">
+        <div class="row">
+          <home-offers ref="OffersComponent"></home-offers>
+          <home-content
+            v-for="(block, index) in content" :block="block"
+            :class="index%2 == 1 ? 'left-side' : 'right-side'" key="index">
+          </home-content>
+        </div>
       </div>
-    </div>
-
-
+    </transition>
   </section>
 
 </template>
@@ -39,7 +36,11 @@
 export default{
     name: 'Home',
     props: ['defines'],
-    components: {Slider, HomeOffers, HomeContent, loader},
+    components: {
+      'slider' : Slider,
+      'loader': loader,
+      HomeOffers,
+      HomeContent, },
     head: {
       // To use "this" in the component, it is necessary to return the object through a function
       title: function () {
@@ -64,7 +65,8 @@ export default{
     },
     data(){
       return {
-        slidesArrived: false,
+        slidesArrived: 'loader',
+        showRestContent: false,
       }
     },
     created(){
@@ -74,17 +76,15 @@ export default{
             {ID, chunks: boundedChunksWithMutations(ID)}
       )
     },
-    mounted() {
-      this.attachArrowEvent();
-    },
-
-    methods: {
-      attachArrowEvent(){
-        document.getElementById('main-arrow-down').addEventListener('click', (e)=>{
-          let el = this.$refs.OffersComponent.$el;
-          scrollToElement(el, 500)
-        })
-      },
+    watch : {
+      slidesArrived : {
+        handler: function(val, oldVal) {
+          if(val === 'slider'){
+            setTimeout(() => { this.showRestContent = true}, 500)
+          }
+        },
+        deep: true
+      }
     }
   }
 </script>

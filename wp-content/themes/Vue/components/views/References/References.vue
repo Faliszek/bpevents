@@ -2,11 +2,11 @@
   <section id="references" class="refs page__content">
     <page-title :title="title"></page-title>
     <div class="container">
-      <div class="row">
-        <div id="refs" class="clearfix refs__slider">
+      <div class="row refs__row">
+        <i class="arrow-prev icon-angle-left"></i>
+        <div id="refs" class="clearfix refs__slider" v-show="showSlider">
           <swiper :options="swiperOption" ref="refsSwiper" >
             <swiper-slide v-for="(reference, index) in refs"  key="index" class="refs__slide">
-              <!--<div class="slide-img img-responsive" :style="{ backgroundImage: 'url(' + slide.slide_img.url + ')' }" ></div>-->
               <reference-single
                 :reference="reference"
                 key="index"></reference-single>
@@ -14,8 +14,7 @@
           </swiper>
 
         </div>
-        <i class="arrow-prev fa fa-angle-left"></i>
-        <i class="arrow-next fa fa-angle-right"></i>
+        <i class="arrow-next icon-angle-right"></i>
       </div>
 
       <div class="row btn-row">
@@ -66,6 +65,7 @@
     data(){
       return {
         title: 'Opinie',
+        showSlider: false,
         swiperOption: {
           mousewheelControl: true,
           observeParents: true,
@@ -76,6 +76,9 @@
           autoplay: 4000,
           direction: 'horizontal',
           watchSlidesProgress: true,
+          onInit: swiper => {
+            this.showSlider = true
+          }
         },
         swiperSlides: [],
       }

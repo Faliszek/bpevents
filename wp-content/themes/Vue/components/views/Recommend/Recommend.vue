@@ -52,17 +52,6 @@
                 title: 'Polecamy',
             }
         },
-        methods: {
-          setImgPreview(){
-            $('.image-light-box')
-                .imageLightbox({
-                  arrows:true,
-                  overlay:true,
-                  button: true,
-                  caption: true
-                });
-          }
-        },
         created(){
           this.$store.dispatch(
               'fetchDataPage',{
@@ -73,9 +62,6 @@
                     chunkType: 'recommendations'
                   }
               ]});
-        },
-        updated(){
-          this.setImgPreview();
         }
     }
 </script>

@@ -24,7 +24,7 @@
     },
     methods: {
       setIcon(string){
-        string = "fa fa-" + string;
+        string = "icon icon-" + string;
         return string;
       },
     }

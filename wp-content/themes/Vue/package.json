@@ -32,12 +32,8 @@
   "dependencies": {
     "bootstrap-only-css": "^1.0.0",
     "font-awesome": "^4.7.0",
-    "imagelightbox": "^0.7.5",
-    "jquery": "^3.1.1",
-    "jquery-toast-plugin": "^1.3.1",
     "lodash": "^4.17.4",
     "materialize-css": "^0.98.2",
-    "slick-carousel": "^1.6.0",
     "v-img": "0.0.4",
     "vue": "^2.2.2",
     "vue-awesome-swiper": "^2.5.4",

@@ -17,6 +17,19 @@ export function isSafe(s){
   let reg = /^[^<>{}]+$/g;
   return reg.test(s);
 }
+export function scrollToTop(duration){
+
+  let scrollTop = document.querySelector('body').scrollTop;
+
+  if (duration <= 0) return;
+
+  let perTick = scrollTop / duration * 10;
+  setTimeout(function() {
+    document.querySelector('body').scrollTop = scrollTop - perTick;
+    if (scrollTop === 0) return;
+    scrollToTop(duration - 10);
+  }, 10);
+}
 
 export function scrollToElement(el, duration){
 

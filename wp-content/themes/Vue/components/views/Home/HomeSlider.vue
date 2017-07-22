@@ -13,14 +13,19 @@
         </div>
       </swiper-slide>
     </swiper>
-      <i class="arrow-prev fa fa-angle-left"></i>
-      <i class="arrow-next fa fa-angle-right"></i>
+      <i class="arrow-prev icon-angle-left"></i>
+      <i class="arrow-next icon-angle-right"></i>
+    <div id="main-arrow-down" class="arrow-wrap" >
+      <i class="icon-angle-down"></i>
+    </div>
   </div>
 </template>
 <script type="text/babel">
   import {mapGetters} from 'vuex';
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import HomeSliderBtn  from './HomeSliderBtn.vue';
+  import { scrollToElement } from '../../../js/helper';
+
 
   export default{
     name: 'slider',
@@ -48,24 +53,28 @@
         sliderLoaded: false,
       }
     },
-    beforeCreate(){
-    },
-
     created(){
       this.setSlider();
     },
     updated(){
-      this.$el.style.height = this.windowH;
       this.setSlider();
     },
-    mounted(){
+    mounted() {
+      this.attachArrowEvent();
+      this.$el.style.height = this.windowH;
+
     },
     methods: {
       setSlider(){
         this.swiperSlides = this.slides;
-          setTimeout(() => {
-            this.sliderLoaded = true;
-            }, 1000);
+        this.$emit('slides-arrived');
+        setTimeout(() => { this.sliderLoaded = true }, 500)
+      },
+      attachArrowEvent(){
+        document.getElementById('main-arrow-down').addEventListener('click', (e)=>{
+          let el = this.$refs.OffersComponent.$el;
+          scrollToElement(el, 500)
+        })
       }
     }
   }

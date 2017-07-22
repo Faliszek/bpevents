@@ -72,8 +72,6 @@ module.exports = {
 
   plugins: [
     new ExtractTextPlugin("../assets/main.css"),
-    // new webpack.ProvidePlugin({
-    // })
   ],
   devtool: 'source-map'
 };

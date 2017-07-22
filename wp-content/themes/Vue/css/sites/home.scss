@@ -4,8 +4,11 @@
   }
 }
 #home-slider{
+
   #slider {
     overflow:hidden;
+    opacity:1;
+    transition:$transition;
   }
   .swiper-container {
     height:100%;
@@ -92,7 +95,7 @@
     //@include translateY(-50%);
     left:0;
     color:#fff;
-    //transition:$transtiton;
+    transition:$transition;
     &:hover{
       opacity:0.9;
     }
@@ -110,7 +113,7 @@
     transform:translateY(-50%);
     z-index:999;
     color:#fff;
-    //transition:$transtiton;
+    transition:$transition;
     &:hover{
       opacity:0.9;
     }
@@ -122,7 +125,7 @@
     z-index: 11;
     @include display-flex;
     @include justify-content(center);
-    .fa-angle-down{
+    .icon-angle-down{
       cursor:pointer;
       font-size: 80px;
       border: 2px solid #fff;
@@ -134,6 +137,13 @@
       text-align: center;
       transition: $transition;
       transform:scale(1);
+      &:before{
+        margin:0;
+        line-height: unset;
+        padding: 0;
+        display: block;
+        width: unset;
+      }
       &:hover{
         //transform:translateY(-10px);
         transform:scale(1.05);
@@ -152,7 +162,7 @@
     padding-bottom:32px;
     width:100%;
   }
-  i.fa{
+  i.icon{
     font-size: 65px;
     line-height: 110px;
     text-align: center;
@@ -199,14 +209,6 @@
   }
   &__img{
     flex:5;
-    img{
-      transition:$transition;
-    }
-    &:hover{
-      img{
-        transform:scale(1.03);
-      }
-    }
     figcaption{
       padding-top: 15px;
       font-style: italic;

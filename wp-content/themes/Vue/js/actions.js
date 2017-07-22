@@ -25,6 +25,7 @@ export const actionsCreators = () => {
             .get('/wp-json/acf/v2/post/' + params.ID)
             .then((resp) => {
               let data = resp.body.acf;
+              console.log(data);
               let event = new Event('dataArrived');
               params.chunks.forEach((item) => {
                 context.commit(item.method, data[item.chunkType]);

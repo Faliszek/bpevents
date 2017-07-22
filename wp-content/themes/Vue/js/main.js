@@ -16,6 +16,22 @@ Vue.use(VueHead);
 Vue.use(VueAwesomeSwiper);
 Vue.use(VueImg);
 
+Vue.directive('render', {
+  bind(el) {
+    let checkImg = setInterval(() => {
+      if (el.complete) {
+        el.parentNode.classList.remove('unvisible');
+        el.classList.add('opacity-show');
+        if (el.classList.contains('opacity-show')) {
+          clearInterval(checkImg)
+        }
+      }
+    }, 300)
+  }
+});
+
+
+
 Vue.config.devtools = true;
 Vue.http.options.emulateJSON = true;
 

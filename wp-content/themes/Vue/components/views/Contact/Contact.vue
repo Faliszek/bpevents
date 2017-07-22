@@ -55,9 +55,7 @@
               {method: 'setContactDesc', chunkType: 'desc'},
               {method: 'setContactImg', chunkType: 'img'}
             ]
-          },
-          this.defines.contactPage
-          );
+          });
     }
   }
 </script>

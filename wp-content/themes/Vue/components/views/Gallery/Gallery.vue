@@ -4,26 +4,22 @@
         <h1 class="text-center page__title">Galeria</h1>
         <div class="container">
             <div class="row">
-                <div class="gallery-menu">
-                </div>
-                <ul class="photos photos-container">
-                    <li class="eq-photo z-depth-1" v-for="(slide, index) in slides"  v-bind:key="slide">
-                        <a :href="slide.picture.url" class="image-light-box">
-                            <img class="img-responsive" :src="slide.picture.url" :alt="slide.picture.alt" />
-                        </a>
-                    </li>
-                 </ul>
+                <gallery-nav></gallery-nav>
+                <equipment-gallery :equipment="equipment"></equipment-gallery>
+                <photos-gallery :photos="photos"></photos-gallery>
+                <videos-gallery :videos="videos"></videos-gallery>
             </div>
         </div>
     </section>
 </template>
-<style>
-    li[data-id='10'] {
-        display: none !important;
-    }
-</style>
 <script>
   import _ from 'lodash';
+  import { mapGetters } from 'vuex';
+  import { boundedChunksWithMutations } from '../../../js/helper';
+  import GalleryNav from './GalleryNav.vue'
+  import PhotosGallery from './GalleryPhotos.vue'
+  import VideosGallery from './GalleryVideos.vue'
+  import EquipmentGallery from './GalleryEquipment.vue'
   export default {
     name: 'Gallery',
     props: ['defines'],
@@ -42,36 +38,25 @@
         ]
       }
     },
-    data(){
-      return {
-        data: this.data ? this.getDataEq() : '',
-        slides: '',
-      }
+    components: {
+      GalleryNav,
+      PhotosGallery,
+      VideosGallery,
+      EquipmentGallery,
     },
-    mounted() {
-      if(this.defines){
-        this.getDataEq();
-        this.shuffle();
-      }
+    computed: {
+      ...mapGetters({
+        photos: 'getGalleryPhotos',
+        videos: 'getGalleryVideos',
+        equipment: 'getGalleryEquipment',
+      })
     },
-    methods: {
-      getDataEq() {
-        this.$http.get('/wp-json/acf/v2/post/' + this.defines.galleryPage)
-            .then(response => {
-              this.data =  response.body.acf;
-              this.getSlides();
-            }, response => {
-              console.log('Data could not be loaded', +response)
-            });
-      },
-
-      getSlides() {
-        this.slides = this.data.eq;
-      },
-      shuffle() {
-        this.slides = _.shuffle(this.slides)
-      }
-
+    created(){
+      let ID = this.defines.galleryPage;
+      this.$store.dispatch(
+          'fetchDataPage',
+          {ID, chunks: boundedChunksWithMutations(ID)}
+      )
     }
   }
 </script>

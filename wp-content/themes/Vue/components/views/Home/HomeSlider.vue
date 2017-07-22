@@ -62,7 +62,6 @@
     mounted() {
       this.attachArrowEvent();
       this.$el.style.height = this.windowH;
-
     },
     methods: {
       setSlider(){
@@ -72,7 +71,7 @@
       },
       attachArrowEvent(){
         document.getElementById('main-arrow-down').addEventListener('click', (e)=>{
-          let el = this.$refs.OffersComponent.$el;
+          let el = document.querySelector('.offer-block');
           scrollToElement(el, 500)
         })
       }

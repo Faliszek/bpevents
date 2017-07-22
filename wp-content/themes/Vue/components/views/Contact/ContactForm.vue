@@ -40,9 +40,6 @@
     <vue-toast ref="toast"></vue-toast>
   </div>
 </template>
-<style>
-
-</style>
 <script>
   import { isMail, isName, isSafe } from '../../../js/helper';
   import Waves from 'node-waves/dist/waves';

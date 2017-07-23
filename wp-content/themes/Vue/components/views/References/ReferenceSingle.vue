@@ -2,9 +2,9 @@
   <div class="ref">
     <div class="ref__wrap">
       <div class="ref__img scale-hover-effect">
-          <img v-img v-render class="img-responsive z-depth-1"
-               :src="reference.ref_autor_img.url"
-               :alt="reference.ref_autor_img.alt"/>
+        <img v-img v-render class="img-responsive img z-depth-1"
+             :src="reference.ref_autor_img.url"
+             :alt="reference.ref_autor_img.alt"/>
       </div>
       <div class="ref__content">
         <h4>{{ reference.ref_autor }}</h4>

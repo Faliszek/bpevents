@@ -30,17 +30,18 @@
   import loader from '../loader.vue';
   import HomeOffers from './HomeOffers.vue';
   import HomeContent from './HomeContent.vue';
-  import { scrollToElement, boundedChunksWithMutations } from '../../../js/helper';
+  import {scrollToElement, boundedChunksWithMutations} from '../../../js/helper';
 
 
-export default{
+  export default{
     name: 'Home',
     props: ['defines'],
     components: {
-      'slider' : Slider,
+      'slider': Slider,
       'loader': loader,
       HomeOffers,
-      HomeContent, },
+      HomeContent,
+    },
     head: {
       // To use "this" in the component, it is necessary to return the object through a function
       title: function () {
@@ -72,15 +73,17 @@ export default{
     created(){
       let ID = this.defines.homePage;
       this.$store.dispatch(
-            'fetchDataPage',
-            {ID, chunks: boundedChunksWithMutations(ID)}
+          'fetchDataPage',
+          {ID, chunks: boundedChunksWithMutations(ID)}
       )
     },
-    watch : {
-      slidesArrived : {
-        handler: function(val, oldVal) {
-          if(val === 'slider'){
-            setTimeout(() => { this.showRestContent = true}, 500)
+    watch: {
+      slidesArrived: {
+        handler: function (val, oldVal) {
+          if (val === 'slider') {
+            setTimeout(() => {
+              this.showRestContent = true
+            }, 1000)
           }
         },
         deep: true

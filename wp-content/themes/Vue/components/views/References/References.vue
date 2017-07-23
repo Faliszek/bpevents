@@ -5,8 +5,8 @@
       <div class="row refs__row">
         <i class="arrow-prev icon-angle-left"></i>
         <div id="refs" class="clearfix refs__slider" v-show="showSlider">
-          <swiper :options="swiperOption" ref="refsSwiper" >
-            <swiper-slide v-for="(reference, index) in refs"  key="index" class="refs__slide">
+          <swiper :options="swiperOption" ref="refsSwiper">
+            <swiper-slide v-for="(reference, index) in refs" key="index" class="refs__slide">
               <reference-single
                 :reference="reference"
                 key="index"></reference-single>
@@ -29,9 +29,8 @@
   import PageTitle from '../page-title.vue';
   import ReferenceSingle from './ReferenceSingle.vue';
   import {mapGetters} from 'vuex';
-  import { boundedChunksWithMutations } from '../../../js/helper';
-  import { swiper, swiperSlide } from 'vue-awesome-swiper';
-
+  import {boundedChunksWithMutations} from '../../../js/helper';
+  import {swiper, swiperSlide} from 'vue-awesome-swiper';
 
 
   export default{
@@ -72,7 +71,7 @@
           nextButton: '.arrow-next',
           prevButton: '.arrow-prev',
           speed: 500,
-          loop:false,
+          loop: false,
           autoplay: 4000,
           direction: 'horizontal',
           watchSlidesProgress: true,

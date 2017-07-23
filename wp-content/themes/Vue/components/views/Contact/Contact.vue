@@ -50,7 +50,7 @@
       this.$store.dispatch(
           'fetchDataPage',
           {
-            ID:this.defines.contactPage,
+            ID: this.defines.contactPage,
             chunks: [
               {method: 'setContactDesc', chunkType: 'desc'},
               {method: 'setContactImg', chunkType: 'img'}

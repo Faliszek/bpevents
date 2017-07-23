@@ -1,8 +1,8 @@
 <template>
   <div id="slider" :class="{ 'unvisible' : !sliderLoaded }">
     <div id="progress-bar" class="progress-bar"></div>
-    <swiper :options="swiperOption" ref="mySwiper" >
-      <swiper-slide v-for="(slide, index) in slides"  key="index" class="home-slide">
+    <swiper :options="swiperOption" ref="mySwiper">
+      <swiper-slide v-for="(slide, index) in slides" key="index" class="home-slide">
         <!--<div class="slide-img img-responsive" :style="{ backgroundImage: 'url(' + slide.slide_img.url + ')' }" ></div>-->
         <img class="slide-img img-responsive" :src="slide.slide_img.url"/>
         <div class="mask"></div>
@@ -13,23 +13,23 @@
         </div>
       </swiper-slide>
     </swiper>
-      <i class="arrow-prev icon-angle-left"></i>
-      <i class="arrow-next icon-angle-right"></i>
-    <div id="main-arrow-down" class="arrow-wrap" >
+    <i class="arrow-prev icon-angle-left"></i>
+    <i class="arrow-next icon-angle-right"></i>
+    <div id="main-arrow-down" class="arrow-wrap">
       <i class="icon-angle-down"></i>
     </div>
   </div>
 </template>
 <script type="text/babel">
   import {mapGetters} from 'vuex';
-  import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import {swiper, swiperSlide} from 'vue-awesome-swiper'
   import HomeSliderBtn  from './HomeSliderBtn.vue';
-  import { scrollToElement } from '../../../js/helper';
+  import {scrollToElement} from '../../../js/helper';
 
 
   export default{
     name: 'slider',
-    props: ['slides','slidesArrived'],
+    props: ['slides', 'slidesArrived'],
     components: {
       swiper,
       swiperSlide,
@@ -43,7 +43,7 @@
           nextButton: '.arrow-next',
           prevButton: '.arrow-prev',
           speed: 500,
-          loop:false,
+          loop: false,
           autoplay: 4000,
           direction: 'horizontal',
           watchSlidesProgress: true,
@@ -67,10 +67,12 @@
       setSlider(){
         this.swiperSlides = this.slides;
         this.$emit('slides-arrived');
-        setTimeout(() => { this.sliderLoaded = true }, 500)
+        setTimeout(() => {
+          this.sliderLoaded = true
+        }, 500)
       },
       attachArrowEvent(){
-        document.getElementById('main-arrow-down').addEventListener('click', (e)=>{
+        document.getElementById('main-arrow-down').addEventListener('click', (e) => {
           let el = document.querySelector('.offer-block');
           scrollToElement(el, 500)
         })

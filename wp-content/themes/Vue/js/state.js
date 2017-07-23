@@ -9,8 +9,11 @@ export const stateCreator = () => {
     },
 
     gallery: {
+      equipmentTitle: '',
       equipment: [],
+      photosTitle: '',
       photos: [],
+      videosTitle: '',
       videos: []
     },
 

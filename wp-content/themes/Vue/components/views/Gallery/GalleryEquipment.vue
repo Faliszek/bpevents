@@ -1,6 +1,4 @@
 <template>
-  <div class="gallery__block">
-    <h5 class="text-center title" v-if="title">{{ title }}</h5>
     <ul class="gallery__eqs eqs-container">
       <li class="gallery__eq z-depth-1 unvisible scale-hover-effect"
           v-for="(eq, index) in equipment"
@@ -15,10 +13,15 @@
         </figcaption>
       </li>
     </ul>
-  </div>
 </template>
 <script>
+  import { mapGetters } from 'vuex';
   export default{
-    props: ['title', 'equipment'],
+    name: 'equipment-gallery',
+    computed: {
+      ...mapGetters({
+        equipment: 'getGalleryEquipment',
+      }),
+    },
   }
 </script>

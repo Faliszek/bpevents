@@ -1,6 +1,4 @@
 <template>
-  <div class="gallery__block">
-    <h5 class="text-center title" v-if="title">{{ title }}</h5>
     <ul class="gallery__videos videos-container">
       <li class="gallery__video z-depth-1 scale-hover-effect video-player"
           v-for="(video, index) in videos"
@@ -20,34 +18,21 @@
         </div>
       </li>
     </ul>
-  </div>
 </template>
 <script>
   import { videoPlayer } from 'vue-video-player'
+  import {mapGetters} from 'vuex';
+
   export default{
-    props: ['title', 'videos'],
+    name: 'videos-gallery',
     components: {
       videoPlayer
     },
-    data(){
-      return {
-        playerOptions: {
+    computed: {
+      ...mapGetters({
+        videos: 'getGalleryVideos',
+      }),
+    },
 
-          // component options
-          start: 0,
-          playsinline: false,
-
-          // videojs options
-          muted: true,
-          language: 'en',
-          playbackRates: [0.7, 1.0, 1.5, 2.0],
-          sources: [{
-            type: "video/mp4",
-            src: "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm"
-          }],
-          poster: "/static/images/author.jpg",
-        }
-      }
-    }
   }
 </script>

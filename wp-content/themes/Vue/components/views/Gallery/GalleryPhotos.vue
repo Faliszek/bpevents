@@ -1,6 +1,4 @@
 <template>
-  <div class="gallery__block">
-    <h5 class="text-center title" v-if="title">{{ title }}</h5>
     <ul class="gallery__photos photos-container">
       <li class="gallery__photo z-depth-1 unvisible scale-hover-effect"
           v-for="(photo, index) in photos"
@@ -13,11 +11,16 @@
         />
       </li>
     </ul>
-
-  </div>
 </template>
 <script>
+  import {mapGetters} from 'vuex';
+
   export default{
-    props: ['title', 'photos'],
+    name: 'photos-gallery',
+    computed: {
+      ...mapGetters({
+        photos: 'getGalleryPhotos',
+      }),
+    },
   }
 </script>

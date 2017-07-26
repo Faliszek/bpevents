@@ -16,13 +16,28 @@
       cursor:pointer;
       padding:14px 0;
       position:relative;
-      transition:$transition;
       border-top-left-radius:14px;
       border-top-right-radius:14px;
+
+      &:after{
+        content:'';
+        transition:$transition;
+        position:absolute;
+        bottom:0;
+        left:0;
+        width:100%;
+        background:$accent;
+        height:3px;
+        display:block;
+        transform:scaleX(0);
+      }
+
       &:hover{
         color:$accent-hover;
       }
+
       &.active {
+        color:$accent-hover;
         h5 {
           color:$accent;
         }
@@ -34,27 +49,13 @@
       h5{
         margin:0;
       }
-      &:after{
-        content:'';
-        position:absolute;
-        bottom:0;
-        left:0;
-        width:100%;
-        background:$accent;
-        height:3px;
-        display:block;
-        transform:scaleX(0);
-      }
     }
   }
-  &__block{
-    .title{
+  &__title{
       padding-top:16px;
       padding-bottom:26px;
       display:block;
     }
-
-  }
   &__photos {
     display: flex;
     justify-content: space-between;

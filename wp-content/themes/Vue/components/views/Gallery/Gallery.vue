@@ -4,24 +4,14 @@
     <h1 class="text-center page__title">Galeria</h1>
     <div class="container">
       <div class="row">
-        <gallery-nav></gallery-nav>
+        <gallery-nav v-on:change-gallery="changeActiveGallery"  :active-gallery="activeGallery"></gallery-nav>
 
-        <videos-gallery
-          :title="videosTitle"
-          :videos="videos">
-        </videos-gallery>
-
-        <equipment-gallery
-          :title="equipmentTitle"
-          :equipment="equipment">
-        </equipment-gallery>
-
-        <photos-gallery
-          :title="photosTitle"
-          :photos="photos">
-        </photos-gallery>
-
-
+        <transition name="scale" mode="out-in" appear>
+          <h5 id="gallery-title" class="text-center gallery__title " v-show="activeTitle" v-html="activeTitle"></h5>
+        </transition>
+        <transition name="flash" mode="out-in">
+          <component :is="activeGallery"></component>
+        </transition>
       </div>
     </div>
   </section>
@@ -54,19 +44,22 @@
     },
     components: {
       GalleryNav,
-      PhotosGallery,
-      VideosGallery,
-      EquipmentGallery,
+      'photos-gallery': PhotosGallery,
+      'videos-gallery': VideosGallery,
+      'equipment-gallery': EquipmentGallery,
     },
     computed: {
-      ...mapGetters({
-        photosTitle: 'getGalleryPhotosTitle',
-        photos: 'getGalleryPhotos',
-        videosTitle: 'getGalleryVideosTitle',
-        videos: 'getGalleryVideos',
-        equipmentTitle: 'getGalleryEquipmentTitle',
-        equipment: 'getGalleryEquipment',
-      })
+        ...mapGetters({
+          photosTitle: 'getGalleryPhotosTitle',
+          videosTitle: 'getGalleryVideosTitle',
+          equipmentTitle: 'getGalleryEquipmentTitle',
+        })
+    },
+    data(){
+      return{
+        activeGallery: '',
+        activeTitle: '',
+      }
     },
     created(){
       let ID = this.defines.galleryPage;
@@ -74,6 +67,21 @@
           'fetchDataPage',
           {ID, chunks: boundedChunksWithMutations(ID)}
       )
+    },
+
+    mounted(){
+      document.addEventListener('dataArrived', ()=>{
+        this.activeTitle = this.photosTitle;
+        this.activeGallery = 'photos-gallery';
+      })
+    },
+    methods: {
+      changeActiveGallery(data){
+        this.activeTitle = '';
+        setTimeout(()=> { this.activeTitle = this[data.choosenTitle]},600)
+        this.activeGallery = data.choosenGallery;
+      }
     }
+
   }
 </script>

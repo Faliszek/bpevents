@@ -22,12 +22,11 @@ Vue.use(VueVideoPlayer);
 Vue.directive('render', {
     bind: function(el, binding){
       if(binding.value === 'video'){
-        console.log(el)
         let poster = new Image();
         let checkVideoImg = setInterval(() => {
           let getStyleBackground =
-              el.querySelector('.vjs-poster')
-                  .getAttribute('style');
+              el.querySelector('.vjs-poster') !== null ?
+              el.querySelector('.vjs-poster').getAttribute('style') : false;
           if(getStyleBackground) {
             let findImgSrc =
                 getStyleBackground
@@ -42,7 +41,6 @@ Vue.directive('render', {
                   clearInterval(checkVideoImg)
                 }
             }
-            console.log('testest');
           } else {
             el.parentNode.classList.add('opacity-show');
           }
@@ -56,7 +54,6 @@ Vue.directive('render', {
               clearInterval(checkImg)
             }
           }
-          console.log('testest');
         }, 300)
       }
     },

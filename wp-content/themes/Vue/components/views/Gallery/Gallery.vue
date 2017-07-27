@@ -1,7 +1,7 @@
 <!--suppress ALL -->
 <template>
   <section id="gallery" class="gallery content page__content" v-cloak>
-    <h1 class="text-center page__title">Galeria</h1>
+    <page-title :title="title"></page-title>
     <div class="container">
       <div class="row">
         <gallery-nav v-on:change-gallery="changeActiveGallery"  :active-gallery="activeGallery"></gallery-nav>
@@ -9,7 +9,7 @@
         <transition name="scale" mode="out-in" appear>
           <h5 id="gallery-title" class="text-center gallery__title " v-show="activeTitle" v-html="activeTitle"></h5>
         </transition>
-        <transition name="flash" mode="out-in">
+        <transition name="scale" mode="out-in">
           <component :is="activeGallery"></component>
         </transition>
       </div>
@@ -20,6 +20,7 @@
   import _ from 'lodash';
   import {mapGetters} from 'vuex';
   import {boundedChunksWithMutations} from '../../../js/helper';
+  import PageTitle from '../../page-title.vue';
   import GalleryNav from './GalleryNav.vue'
   import PhotosGallery from './GalleryPhotos.vue'
   import VideosGallery from './GalleryVideos.vue'
@@ -43,6 +44,7 @@
       }
     },
     components: {
+      PageTitle,
       GalleryNav,
       'photos-gallery': PhotosGallery,
       'videos-gallery': VideosGallery,
@@ -59,6 +61,7 @@
       return{
         activeGallery: '',
         activeTitle: '',
+        title: 'Galeria'
       }
     },
     created(){
@@ -70,7 +73,7 @@
     },
 
     mounted(){
-      document.addEventListener('dataArrived', ()=>{
+      document.addEventListener('galleryDataArrived', ()=>{
         this.activeTitle = this.photosTitle;
         this.activeGallery = 'photos-gallery';
       })

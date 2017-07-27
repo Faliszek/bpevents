@@ -26,8 +26,3 @@ export const mutationsCreator = () => {
     setFooterMenuTitle: (state, data) => state.footer.menu.title = data
   }
 };
-
-
-    //
-
-    //

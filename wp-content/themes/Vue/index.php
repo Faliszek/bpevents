@@ -13,7 +13,6 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300i" rel="stylesheet">
   <?php wp_head(); ?>
   <script> var SERVER_DATA = <?php echo set_data();?></script>
-<!--  <link rel="preload" as="script" href="assets/bundle.js"-->
 </head>
   <body>
     <div id="app"></div>

@@ -102,7 +102,3 @@ export function componentNeedUpdate(ID){
   });
   return doesNeedUpdate;
 }
-//
-// export function matchComponentName(ID){
-//   return matchComponent(ID).name
-// }

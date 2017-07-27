@@ -41,10 +41,4 @@ const router = new VueRouter({
   }
 });
 
-// router.beforeEach((to, from, next) => {
-  // let ID = getRouteComponentID(to.name).ID;
-  // store.dispatch('fetchDataPage', {ID, chunks: boundedChunksWithMutations(ID) })
-  // next();
-// })
-
 export default router;

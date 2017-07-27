@@ -16,7 +16,7 @@
   </section>
 </template>
 <script>
-  import PageTitle from '../page-title.vue';
+  import PageTitle from '../../page-title.vue';
   import SingleRecommend from './RecommendSingle.vue';
   import {mapGetters} from 'vuex';
 

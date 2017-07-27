@@ -44,7 +44,7 @@
   import {isMail, isName, isSafe} from '../../../js/helper';
   import Waves from 'node-waves/dist/waves';
   import VueToast from 'vue-toast';
-  import Loader from '../loader.vue';
+  import Loader from '../../loader.vue';
   export default {
     name: 'contact-form',
     props: ['defines'],
@@ -54,14 +54,14 @@
     data() {
       return {
         dataForm: {
-//          name: this.name ? this.name : '',
-//          topic: this.topic ? this.topic : '',
-//          email: this.email ? this.email : '',
-//          message: this.message ? this.message : ''
-          name: 'Janusz Nowak',
-          topic: 'Axios Test',
-          email: 'asd@o2.pl',
-          message: 'Testowa wiadomość'
+          name: this.name ? this.name : '',
+          topic: this.topic ? this.topic : '',
+          email: this.email ? this.email : '',
+          message: this.message ? this.message : ''
+//          name: 'Janusz Nowak',
+//          topic: 'Axios Test',
+//          email: 'asd@o2.pl',
+//          message: 'Testowa wiadomość'
         },
         validate: {
           emailIsValid: true,
@@ -92,7 +92,6 @@
         this.showToast('Upsss.. coś poszło nie tak, spróboj ponownie', 'error');
         this.loading = false;
       });
-//        document.addEventListener('', () => {})
     },
     methods: {
       sendMessage(event) {
@@ -101,29 +100,6 @@
 
         if (validated) {
           this.$store.dispatch('sendContactForm', this.dataForm)
-
-//            $.toast().reset('all');
-//            $.toast({
-//              text: '' + response.body.msg + '',
-//              showHideTransition: 'slide',
-//              loader: false,
-//              bgColor: 'rgba(25, 180, 25, 0.8)',
-//              position: 'bottom-right',
-//              textAlign: 'center'
-//            });
-//            this.resetData();
-
-//          }, response => {
-//            $.toast().reset('all');
-//            $.toast({
-//              text: 'Upsss.. coś poszło nie tak, spróboj ponownie',
-//              showHideTransition: 'slide',
-//              loader: false,
-//              bgColor: 'rgba(180, 25, 25, 0.8)',
-//              position: 'bottom-right',
-//              textAlign: 'center'
-//            });
-//          });
         }
       },
 
@@ -161,26 +137,8 @@
           result = false;
           if (!value && value !== '') {
             if (key === 'emailIsValid') {
-//              $.toast().reset('all');
-//              $.toast({
-//                text: 'Wprowadzony e-mail jest niepoprawny',
-//                showHideTransition: 'slide',
-//                loader: false,
-//                position: 'bottom-right',
-//                bgColor: 'rgba(100,100,100,0.8)',
-//                textAlign: 'center',
-//              });
               return result;
             }
-//            $.toast().reset('all');
-//            $.toast({
-//              text: 'Pole zawiera niedozwolone znaki np. ^<>{}',
-//              showHideTransition: 'slide',
-//              loader: false,
-//              position: 'bottom-right',
-//              bgColor: 'rgba(100,100,100,0.8)',
-//              textAlign: 'center',
-//            });
             return result;
           }
           else {

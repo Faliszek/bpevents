@@ -26,7 +26,7 @@
 
 </template>
 <script>
-  import PageTitle from '../page-title.vue';
+  import PageTitle from '../../page-title.vue';
   import ReferenceSingle from './ReferenceSingle.vue';
   import {mapGetters} from 'vuex';
   import {boundedChunksWithMutations} from '../../../js/helper';

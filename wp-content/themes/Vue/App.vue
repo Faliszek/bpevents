@@ -1,7 +1,6 @@
 <template>
   <div id="page">
     <header-theme :defines="this.variables"></header-theme>
-    <!--<transition name="slide-fade" mode="out-in">-->
     <transition name="flash" mode="out-in" >
       <keep-alive>
         <router-view :defines="this.variables"></router-view>

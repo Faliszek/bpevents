@@ -13,7 +13,7 @@
 
 </template>
 <script>
-  import PageTitle from '../page-title.vue';
+  import PageTitle from '../../page-title.vue';
   import ContactDesc from './ContactDesc.vue';
   import ContactForm from './ContactForm.vue';
 

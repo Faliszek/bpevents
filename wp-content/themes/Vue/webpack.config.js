@@ -73,5 +73,4 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin("../assets/main.css"),
   ],
-  devtool: 'source-map'
 };

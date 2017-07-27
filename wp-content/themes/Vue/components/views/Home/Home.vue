@@ -27,7 +27,7 @@
 <script type="text/babel">
   import {mapGetters} from 'vuex';
   import Slider from './HomeSlider.vue';
-  import loader from '../loader.vue';
+  import loader from '../../loader.vue';
   import HomeOffers from './HomeOffers.vue';
   import HomeContent from './HomeContent.vue';
   import {scrollToElement, boundedChunksWithMutations} from '../../../js/helper';

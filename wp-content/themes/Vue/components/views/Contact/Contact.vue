@@ -3,7 +3,7 @@
     <page-title :title="title"></page-title>
     <div class="container">
       <div class="row">
-        <div class="contact-wrap">
+        <div class="contact-wrap contact__wrap">
           <contact-desc></contact-desc>
           <contact-form :defines="defines"></contact-form>
         </div>

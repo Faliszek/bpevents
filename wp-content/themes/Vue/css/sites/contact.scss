@@ -1,15 +1,12 @@
 .contact {
   padding-top: 64px;
   padding-bottom: 64px;
-  h1{
-    text-align:center;
-  }
-  .contact-wrap{
+  &__wrap{
     display:flex;
-    @include align-items(center);
+    align-items: center;
     padding-top: 36px;
   }
-  #contact-form {
+  &__form {
     width:100%;
     margin:0 auto;
     padding: 24px 48px;
@@ -46,10 +43,10 @@
       min-height:240px;
     }
   }
-  .contact-info {
-    @include display-flex;
-    @include flex-direction(column);
-    @include align-items(center);
+  &__info {
+    display:flex;
+    flex-direction: column;
+    align-items:center;
     padding-top:35px;
     padding-bottom:35px;
     .email{
@@ -85,7 +82,7 @@
       }
     }
   }
-  .logo{
+  &__logo{
     width:50%;
     height:100px;
     margin:0 auto;

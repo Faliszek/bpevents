@@ -1,6 +1,6 @@
 <template>
   <div class="contact-form-wrapper col-xs-6">
-    <form id="contact-form" class="z-depth-3">
+    <form id="contact-form" class="contact__form z-depth-3">
       <div class="form-group firstname">
         <input id="firstname" :class="{ 'form-error': !validate.nameIsValid }"
                class="input" type="text"

@@ -46,9 +46,8 @@
     methods: {
       changeGallery(e){
         let el  = e.currentTarget;
-        let choosenTitle  = el.getAttribute('data-gallery-title');
         let choosenGallery = el.getAttribute('data-gallery');
-        this.$emit('change-gallery', {choosenTitle, choosenGallery})
+        this.$emit('change-gallery', choosenGallery);
       }
     }
   }

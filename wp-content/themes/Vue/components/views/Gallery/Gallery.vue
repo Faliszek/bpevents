@@ -5,13 +5,10 @@
     <div class="container">
       <div class="row">
         <gallery-nav v-on:change-gallery="changeActiveGallery"  :active-gallery="activeGallery"></gallery-nav>
-
-        <transition name="scale" mode="out-in" appear>
-          <h5 id="gallery-title" class="text-center gallery__title " v-show="activeTitle" v-html="activeTitle"></h5>
-        </transition>
-        <transition name="scale" mode="out-in">
-          <component :is="activeGallery"></component>
-        </transition>
+          <gallery-title :title="activeGallery"></gallery-title>
+          <transition name="scale" mode="out-in" v-if="activeGallery">
+            <component :is="activeGallery"></component>
+          </transition>
       </div>
     </div>
   </section>
@@ -21,6 +18,7 @@
   import {mapGetters} from 'vuex';
   import {boundedChunksWithMutations} from '../../../js/helper';
   import PageTitle from '../../page-title.vue';
+  import GalleryTitle from './GalleryTitle.vue'
   import GalleryNav from './GalleryNav.vue'
   import PhotosGallery from './GalleryPhotos.vue'
   import VideosGallery from './GalleryVideos.vue'
@@ -46,16 +44,10 @@
     components: {
       PageTitle,
       GalleryNav,
+      GalleryTitle,
       'photos-gallery': PhotosGallery,
       'videos-gallery': VideosGallery,
       'equipment-gallery': EquipmentGallery,
-    },
-    computed: {
-        ...mapGetters({
-          photosTitle: 'getGalleryPhotosTitle',
-          videosTitle: 'getGalleryVideosTitle',
-          equipmentTitle: 'getGalleryEquipmentTitle',
-        })
     },
     data(){
       return{
@@ -71,20 +63,15 @@
           {ID, chunks: boundedChunksWithMutations(ID)}
       )
     },
-
     mounted(){
-      document.addEventListener('galleryDataArrived', ()=>{
-        this.activeTitle = this.photosTitle;
-        this.activeGallery = 'photos-gallery';
-      })
+      let initGallery = 'photos-gallery';
+      this.changeActiveGallery(initGallery)
     },
     methods: {
-      changeActiveGallery(data){
-        this.activeTitle = '';
-        setTimeout(()=> { this.activeTitle = this[data.choosenTitle]},600)
-        this.activeGallery = data.choosenGallery;
+      changeActiveGallery(gallery){
+        this.activeGallery = gallery;
       }
-    }
 
+    }
   }
 </script>

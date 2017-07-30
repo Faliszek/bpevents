@@ -1,7 +1,7 @@
 <!--suppress ALL -->
 <template>
   <section id="home" class="content page__content" v-cloak>
-    <div id="home-slider" class="home__slider">
+    <div id="home-slider" class="home-slider home__slider">
       <transition name="flash" mode="out-in">
         <component
           :is="slidesArrived"

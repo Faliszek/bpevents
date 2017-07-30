@@ -1,17 +1,3 @@
-.facebook-button {
-  margin: 0 auto;
-  display: block;
-  text-align: center;
-  font-weight: bold;
-  color:#fff;
-  max-width:320px;
-  width:90%;
-}
-
-.btn-row{
-  padding-top:40px;
-  padding-bottom:25px;
-}
 .refs {
   //@include display-flex();
   //@include align-items(center);
@@ -100,5 +86,18 @@
       padding-right: 10px;
     }
   }
+}
+.facebook-button {
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  color:#fff;
+  max-width:320px;
+  width:90%;
+}
+.btn-row{
+  padding-top:40px;
+  padding-bottom:25px;
 }
 

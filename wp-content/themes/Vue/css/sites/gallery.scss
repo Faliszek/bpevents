@@ -62,7 +62,7 @@
     flex-wrap: wrap;
   }
   &__photo {
-    width: 48%;
+    width: 31%;
     margin-bottom:2%;
     overflow:hidden;
     @include awesome-img();
@@ -74,7 +74,7 @@
     flex-wrap: wrap;
   }
   &__eq {
-    width: 48%;
+    width: 31%;
     margin-bottom:2%;
     overflow:hidden;
     display:flex;
@@ -91,7 +91,7 @@
     flex-wrap: wrap;
   }
   &__video {
-    width: 48%;
+    width: 31%;
     margin-bottom: 2%;
     overflow: hidden;
     display: flex;

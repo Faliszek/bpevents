@@ -1,8 +1,8 @@
 <template>
 
-  <div class="contact-desc col-xs-6">
-    <div class="logo"><img :src="picture.url" :alt="picture.alt"/></div>
-    <div class="contact-info" v-html="desc"></div>
+  <div class="contact__desc col-xs-6">
+    <div class="contact__logo"><img :src="picture.url" :alt="picture.alt"/></div>
+    <div class="contact__info" v-html="desc"></div>
   </div>
 </template>
 

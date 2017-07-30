@@ -25,14 +25,9 @@ export const actionsCreators = () => {
             .get('/wp-json/acf/v2/post/' + params.ID)
             .then((resp) => {
               let data = resp.body.acf;
-              let component = getComponentName(params.ID);
-              let event = new Event(`${component}DataArrived`);
-              console.log(`${component}DataArrived`);
               params.chunks.forEach((item) => {
-                context.commit(item.method, data[item.chunkType]);
+                context.commit(item.method, data[item.chunkType]);``
               });
-              document.dispatchEvent(event);
-
             });
       }
 

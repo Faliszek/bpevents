@@ -67,6 +67,13 @@
       width:100%;
       height:100%;
       background-size:cover;
+      background-repeat: no-repeat;
+      background-position:50% 50%;
+    }
+  }
+  .slide-content {
+    &__title{
+
     }
   }
   .main-button{
@@ -82,6 +89,9 @@
     }
   }
   .arrow-prev{
+    @include md(){
+      display:none;
+    }
     width:10%;
     float:left;
     text-align:center;
@@ -101,6 +111,9 @@
     }
   }
   .arrow-next {
+    @include md(){
+      display:none;
+    }
     float:left;
     width:10%;
     text-align: center;
@@ -175,17 +188,34 @@
     height: 110px;
   }
   .offer{
+    @include md(){
+      padding-bottom:64px;
+    }
     &__title{
       text-align:center;
     }
     &__content{
       text-align:center;
       font-size:18px;
+      @include md(){
+        max-width:60%;
+        margin:0 auto;
+      }
+      @include sm(){
+        max-width:80%;
+      }
+      @include xs(){
+        max-width:95%;
+      }
     }
   }
 }
 .content-block{
   padding-bottom:32px;
+  @include md(){
+    padding-left:15px;
+    padding-right:15px;
+  }
   &.left-side{
     .content-block__img{
       order:1;
@@ -197,18 +227,28 @@
   &.right-side{
     .content-block__img{
       order:2;
+      @include md(){
+        order:1;
+      }
     }
     .content-block__text{
       order:1;
+      @include md(){
+        order:2;
+      }
     }
   }
 
   &__wrapper{
     display:flex;
     align-items:center;
+    flex-wrap:wrap;
   }
   &__img{
-    flex:5;
+    width:50%;
+    @include md(){
+      width:100%;
+    }
     figcaption{
       padding-top: 15px;
       font-style: italic;
@@ -216,7 +256,11 @@
     }
   }
   &__text{
-    flex:4;
+    width:40%;
+    @include md(){
+      width:100%;
+      text-align:justify;
+    }
     font-size:18px;
   }
   &__title{

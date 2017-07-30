@@ -4,10 +4,10 @@
     <swiper :options="swiperOption" ref="mySwiper">
       <swiper-slide v-for="(slide, index) in slides" key="index" class="home-slide">
         <!--<div class="slide-img img-responsive" :style="{ backgroundImage: 'url(' + slide.slide_img.url + ')' }" ></div>-->
-        <img class="slide-img img-responsive" :src="slide.slide_img.url"/>
+        <div class="slide-img img-responsive"  :style="{ 'background-image': 'url(' + slide.slide_img.url + ')' }"/>
         <div class="mask"></div>
         <div class="slide-content">
-          <h1 class="slide-content__title">{{ slide.slide_title }}</h1>
+          <h1 class="slide-content__title page__title">{{ slide.slide_title }}</h1>
           <p class="slide-content__text" v-html="slide.slide_text"></p>
           <home-slider-btn key="index" :slide="slide"></home-slider-btn>
         </div>

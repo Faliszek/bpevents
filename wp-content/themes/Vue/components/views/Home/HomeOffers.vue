@@ -1,7 +1,7 @@
 <template>
   <div class="offer-block">
     <h1 class="offer-block__title">Oferta</h1>
-    <div class="col-sm-4 offer" v-for="offer in offers">
+    <div class="col-md-12 col-lg-4 offer" v-for="offer in offers">
       <i :class="setIcon(offer.offer_icon)" class="z-depth-1"></i>
       <h3 class="offer__title">{{ offer.offer_title }}</h3>
       <p class="offer__content" v-html="offer.offer_content"></p>

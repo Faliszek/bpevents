@@ -4,13 +4,36 @@
   &__wrap{
     display:flex;
     align-items: center;
+    flex-wrap:wrap;
     padding-top: 36px;
+    @include md(){
+      padding-left:15px;
+      padding-right:15px;
+    }
+  }
+
+  &__desc{
+    width:50%;
+    @include md(){
+      width:100%;
+    }
+  }
+
+  &__form-wrapper{
+    width:50%;
+    @include md(){
+      width:100%;
+    }
   }
   &__form {
     width:100%;
     margin:0 auto;
     padding: 24px 48px;
     background: rgba(245,245,245,0.1);
+    flex-wrap:wrap;
+    @include sm(){
+      padding: 24px;
+    }
     &.was-send{
       .input {
         font-size:0;
@@ -25,10 +48,16 @@
     .firstname {
       width:48%;
       float:left;
+      @include sm(){
+        width:100%;
+      }
     }
     .email{
       width:48%;
       float:right;
+      @include sm(){
+        width:100%;
+      }
     }
     .topic {
       width:100%;
@@ -52,6 +81,10 @@
     .email{
       font-size:24px;
       line-height:36px;
+      @include md(){
+        font-size:16px;
+        line-height:18px;
+      }
       a{
         color:$text-color;
       }
@@ -64,12 +97,20 @@
         text-align:center;
         display:block;
         float:left;
+        @include md(){
+          width: 50px;
+          font-size:22px;
+        }
       }
     }
 
     .phone{
       font-size:24px;
       line-height:36px;
+      @include md(){
+        font-size:16px;
+        line-height:18px;
+      }
       &:before{
         font-family:'fontello';
         content:"\e803";
@@ -79,6 +120,10 @@
         text-align:center;
         display:block;
         float:left;
+        @include md(){
+          width: 50px;
+          font-size:22px;
+        }
       }
     }
   }
@@ -86,6 +131,9 @@
     width:50%;
     height:100px;
     margin:0 auto;
+    @include md(){
+      height:unset;
+    }
     img{
       max-width:100%;
       max-height:100%;

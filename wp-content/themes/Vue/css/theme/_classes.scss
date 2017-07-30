@@ -3,12 +3,20 @@
 .page{
   &__title {
     font-weight:bold;
+    @include md(){
+      font-size:3.2rem;
+      padding-left:15px;
+      padding-right:15px;
+
+    }
   }
   &__content {
     padding-top: 64px;
     padding-bottom: 64px;
   }
 }
+
+
 a{
   transition: $transition-time;
   &:hover{

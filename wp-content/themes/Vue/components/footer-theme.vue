@@ -2,11 +2,11 @@
   <footer id="footer">
     <div class="footer container">
       <div class="footer-content row">
-        <div class="col-sm-4 footer__block">
+        <div class="footer__block footer__block-logo">
           <div class="logo"></div>
         </div>
 
-        <div class="col-sm-4 footer__block" v-if="widget">
+        <div class="footer__block footer__block-contact" v-if="widget">
           <div class="widget.id">
             <div :class="widget.class">
               <aside class="widget" v-html="widget.rendered">
@@ -15,9 +15,9 @@
           </div>
         </div>
 
-        <div class="col-sm-4 footer__block" v-if="links">
-          <div class="footer_menu.id">
-            <h4>{{ footer_menu_title }}</h4>
+        <div class="footer__block footer__block-links" v-if="links">
+          <div>
+            <h4 class="widget-title">{{ footer_menu_title }}</h4>
             <ul class="site-map">
               <li v-for="link in links">
                 <router-link

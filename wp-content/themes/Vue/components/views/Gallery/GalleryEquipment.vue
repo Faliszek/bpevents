@@ -1,6 +1,6 @@
 <template>
     <ul class="gallery__eqs eqs-container">
-      <li class="gallery__eq z-depth-1 unvisible scale-hover-effect"
+      <li class="gallery__eq gallery__item z-depth-1 unvisible scale-hover-effect gallery-item"
           v-for="(eq, index) in equipment"
           :key="index">
         <img v-img v-render

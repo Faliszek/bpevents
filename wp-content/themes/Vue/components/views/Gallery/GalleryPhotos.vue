@@ -1,6 +1,6 @@
 <template>
     <ul class="gallery__photos photos-container">
-      <li class="gallery__photo z-depth-1 unvisible scale-hover-effect"
+      <li class="gallery__photo gallery__item z-depth-1 unvisible scale-hover-effect gallery-item"
           v-for="(photo, index) in photos"
           :key="index">
 

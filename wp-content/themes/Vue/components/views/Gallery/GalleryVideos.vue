@@ -1,6 +1,6 @@
 <template>
     <ul class="gallery__videos videos-container">
-      <li class="gallery__video z-depth-1 scale-hover-effect video-player"
+      <li class="gallery__video gallery__item z-depth-1 scale-hover-effect gallery-item video-player"
           v-for="(video, index) in videos"
           :key="index">
         <div class="gallery__video-wrap video-player-wrap">

@@ -64,7 +64,11 @@
       padding-top:16px;
       padding-bottom:26px;
       display:block;
-    font-weight:bold;
+      font-weight:bold;
+    @include md(){
+      padding-left:15px;
+      padding-right:15px;
+    }
     }
   &__photos {
     display: flex;

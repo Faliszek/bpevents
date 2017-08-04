@@ -23,6 +23,6 @@
     document.write(`<style>.page__content \{ min-height: ${window.innerHeight}px }</style>`);
   })();
 </script>
-<script src="/wp-content/themes/Vue/assets/bundle.js"></script>
+<script src="/wp-content/themes/bpevents/assets/bundle.js"></script>
   <?php wp_footer();?>
 </html>

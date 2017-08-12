@@ -8,12 +8,12 @@ function set_data() {
 	$data->siteUrl = constant('SITE_URL');
 	$data->main_menu_id = constant('MAIN_MENU_ID');
 	$data->footer_menu_id = constant('FOOTER_MENU_ID');
+	$data->facebook = get_option('facebook-plugin');
 	$data->homePage = (int)get_option( 'page_on_front' );
 	$data->referencesPage = get_page_by_title( 'referencje' )->ID;
 	$data->contactPage = get_page_by_title( 'kontakt' )->ID;
 	$data->galleryPage = get_page_by_title( 'galeria' )->ID;
 	$data->recommendPage = get_page_by_title( 'polecamy' )->ID;
-
 	$data->routes = set_routes();
 	return json_encode($data, false);
 }

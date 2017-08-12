@@ -1,7 +1,7 @@
 <!--suppress ALL -->
 <template>
-  <section id="home" class="content page__content" v-cloak>
-    <div id="home-slider" class="home-slider home__slider">
+  <div id="home" class="content page__content" v-cloak>
+    <section id="home-slider" class="home-slider home__slider">
       <transition name="flash" mode="out-in">
         <component
           :is="slidesArrived"
@@ -9,19 +9,23 @@
           :slides="slides">
         </component>
       </transition>
-    </div>
+    </section>
     <transition name="flash" appear>
-      <div class="container" v-show="showRestContent">
-        <div class="row">
-          <home-offers ref="OffersComponent"></home-offers>
-          <home-content
-            v-for="(block, index) in content" :block="block"
-            :class="index%2 == 1 ? 'left-side' : 'right-side'" key="index">
-          </home-content>
-        </div>
+      <div>
+        <home-offers v-show="showRestContent" ref="OffersComponent"></home-offers>
       </div>
     </transition>
-  </section>
+
+    <transition name="flash" appear>
+      <div>
+        <home-content
+                v-show="showRestContent"
+                v-for="(block, index) in content" :block="block"
+                :class="index%2 == 1 ? 'left-side' : 'right-side'" key="index">
+        </home-content>
+      </div>
+    </transition>
+  </div>
 
 </template>
 <script type="text/babel">

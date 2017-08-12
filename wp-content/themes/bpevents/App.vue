@@ -1,5 +1,5 @@
 <template>
-  <div id="page">
+  <main id="page">
     <header-theme :defines="this.variables"></header-theme>
     <transition name="flash" mode="out-in" >
       <keep-alive>
@@ -7,7 +7,7 @@
       </keep-alive>
     </transition>
     <footer-theme :defines="this.variables"></footer-theme>
-  </div>
+  </main>
 </template>
 <script>
   import Vue from 'vue';

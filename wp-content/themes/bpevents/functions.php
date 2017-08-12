@@ -33,9 +33,10 @@ function vue_setup(){
     ) );
 }
 function vue_js() {
-	if ( !is_admin() ) {
-		wp_deregister_script( 'jquery' );
-	}
+	wp_enqueue_script('jquery');
+//	if ( !is_admin() ) {
+//		wp_deregister_script( 'jquery' );
+//	}
 }
 function vue_css() {
     wp_enqueue_style( 'style', get_template_directory_uri() . '/style.css', array(), '1.0.0' );

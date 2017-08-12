@@ -41,7 +41,6 @@
         width: 200px;
         float: left;
         position: relative;
-        top: 5px;
         @include md(){
           top:0;
         }

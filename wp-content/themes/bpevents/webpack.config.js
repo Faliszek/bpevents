@@ -5,7 +5,7 @@ module.exports = {
   entry: "./js/main.js",
   output: {
     path: __dirname + '/assets/',
-    publicPath: '/wp-content/themes/Vue/assets/',
+    publicPath: '/wp-content/themes/bpevents/assets/',
     filename: "bundle.js"
   },
   module: {

@@ -9,8 +9,7 @@
   <meta name="theme-color" content="#000000">
   <link rel="manifest" href="/manifest.json">
   <link rel="shortcut icon" href="/favicon.ico">
-  <link href="https://fonts.googleapis.com/css?family=Droid+Sans|Lato|Raleway|Roboto|Slabo+27px" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
   <?php wp_head(); ?>
   <script> var SERVER_DATA = <?php echo set_data();?></script>
 </head>

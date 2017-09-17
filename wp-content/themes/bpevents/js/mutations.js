@@ -23,6 +23,8 @@ export const mutationsCreator = () => {
 
     setFooterWidget: (state, data) => state.footer.widget = data,
     setFooterMenuLinks: (state, data) => state.footer.menu.links = data,
-    setFooterMenuTitle: (state, data) => state.footer.menu.title = data
+    setFooterMenuTitle: (state, data) => state.footer.menu.title = data,
+
+    setCmsData: (state, data) => state.cmsData = data
   }
 };

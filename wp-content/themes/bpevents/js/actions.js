@@ -17,7 +17,20 @@ export const actionsCreators = () => {
             }
           });
     },
+    fetchContentSite: (context, params) => {
+      console.log(params)
+      // let doesNeedUpdate = componentNeedUpdate(params.ID);
+      // if (doesNeedUpdate) {
+        Vue.http
+          .get('/wp-json/wp/v2/pages/'+params.ID)
+          .then((resp) => {
+            let data = resp.body.content.rendered;
+            console.log(data)
+            context.commit('setCmsData', data)
+          });
+      // }
 
+      },
     fetchDataPage: (context, params) => {
       let doesNeedUpdate = componentNeedUpdate(params.ID);
       if (doesNeedUpdate) {
@@ -26,7 +39,7 @@ export const actionsCreators = () => {
             .then((resp) => {
               let data = resp.body.acf;
               params.chunks.forEach((item) => {
-                context.commit(item.method, data[item.chunkType]);``
+                context.commit(item.method, data[item.chunkType]);
               });
             });
       }
@@ -40,6 +53,7 @@ export const actionsCreators = () => {
           }, response => {
             console.log('Sidebar could not be loaded', +response)
           });
+
     },
 
     sendContactForm(context, params){

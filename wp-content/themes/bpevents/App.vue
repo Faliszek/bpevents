@@ -2,9 +2,9 @@
   <main id="page">
     <header-theme :defines="this.variables"></header-theme>
     <transition name="flash" mode="out-in" >
-      <keep-alive>
+      <!--<keep-alive>-->
         <router-view :defines="this.variables"></router-view>
-      </keep-alive>
+      <!--</keep-alive>-->
     </transition>
     <footer-theme :defines="this.variables"></footer-theme>
     <facebook-widget></facebook-widget>

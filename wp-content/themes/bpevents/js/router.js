@@ -25,6 +25,7 @@ const assignRoutesToComponents = (dataRoutes) => {
       });
     }
   });
+  console.log(mappedRoutes);
   return mappedRoutes;
 };
 

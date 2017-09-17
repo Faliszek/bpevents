@@ -23,7 +23,9 @@ export const gettersCreator = () => {
 
     getFooterWidget: state => state.footer.widget,
     getFooterMenuLinks: state => state.footer.menu.links,
-    getFooterMenuTitle: state => state.footer.menu.title
+    getFooterMenuTitle: state => state.footer.menu.title,
+
+    getCmsData: state => state.cmsData
   }
 
 };

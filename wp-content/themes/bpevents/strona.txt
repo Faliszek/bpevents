@@ -1,0 +1,12 @@
+1. Zobacz wiecej opini na stronie opini - done
+2. Wywalic date ze strony opinii - done
+3. Strona galerii, zakładki, video, zdjecia, sprzet - done
+4. Wtyczka facebooka wysunieta z lewej strony - done
+5. Zakładka Polecamy - done
+
+Rzeczy do zrobienia przy/po przeniesieniu
+
+1. Konfiguracja Maila i SMTP
+2. Konfiguracja Facebooka
+3. Zebranie wszystkich dostępów
+4. Lekka optymalizacja

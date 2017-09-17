@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="../../../assets/main.css">
 <template>
 
   <div class="contact__desc">

@@ -31,6 +31,7 @@ export const stateCreator = () => {
       refs: [],
       facebookLink: ''
     },
+    cmsData: '',
     footer: {
       widget: {},
       menu: {

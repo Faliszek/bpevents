@@ -1,6 +1,4 @@
-<link rel="stylesheet" href="../../../assets/main.css">
 <template>
-
   <div class="contact__desc">
     <div class="contact__logo"><img :src="picture.url" :alt="picture.alt"/></div>
     <div class="contact__info" v-html="desc"></div>

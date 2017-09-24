@@ -1,6 +1,6 @@
 /*** DEV ***/
-@import 'dev';
-
+// @import 'dev';
+//
 /*** LIBS **/
 @import '~bootstrap-only-css';
 @import '~node-waves/dist/waves.css';
@@ -44,4 +44,3 @@ body{
 [v-cloak]{
   display:none !important;
 }
-

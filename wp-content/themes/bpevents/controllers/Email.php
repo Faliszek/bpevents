@@ -5,10 +5,12 @@ function send_mail(){
     if(isset($_POST['data'])){
         $to = Mailer::getAdminMail();
         $data = $_POST['data'];
-        $topic = $data['topic'];
-        $message = $data['message'];
-        $name = $data['name'];
-        $from = $data['email'];
+        $topic = sanitize_text_field($data['topic']);
+        $message = sanitize_text_field($data['message']);
+        $name = sanitize_text_field($data['name']);
+        $from = sanitize_text_field($data['email']);
+
+
         $headers[] = 'From: '.$name.' <'.$from.'>';
         $headers[] = 'Reply-To: '.$name.' <'.$from.'>,';
 
@@ -30,11 +32,11 @@ function send_mail(){
                 echo json_encode($result, true);
             } catch (Exception $e){
                 echo json_encode($e->getMessage(), true);
-                $result['msg'] = 'Coś poszło nie tak, spróboj później';
+                $result['msg'] = 'Coś poszło nie tak, spróbój później';
             }
         } else{
             echo json_encode($errors, true);
-	          $result['msg'] = 'Coś poszło nie tak, spróboj później';
+	          $result['msg'] = 'Coś poszło nie tak, spróbój później';
         }
 
     }

@@ -3,9 +3,9 @@
   border:1px solid rgba(0,0,0,0.2);
   transition:$transition;
   font-size:18px;
+  border-radius:4px;
   &.form-error{
-    //border:1px solid rgba(0,0,0,0.2);
-    box-shadow: 0px 0px 1px 1px rgba(200,20,20,0.4);
+    border:1px solid rgba(255,0,0,0.7);
   }
 }
 

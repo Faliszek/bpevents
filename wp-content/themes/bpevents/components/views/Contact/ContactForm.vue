@@ -119,16 +119,7 @@
           let value = this.dataForm[key];
           if (value === '') {
             result = false;
-            $.toast().reset('all');
-            $.toast({
-              text: 'Wypełnij brakujące pola',
-              showHideTransition: 'slide',
-              loader: false,
-              position: 'bottom-right',
-              bgColor: 'rgba(100,100,100,0.8)',
-              textAlign: 'center',
-
-            });
+            this.showToast('Wypełnij brakujące pole', 'error');
             return result;
           }
         }

@@ -9,4 +9,4 @@ Rzeczy do zrobienia przy/po przeniesieniu
 1. Konfiguracja Maila i SMTP
 2. Konfiguracja Facebooka
 3. Zebranie wszystkich dostępów
-4. Lekka optymalizacja
+4. Optymalizacja

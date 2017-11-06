@@ -9,7 +9,6 @@
       <div class="ref__content">
         <h4 class="title">{{ reference.ref_autor }}</h4>
         <p class="text" v-html="reference.ref_opinion "></p>
-        <a class="link" target="_blank" :href="reference.ref_link">Zobacz opinie</a>
       </div>
     </div>
   </div>

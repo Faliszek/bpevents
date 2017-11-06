@@ -22,6 +22,7 @@
 <script>
   import { videoPlayer } from 'vue-video-player'
   import {mapGetters} from 'vuex';
+  
 
   export default{
     name: 'videos-gallery',

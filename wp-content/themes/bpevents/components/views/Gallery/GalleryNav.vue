@@ -5,7 +5,7 @@
          data-gallery="photos-gallery"
          data-gallery-title="photosTitle"
          :class="[{active : activeGallery === photosComponent.name } , 'gallery__nav-item photos-item']">
-      <h6>Fotografie</h6>
+      <h6>{{photosTab}}</h6>
     </div>
 
     <div @click="changeGallery"
@@ -13,14 +13,14 @@
          data-gallery="videos-gallery"
          data-gallery-title="videosTitle"
          :class="[{active : activeGallery === videosComponent.name } , 'gallery__nav-item photos-item']">
-      <h6>Video</h6>
+      <h6>{{videosTab}}</h6>
     </div>
     <div @click="changeGallery"
          v-if="equipment"
          data-gallery="equipment-gallery"
          data-gallery-title="equipmentTitle"
          :class="[{active : activeGallery === equipmentComponent.name } , 'gallery__nav-item photos-item']">
-      <h6>Sprzęt</h6>
+      <h6>{{equipmentTab}}</h6>
     </div>
 
   </div>
@@ -42,11 +42,19 @@
         equipmentComponent: EquipmentGallery
       }
     },
+    created() {
+      console.log(this)
+    },
     computed: {
       ...mapGetters({
         videos: 'getGalleryVideos',
+        videosTab: 'getGalleryVideosTab',
         photos: 'getGalleryPhotos',
+        photosTab: 'getGalleryPhotosTab',
+
         equipment: 'getGalleryEquipment',
+        equipmentTab: 'getGalleryEquipmentTab',
+
 
       }),
     },
@@ -64,3 +72,4 @@
     }
   }
 </script>
+ 

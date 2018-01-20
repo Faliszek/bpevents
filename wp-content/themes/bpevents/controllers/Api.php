@@ -45,6 +45,7 @@ function set_routes(){
         $route->site_title = get_field('site_title', $page->ID);
         $route->meta_title = get_field('seo_title', $page->ID);
         $route->meta_desc = get_field('seo_desc', $page->ID);
+        $route->view_title = get_field('view_title', $page->ID);
         array_push($routes, $route);
     }
     return $routes;

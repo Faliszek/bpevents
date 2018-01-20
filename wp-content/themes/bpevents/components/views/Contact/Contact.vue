@@ -43,14 +43,17 @@
     },
     data(){
       return {
-        title: 'Skontaktuj się ze mną!'
+        title: ''
       }
     },
     created(){
+      const ID = this.defines.contactPage;
+      this.title = this.defines.routes.find(r => r.ID === ID).view_title
+
       this.$store.dispatch(
           'fetchDataPage',
           {
-            ID: this.defines.contactPage,
+            ID,
             chunks: [
               {method: 'setContactDesc', chunkType: 'desc'},
               {method: 'setContactImg', chunkType: 'img'}

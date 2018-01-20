@@ -9,10 +9,15 @@ export const stateCreator = () => {
     },
 
     gallery: {
+
+      equipmentTab: '',
       equipmentTitle: '',
       equipment: [],
+
+      photosTab: '',
       photosTitle: '',
       photos: [],
+      videosTab: '',
       videosTitle: '',
       videos: []
     },

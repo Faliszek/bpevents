@@ -14,10 +14,17 @@ export const mutationsCreator = () => {
     setReferencesRefs: (state, data) => state.references.refs = data,
     setReferencesFacebookLink: (state, data) => state.references.facebookLink = data,
 
+
+    setGalleryEquipmentTab: (state, data) => state.gallery.equipmentTab = data,
     setGalleryEquipmentTitle: (state, data) => state.gallery.equipmentTitle = data,
     setGalleryEquipment: (state, data) => state.gallery.equipment = data,
+
+
+    setGalleryPhotosTab: (state, data) => state.gallery.photosTab = data,
     setGalleryPhotosTitle: (state, data) => state.gallery.photosTitle = data,
     setGalleryPhotos: (state, data) => state.gallery.photos = data,
+
+    setGalleryVideosTab: (state, data) => state.gallery.videosTab = data,
     setGalleryVideosTitle: (state, data) => state.gallery.videosTitle = data,
     setGalleryVideos: (state, data) => state.gallery.videos = data,
 

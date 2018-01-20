@@ -17,13 +17,12 @@ export const actionsCreators = () => {
       });
     },
     fetchContentSite: (context, params) => {
-      // let doesNeedUpdate = componentNeedUpdate(params.ID);
-      // if (doesNeedUpdate) {
+    
       Vue.http.get('/wp-json/wp/v2/pages/' + params.ID).then((resp) => {
         let data = resp.body.content.rendered;
         context.commit('setCmsData', data)
       });
-      // }
+    
 
     },
     fetchDataPage: (context, params) => {
@@ -31,6 +30,7 @@ export const actionsCreators = () => {
       if (doesNeedUpdate) {
         Vue.http.get('/wp-json/acf/v2/post/' + params.ID).then((resp) => {
           let data = resp.body.acf;
+         
           params.chunks.forEach((item) => {
             context.commit(item.method, data[item.chunkType]);
           });

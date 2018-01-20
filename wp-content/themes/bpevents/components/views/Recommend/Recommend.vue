@@ -49,13 +49,17 @@
     },
     data(){
       return {
-        title: 'Polecamy',
+        title: '',
       }
     },
     created(){
+      const ID = this.defines.recommendPage;
+      this.title = this.defines.routes.find(r => r.ID === ID).view_title
+
+
       this.$store.dispatch(
           'fetchDataPage', {
-            ID: this.defines.recommendPage,
+            ID,
             chunks: [
               {
                 method: 'setRecommendRecommendations',

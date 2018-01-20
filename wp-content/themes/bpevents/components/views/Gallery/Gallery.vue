@@ -14,7 +14,6 @@
   </section>
 </template>
 <script>
-  import _ from 'lodash';
   import {mapGetters} from 'vuex';
   import {boundedChunksWithMutations} from '../../../js/helper';
   import PageTitle from '../../page-title.vue';
@@ -53,11 +52,12 @@
       return{
         activeGallery: '',
         activeTitle: '',
-        title: 'Galeria'
+        title: '',
       }
     },
     created(){
       let ID = this.defines.galleryPage;
+      this.title = this.defines.routes.find(r => r.ID === ID).view_title
       this.$store.dispatch(
           'fetchDataPage',
           {ID, chunks: boundedChunksWithMutations(ID)}

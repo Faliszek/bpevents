@@ -63,7 +63,7 @@
     },
     data(){
       return {
-        title: 'Opinie',
+        title: '',
         showSlider: false,
         swiperOption: {
           mousewheelControl: true,
@@ -83,7 +83,10 @@
       }
     },
     created() {
-      let ID = this.defines.referencesPage;
+      const ID = this.defines.referencesPage;
+      this.title = this.defines.routes.find(r => r.ID === ID).view_title
+
+
       this.$store.dispatch(
           'fetchDataPage',
           {ID, chunks: boundedChunksWithMutations(ID)}

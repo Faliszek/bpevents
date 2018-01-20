@@ -14,10 +14,17 @@ export const gettersCreator = () => {
     getReferencesRefs: state => state.references.refs,
     getReferencesFacebookLink: state => state.references.facebookLink,
 
+
+    getGalleryEquipmentTab: (state) => state.gallery.equipmentTab,
     getGalleryEquipmentTitle: (state) => state.gallery.equipmentTitle,
     getGalleryEquipment: (state) => state.gallery.equipment,
+
+
+    getGalleryPhotosTab: (state) => state.gallery.photosTab,
     getGalleryPhotosTitle: (state) => state.gallery.photosTitle,
     getGalleryPhotos: (state) => state.gallery.photos,
+
+    getGalleryVideosTab: (state) => state.gallery.videosTab,
     getGalleryVideosTitle: (state) => state.gallery.videosTitle,
     getGalleryVideos: (state) => state.gallery.videos,
 

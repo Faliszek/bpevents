@@ -4,6 +4,6 @@
 <script>
   export default{
     name: 'PageTitle',
-    props: ['title']
+    props: ['title'],
   }
 </script>

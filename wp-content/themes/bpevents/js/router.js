@@ -6,7 +6,9 @@ const assignRoutesToComponents = (dataRoutes) => {
   let mappedRoutes = [];
   dataRoutes.forEach((route, index) => {
     mappedRoutes.push({
+      id: route.ID,
       name: route.name,
+      viewTitle: route.view_title,
       path: route.path,
       component:
           require(`../components/views/${route.component}/${route.component}.vue`),
@@ -25,7 +27,6 @@ const assignRoutesToComponents = (dataRoutes) => {
       });
     }
   });
-  console.log(mappedRoutes);
   return mappedRoutes;
 };
 

@@ -43,15 +43,8 @@
     },
     data(){
       return{
-        title: this.$route.name
+        title: ''
       }
-    },
-    updated(){
-//      let ID = getRouteComponentID(this.$route.name).ID
-//      this.$store.dispatch({
-//        ID,
-//        type: 'fetchContentSite',
-//      })
     },
     mounted(){
         this.updateView(this.$route)
@@ -59,6 +52,7 @@
     methods: {
       updateView(nextView) {
         let ID = getRouteComponentID(nextView.name).ID
+        this.title = this.defines.routes.find(r => r.ID === ID).view_title
         this.$store.dispatch({
           ID,
           type: 'fetchContentSite',

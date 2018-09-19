@@ -11,7 +11,7 @@
           </div>
           <div class="menu-main__container">
             <ul class="menu-main__link-list">
-              <li @click="toggleMenu" class="menu-main__link" @mouseover="fetchData(link.object_id)" :data-id="link.object_id" v-for="link in links">
+              <li v-bind:key="link.object_id" @click="toggleMenu" class="menu-main__link" @mouseover="fetchData(link.object_id)" :data-id="link.object_id" v-for="link in links">
                 <router-link
                   :to="{ path: link.object_slug }"
                   class="menu-item">
@@ -28,33 +28,36 @@
   </header>
 </template>
 <script type="text/babel">
-  import Waves from 'node-waves/dist/waves';
-  import { mapGetters } from 'vuex';
-  import { MAIN_MENU_ID } from '../js/data';
-  import { boundedChunksWithMutations } from '../js/helper'
-  export default {
-    props: ['defines'],
-    computed: {
-      ...mapGetters({
-        links: 'getMenuLinks'
-      })
+import Waves from "node-waves/dist/waves";
+import { mapGetters } from "vuex";
+import { MAIN_MENU_ID } from "../js/data";
+import { boundedChunksWithMutations } from "../js/helper";
+export default {
+  props: ["defines"],
+  computed: {
+    ...mapGetters({
+      links: "getMenuLinks"
+    })
+  },
+  data() {
+    return {
+      showMenu: false
+    };
+  },
+  created() {
+    this.$store.dispatch("getMenu", MAIN_MENU_ID);
+  },
+  methods: {
+    fetchData(ID) {
+      this.$store.dispatch("fetchDataPage", {
+        ID,
+        chunks: boundedChunksWithMutations(ID)
+      });
     },
-    data(){
-      return{
-        showMenu: false,
-      }
-    },
-    created(){
-      this.$store.dispatch('getMenu', MAIN_MENU_ID);
-    },
-    methods: {
-      fetchData(ID){
-        this.$store.dispatch('fetchDataPage', {ID, chunks: boundedChunksWithMutations(ID) })
-      },
 
-      toggleMenu(){
-        this.showMenu = !this.showMenu;
-      }
+    toggleMenu() {
+      this.showMenu = !this.showMenu;
     }
   }
+};
 </script>

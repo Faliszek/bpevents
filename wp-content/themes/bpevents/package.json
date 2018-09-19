@@ -4,10 +4,6 @@
   "main": "index.js",
   "author": "Paweł Falisz",
   "license": "MIT",
-  "scripts": {
-    "start": "webpack -w",
-    "build": "webpack -p"
-  },
   "devDependencies": {
     "autoprefixer": "^6.7.7",
     "babel-core": "^6.22.1",
@@ -32,11 +28,10 @@
     "url-loader": "^0.5.7",
     "vue-loader": "^11.1.4",
     "vueify": "^9.4.1",
-    "webpack": "^2.4.1"
+    "webpack": "2.4.1"
   },
   "dependencies": {
     "bootstrap-only-css": "^1.0.0",
-    "eslint": "^4.16.0",
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",
     "materialize-css": "^0.98.2",
@@ -51,5 +46,9 @@
     "vue-video-player": "^3.1.4",
     "vuex": "^2.3.1",
     "vuex-router-sync": "^4.2.0"
+  },
+  "scripts": {
+    "start": "webpack -w",
+    "build": "webpack -p"
   }
 }

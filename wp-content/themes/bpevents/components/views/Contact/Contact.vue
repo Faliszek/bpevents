@@ -9,56 +9,59 @@
         </div>
       </div>
     </div>
+
+    <div class="row content-row-map">
+<iframe src="
+https://maps.google.pl/maps?ie=UTF8&q=%C5%81epkowskiego+5%2F14%2C+31-423+Krak%C3%B3w&gl=PL
+&hl=pl&t=m&iwloc=A&output=embed" width="600" height="450" frameborder="0" style="border:0"
+></iframe>
+
+      </div>
   </section>
 
 </template>
 <script>
-  import PageTitle from '../../page-title.vue';
-  import ContactDesc from './ContactDesc.vue';
-  import ContactForm from './ContactForm.vue';
+import PageTitle from "../../page-title.vue";
+import ContactDesc from "./ContactDesc.vue";
+import ContactForm from "./ContactForm.vue";
 
-  export default{
-    name: 'Contact',
-    props: ['defines'],
-    className: 'contact',
-    components: {
-      PageTitle,
-      ContactDesc,
-      ContactForm
-    },
-    head: {
-      // To use "this" in the component, it is necessary to return the object through a function
-      title: function () {
-        return {
-          inner: this.$route.meta.site_title,
-          separator: ' ',
-        }
-      },
-      meta: function () {
-        return [
-          {name: 'description', content: this.$route.meta.desc},
-          {name: 'title', content: this.$route.meta.title}
-        ]
-      }
-    },
-    data(){
+export default {
+  name: "Contact",
+  props: ["defines"],
+  className: "contact",
+  components: {
+    PageTitle,
+    ContactDesc,
+    ContactForm
+  },
+  head: {
+    // To use "this" in the component, it is necessary to return the object through a function
+    title: function() {
       return {
-        title: ''
-      }
+        inner: this.$route.meta.site_title,
+        separator: " "
+      };
     },
-    created(){
-      const ID = this.defines.contactPage;
-      this.title = this.defines.routes.find(r => r.ID === ID).view_title
-
-      this.$store.dispatch(
-          'fetchDataPage',
-          {
-            ID,
-            chunks: [
-              {method: 'setContactDesc', chunkType: 'desc'},
-              {method: 'setContactImg', chunkType: 'img'}
-            ]
-          });
+    meta: function() {
+      return [
+        { name: "description", content: this.$route.meta.desc },
+        { name: "title", content: this.$route.meta.title }
+      ];
     }
+  },
+  data() {
+    return {
+      title: "Skontaktuj się ze mną!"
+    };
+  },
+  created() {
+    this.$store.dispatch("fetchDataPage", {
+      ID: this.defines.contactPage,
+      chunks: [
+        { method: "setContactDesc", chunkType: "desc" },
+        { method: "setContactImg", chunkType: "img" }
+      ]
+    });
   }
+};
 </script>

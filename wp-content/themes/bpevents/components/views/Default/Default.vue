@@ -10,60 +10,58 @@
     </section>
 </template>
 <script>
-  import PageTitle from '../../page-title.vue';
-  import { mapGetters } from 'vuex';
-  import { getRouteComponentID } from '../../../js/helper'
+import PageTitle from "../../page-title.vue";
+import { mapGetters } from "vuex";
+import { getRouteComponentID } from "../../../js/helper";
 
-
-  export default {
-    name: 'Default',
-    props: ['defines'],
-    head: {
-      // To use "this" in the component, it is necessary to return the object through a function
-      title: function () {
-        return {
-          inner: this.$route.meta.site_title,
-          separator: ' ',
-        }
-      },
-      meta: function () {
-        return [
-          {name: 'description', content: this.$route.meta.desc},
-          {name: 'title', content: this.$route.meta.title}
-        ]
-      }
+export default {
+  name: "Default",
+  props: ["defines"],
+  head: {
+    // To use "this" in the component, it is necessary to return the object through a function
+    title: function() {
+      return {
+        inner: this.$route.meta.site_title,
+        separator: " "
+      };
     },
-    components: {
-      PageTitle
-    },
-    computed: {
-      ...mapGetters({
-        content: 'getCmsData',
-      }),
-    },
-    data(){
-      return{
-        title: ''
-      }
-    },
-    mounted(){
-        this.updateView(this.$route)
-    },
-    methods: {
-      updateView(nextView) {
-        let ID = getRouteComponentID(nextView.name).ID
-        this.title = this.defines.routes.find(r => r.ID === ID).view_title
-        this.$store.dispatch({
-          ID,
-          type: 'fetchContentSite',
-        })
-      }
-    },
-    watch: {
-      '$route' (to, from) {
-        this.updateView(to)
-        this.title = to.name
-      }
+    meta: function() {
+      return [
+        { name: "description", content: this.$route.meta.desc },
+        { name: "title", content: this.$route.meta.title }
+      ];
+    }
+  },
+  components: {
+    PageTitle
+  },
+  computed: {
+    ...mapGetters({
+      content: "getCmsData"
+    })
+  },
+  data() {
+    return {
+      title: this.$route.name
+    };
+  },
+  mounted() {
+    this.updateView(this.$route);
+  },
+  methods: {
+    updateView(nextView) {
+      let ID = getRouteComponentID(nextView.name).ID;
+      this.$store.dispatch({
+        ID,
+        type: "fetchContentSite"
+      });
+    }
+  },
+  watch: {
+    $route(to, from) {
+      this.updateView(to);
+      this.title = to.name;
     }
   }
+};
 </script>

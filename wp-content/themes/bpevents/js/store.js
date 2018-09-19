@@ -5,7 +5,6 @@ import { stateCreator } from './state';
 import { gettersCreator } from './getters';
 import { actionsCreators } from './actions';
 import { mutationsCreator } from './mutations';
-
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
